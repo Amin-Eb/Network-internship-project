@@ -28,6 +28,70 @@ Some of them introduce aliases for addresses
 
 ### Official documents about DNS
 
+It is recommended to read below RFCs (request for comments).
+
+1. [DNS Terminology](https://datatracker.ietf.org/doc/html/rfc9499) can be used as a dictionary for DNS related terms. 
+2. [Domain names - concepts and facilities](https://datatracker.ietf.org/doc/html/rfc1034) can explains how DNS works
+3. [Domain names - implementation and specification](https://datatracker.ietf.org/doc/html/rfc1035) is a guideline for DNS servers  implementation
+
 
 ### Cpp Libraries understanding DNS
+TODO: please fill this part by your search results.
 
+### DNS transaction reporter
+
+Final goal is have an executable file which can report success rate of DNS transactions.
+
+It may do it either reading a pcap file or read packet from network interface (as Wireshark did).
+
+#### DNS transaction success detector
+
+At this point we may assume an stream of DnsTransaction are available so we can report them.
+
+class is not responsible to handle receiving stream but some one should be able use it that way.
+
+Write an example and may simulate stream by 10 DnsTransaction content.
+
+```
+structure Binary
+{
+    uint8_t* data;
+    uint16_t length;
+};
+
+structure DnsTransaction
+{
+    Binary request;
+    Binary response;
+};
+```
+
+First write a class that may receive DnsTransactions and report success rate.
+
+It should have unit tests which cover class functionality.
+
+#### DNS transaction detector
+
+Here we will implement a class which can relate responses to their own requests.
+
+Here you may need some metadata of packet more than just Binary for request and response.
+
+Look for pcap you captured and gather needed information as an structure contains Binary (lets call it Packet).
+
+The transaction detector should be used for relate response to request and provide DnsTransaction to success rate reporter.
+
+It should capable of receive stream of Packets and deliver stream of DnsTransactions.
+
+Again unit tests should cover this class functionality again.
+
+Again class is not responsible to handle receiving stream but some one should be able use it that way.
+
+Write an example and may simulate stream by 20 Packets content.
+
+#### Design your own approach
+
+You can create other flow to receive stream of data and some how report success rate
+
+Here you should design classes with different functionality.
+
+Again unit test, and example of 20 content representing a packet is necessary.
