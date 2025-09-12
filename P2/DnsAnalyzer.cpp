@@ -4,19 +4,32 @@
 using namespace std;
 
 DnsStats processPcap(const std::string& filename) {
+    DnsStats stats;
+    
     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader(filename);
+    if (!reader) {
+        std::cerr << "Error: unsupported file type or cannot create reader for " << filename << "\n";
+        return stats;
+    }
+
     if (!reader->open()) {
-        std::cerr << "Error opening pcap file\n";
-        return {};
+        std::cerr << "Error: could not open pcap file " << filename << "\n";
+        stats.errorcode = -1;
+        delete reader;
+        return stats;
     }
 
     std::set<DnsKey, DnsKeyCmp> requests;
     std::set<DnsKey, DnsKeyCmp> answers;
-    DnsStats stats;
-    int counter = 0;
 
+    int counter = 0;
+    stats.errorcode = -2;
     pcpp::RawPacket rawPacket;
     while (reader->getNextPacket(rawPacket)) {
+        #ifndef FIRST_PACKET
+            #define FIRST_PACKET
+            stats.errorcode = 0;
+        #endif
         pcpp::Packet parsed(&rawPacket);
         counter++;
 
