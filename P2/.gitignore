@@ -1,0 +1,20 @@
+# Build folder
+/build
+/build-*
+
+# Executable files
+*.exe
+*.out
+*.o
+*.obj
+
+# PcapPlusPlus local build folder (if you put it in 'pcap/')
+pcap/
+pcap_build/
+PcapPlusPlus/
+
+# OS / IDE files
+.DS_Store
+*.swp
+*.vscode/
+*.idea/
