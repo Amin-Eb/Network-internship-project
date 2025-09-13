@@ -3,10 +3,17 @@ project(DnsAnalyzer)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# main executable
-add_executable(dns-analyzer main.cpp DnsAnalyzer.cpp)
+# Tell CMake where our headers live
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
-target_include_directories(dns-analyzer PRIVATE include)
+# DNS analyzer executable
+add_executable(dns-analyzer
+    src/main.cpp
+    src/DnsAnalyzer.cpp
+)
+
+target_link_directories(dns-analyzer PRIVATE /usr/local/lib)
+
 target_link_libraries(dns-analyzer
     Pcap++
     Packet++
@@ -14,22 +21,23 @@ target_link_libraries(dns-analyzer
     pcap
 )
 
-# GoogleTest
+# ---- Tests ----
+enable_testing()
 find_package(GTest REQUIRED)
 
-# test executable
-add_executable(dns-tests test_dns.cpp DnsAnalyzer.cpp)
+add_executable(dns-tests
+    tests/test_dns.cpp
+    src/DnsAnalyzer.cpp   # link implementation for tests
+)
 
 target_include_directories(dns-tests PRIVATE include)
 target_link_libraries(dns-tests
-    GTest::gtest
-    GTest::gtest_main
+    GTest::GTest
+    GTest::Main
     Pcap++
     Packet++
     Common++
     pcap
 )
 
-enable_testing()
 add_test(NAME dns-tests COMMAND dns-tests)
-
