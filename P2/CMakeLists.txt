@@ -17,20 +17,6 @@ set(CMAKE_CXX_STANDARD 17)
 # Tell CMake where our headers live
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
-# DNS analyzer executable
-add_executable(dns-analyzer
-    src/main.cpp
-    src/DnsAnalyzer.cpp
-)
-
-target_link_directories(dns-analyzer PRIVATE /usr/local/lib)
-
-target_link_libraries(dns-analyzer
-    Pcap++
-    Packet++
-    Common++
-    pcap
-)
 
 # ---- Tests ----
 enable_testing()

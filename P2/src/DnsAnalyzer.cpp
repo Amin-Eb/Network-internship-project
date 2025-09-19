@@ -54,19 +54,15 @@ bool DnsReporter::isSuccessResponse(const Binary& bin) const {
     return rcode == 0; // 0 = success
 }
 
-void DnsReporter::getReport() const {
-    size_t total = transactions.size();
-    size_t success = 0;
+Report DnsReporter::getReport() const {
+    Report rep;
+    rep.total = transactions.size();
     for (const auto& tx : transactions) {
         if (tx.response.data != nullptr && tx.response.length > 0) {
             if (isSuccessResponse(tx.response)) {
-            success++;
+                rep.success++;
             }
         }
     }
-    std::cout << "Total transactions: " << total << "\n";
-    std::cout << "Successful transactions: " << success << "\n";
-    std::cout << "Success rate: "
-              << (total > 0 ? (100.0 * success / total) : 0.0)
-              << "%\n";
+    return rep;
 }

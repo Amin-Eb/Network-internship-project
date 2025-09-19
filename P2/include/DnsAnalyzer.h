@@ -14,11 +14,17 @@ struct DnsTransaction {
     Binary response;
 };
 
+struct Report {
+    int total = 0;
+    int failed = 0;
+    int success = 0;
+};
+
 class DnsReporter {
 public:
     void addBinary(const Binary& bin);
     void addDnsTransaction(const DnsTransaction& tx);
-    void getReport() const;
+    Report getReport() const;
 
 private:
     std::vector<DnsTransaction> transactions;
