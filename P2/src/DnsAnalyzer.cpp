@@ -1,68 +1,88 @@
 #include "DnsAnalyzer.h"
 #include <stdexcept>
-#include <cstring>
+#include <iostream>
+#include <pcapplusplus/Packet.h>
+#include <pcapplusplus/DnsLayer.h>
+#include <pcapplusplus/PcapFileDevice.h>
+#include <arpa/inet.h>
 
-// first 2 bytes are transaction id
 uint16_t DnsReporter::transactionID(const Binary& bin) {
-    if (bin.length < 2) {
-        throw std::runtime_error("Binary too short for DNS ID");
-    }
-    return (bin.data[0] << 8) | bin.data[1];
+    if (bin.length == 0 || bin.data == nullptr)
+        throw std::runtime_error("Empty packet");
+
+    pcpp::RawPacket rawPacket((const uint8_t*)bin.data, bin.length, timeval(), false);
+    pcpp::Packet packet(&rawPacket);
+
+    auto dnsLayer = packet.getLayerOfType<pcpp::DnsLayer>();
+    if (!dnsLayer)
+        throw std::runtime_error("No DNS layer found id");
+
+    // convert network byte order to host byte order
+    return ntohs(dnsLayer->getDnsHeader()->transactionID);
 }
 
-// check qr (bit 15 of 3rd/4th byte)
 bool DnsReporter::isResponse(const Binary& bin) {
-    if (bin.length < 4) {
-        throw std::runtime_error("Binary too short for DNS flags");
-    }
-    uint16_t flags = (bin.data[2] << 8) | bin.data[3];
-    return (flags & 0x8000) != 0; /* qr = 1 : response 
-                                     the 15th bit is qr bit*/
+    if (bin.length == 0 || bin.data == nullptr)
+        throw std::runtime_error("Empty packet");
+
+    pcpp::RawPacket rawPacket((const uint8_t*)bin.data, bin.length, timeval(), false);
+    pcpp::Packet packet(&rawPacket);
+
+    auto dnsLayer = packet.getLayerOfType<pcpp::DnsLayer>();
+    if (!dnsLayer)
+        throw std::runtime_error("No DNS layer found");
+
+    // qr flag: 0 = query, 1 = response
+    return dnsLayer->getDnsHeader()->queryOrResponse == 1;
+}
+
+bool DnsReporter::isSuccessResponse(const Binary& bin) const {
+    if (bin.length == 0 || bin.data == nullptr)
+        throw std::runtime_error("Empty packet");
+
+    pcpp::RawPacket rawPacket((const uint8_t*)bin.data, bin.length, timeval(), false);
+    pcpp::Packet packet(&rawPacket);
+
+    auto dnsLayer = packet.getLayerOfType<pcpp::DnsLayer>();
+    if (!dnsLayer)
+        return false;
+
+    return dnsLayer->getDnsHeader()->responseCode == 0; // 0 = success
 }
 
 void DnsReporter::addBinary(const Binary& bin) {
     try {
+        pcpp::RawPacket rawPacket((const uint8_t*)bin.data, bin.length, timeval(), false);
+        pcpp::Packet packet(&rawPacket);
+        auto dnsLayer = packet.getLayerOfType<pcpp::DnsLayer>();
+        if (!dnsLayer) return; // skip non-DNS
         uint16_t txid = transactionID(bin);
-        if (isResponse(bin)) {
+        std::cout << "id is : " << std::hex << txid;
+
+        if (isResponse(bin)) { //res
             auto it = pendingRequests.find(txid);
-            if (it != pendingRequests.end()) {//res
-                // found matching request so form transaction
-                DnsTransaction tx{it->second, bin};
-                transactions.push_back(tx);
+            if (it != pendingRequests.end()) {
+                // found matching request, form transaction
+                if(isSuccessResponse(bin)){
+                    rep.success++;
+                } else {
+                    rep.failed++;
+                }
                 pendingRequests.erase(it);
-            } else {
-                // no request found yet so ignore or store separately
+                std::cout << std::hex << " :: " << txid ;
+                rep.total++;
             }
-        } else { //req
+            rep.recieved++;
+        } else { // request
             pendingRequests[txid] = bin;
+            rep.recieved++;
         }
+
+        std::cout << "\n";
     } catch (const std::exception& e) {
         std::cerr << "Error parsing Binary: " << e.what() << std::endl;
     }
 }
-
-void DnsReporter::addDnsTransaction(const DnsTransaction& tx) {
-    transactions.push_back(tx);
-}
-
-bool DnsReporter::isSuccessResponse(const Binary& bin) const {
-    if (bin.length < 4) {
-        throw std::runtime_error("Binary too short for DNS flags");
-    }
-    uint16_t flags = (bin.data[2] << 8) | bin.data[3];
-    uint8_t rcode = flags & 0x000F; // last 4 bits
-    return rcode == 0; // 0 = success
-}
-
 Report DnsReporter::getReport() const {
-    Report rep;
-    rep.total = transactions.size();
-    for (const auto& tx : transactions) {
-        if (tx.response.data != nullptr && tx.response.length > 0) {
-            if (isSuccessResponse(tx.response)) {
-                rep.success++;
-            }
-        }
-    }
-    return rep;
+    return rep; 
 }

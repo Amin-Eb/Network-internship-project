@@ -14,9 +14,13 @@ endif()
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Tell CMake where our headers live
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
+configure_file(
+    ${CMAKE_SOURCE_DIR}/samples/capture.pcapng
+    ${CMAKE_BINARY_DIR}/capture.pcapng
+    COPYONLY
+)
 
 # ---- Tests ----
 enable_testing()
@@ -24,8 +28,7 @@ find_package(GTest REQUIRED)
 
 add_executable(dns-tests
     tests/test_dns.cpp
-    src/DnsAnalyzer.cpp   # link implementation for tests
-)
+    src/DnsAnalyzer.cpp   )
 
 target_include_directories(dns-tests PRIVATE include)
 target_link_libraries(dns-tests

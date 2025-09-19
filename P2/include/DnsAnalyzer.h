@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <vector>
-#include <unordered_map>
+#include <map>
 #include <iostream>
 
 struct Binary {
@@ -15,9 +15,10 @@ struct DnsTransaction {
 };
 
 struct Report {
-    int total = 0;
-    int failed = 0;
-    int success = 0;
+    int total = 0; // total pair of {req, res} meaning total transactions
+    int failed = 0; // faild transactions
+    int success = 0; // successful transaction
+    int recieved = 0; // all recieved packets
 };
 
 class DnsReporter {
@@ -27,9 +28,8 @@ public:
     Report getReport() const;
 
 private:
-    std::vector<DnsTransaction> transactions;
-    std::unordered_map<uint16_t, Binary> pendingRequests;
-
+    Report rep;
+    std::map<uint16_t, Binary> pendingRequests;
     bool isSuccessResponse(const Binary& bin) const;
     static bool isResponse(const Binary& bin);
     static uint16_t transactionID(const Binary& bin);
