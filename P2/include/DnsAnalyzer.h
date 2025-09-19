@@ -1,21 +1,29 @@
 #pragma once
-#include <pcapplusplus/PcapFileDevice.h>
-#include <pcapplusplus/DnsLayer.h>
-#include <pcapplusplus/Packet.h>
-#include <pcapplusplus/IPv4Layer.h>
-#include <set>
-#include <tuple>
-#include <string>
-#include "DnsKey.h"
+#include <cstdint>
+#include <vector>
+#include <unordered_map>
+#include <iostream>
 
-struct DnsStats {
-    int successful = 0;
-    int unsuccessful = 0;
-    int errorcode = 0;
-    // 0 ok
-    //-1 file not exists
-    //-2 file is empty
+struct Binary {
+    uint8_t* data;
+    uint16_t length;
 };
 
-// process a pcap file and return stats for dns packets
-DnsStats processPcap(const std::string& filename);
+struct DnsTransaction {
+    Binary request;
+    Binary response;
+};
+
+class DnsReporter {
+public:
+    void addBinary(const Binary& bin);
+    void addDnsTransaction(const DnsTransaction& tx);
+    void getReport() const;
+
+private:
+    std::vector<DnsTransaction> transactions;
+    std::unordered_map<uint16_t, Binary> pendingRequests;
+
+    static bool isResponse(const Binary& bin);
+    static uint16_t transactionID(const Binary& bin);
+};

@@ -1,6 +1,17 @@
 cmake_minimum_required(VERSION 3.10)
 project(DnsAnalyzer)
 
+
+# The coverage report option
+option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
+
+if(ENABLE_COVERAGE)
+    message(STATUS "Coverage enabled")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -O0 -g")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
+endif()
+
+
 set(CMAKE_CXX_STANDARD 17)
 
 # Tell CMake where our headers live
