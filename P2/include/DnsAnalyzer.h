@@ -24,6 +24,7 @@ private:
     std::vector<DnsTransaction> transactions;
     std::unordered_map<uint16_t, Binary> pendingRequests;
 
+    bool isSuccessResponse(const Binary& bin) const;
     static bool isResponse(const Binary& bin);
     static uint16_t transactionID(const Binary& bin);
 };
