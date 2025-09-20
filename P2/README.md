@@ -36,7 +36,9 @@ It is recommended to read below RFCs (request for comments).
 
 
 ### Cpp Libraries understanding DNS
-TODO: please fill this part by your search results.
+[pcap++](https://pcapplusplus.github.io/docs/quickstart)
+[ldns](https://www.nlnetlabs.nl/projects/ldns/about)
+[c-ares](https://c-ares.org/)
 
 ### DNS transaction reporter
 
