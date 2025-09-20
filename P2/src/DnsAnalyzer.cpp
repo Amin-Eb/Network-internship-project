@@ -57,7 +57,6 @@ void DnsReporter::addBinary(const Binary& bin) {
         auto dnsLayer = packet.getLayerOfType<pcpp::DnsLayer>();
         if (!dnsLayer) return; // skip non-DNS
         uint16_t txid = transactionID(bin);
-        std::cout << "id is : " << std::hex << txid;
 
         if (isResponse(bin)) { //res
             auto it = pendingRequests.find(txid);
@@ -69,7 +68,6 @@ void DnsReporter::addBinary(const Binary& bin) {
                     rep.failed++;
                 }
                 pendingRequests.erase(it);
-                std::cout << std::hex << " :: " << txid ;
                 rep.total++;
             }
             rep.recieved++;
@@ -78,7 +76,6 @@ void DnsReporter::addBinary(const Binary& bin) {
             rep.recieved++;
         }
 
-        std::cout << "\n";
     } catch (const std::exception& e) {
         std::cerr << "Error parsing Binary: " << e.what() << std::endl;
     }
