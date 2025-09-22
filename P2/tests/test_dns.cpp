@@ -14,7 +14,16 @@ Binary makeBinaryFromRaw(const pcpp::RawPacket& raw) {
     return bin;
 }
 
-TEST(DnsReporterTest, ValidPcapTransactions) {
+TEST(DnsReporterTest, GetInitialReport){
+    DnsReporter reporter;
+    EXPECT_EQ(0, reporter.getReport().recieved);
+    EXPECT_EQ(0, reporter.getReport().success);
+    EXPECT_EQ(0, reporter.getReport().failed);
+    EXPECT_EQ(0, reporter.getReport().total);
+}
+
+
+TEST(DnsReporterTest, ValidPcapTransactionsFile) {
     Report rep;
     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("../samples/capture.pcapng");
     if (!reader) {

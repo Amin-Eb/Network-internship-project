@@ -30,7 +30,7 @@ public:
 private:
     Report rep;
     std::map<uint16_t, Binary> pendingRequests;
-    bool isSuccessResponse(const Binary& bin) const;
+    static bool isSuccessResponse(const Binary& bin);
     static bool isResponse(const Binary& bin);
     static uint16_t transactionID(const Binary& bin);
 };

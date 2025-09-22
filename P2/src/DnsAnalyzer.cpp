@@ -36,7 +36,7 @@ bool DnsReporter::isResponse(const Binary& bin) {
     return dnsLayer->getDnsHeader()->queryOrResponse == 1;
 }
 
-bool DnsReporter::isSuccessResponse(const Binary& bin) const {
+bool DnsReporter::isSuccessResponse(const Binary& bin) {
     if (bin.length == 0 || bin.data == nullptr)
         throw std::runtime_error("Empty packet");
 
