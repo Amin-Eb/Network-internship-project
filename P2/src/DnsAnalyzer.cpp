@@ -68,34 +68,35 @@ uint16_t DnsReporter::transactionID(const Binary& bin) {
 }
 
 bool DnsReporter::isResponse(const Binary& bin) {
-    if (bin.length == 0 || bin.data == nullptr)
-        throw std::runtime_error("Empty packet");
+    Binary dnsPayload = extractDnsPayload(bin);
 
-    pcpp::RawPacket rawPacket((const uint8_t*)bin.data, bin.length, timeval(), false);
-    pcpp::Packet packet(&rawPacket);
+    if (dnsPayload.length < 4 || dnsPayload.data == nullptr) {
+        throw std::runtime_error("DNS payload too short for flags");
+    }
 
-    auto dnsLayer = packet.getLayerOfType<pcpp::DnsLayer>();
-    if (!dnsLayer)
-        throw std::runtime_error("No DNS layer found");
+    // Flags are bytes 2 and 3 of DNS payload
+    uint16_t flags = (dnsPayload.data[2] << 8) | dnsPayload.data[3];
 
-    // qr flag: 0 = query, 1 = response
-    return dnsLayer->getDnsHeader()->queryOrResponse == 1;
+    // qr is 15th, the leftmost bit
+    return (flags & 0x8000) != 0; // 1 = response, 0 = query
 }
+
 
 bool DnsReporter::isSuccessResponse(const Binary& bin) {
-    if (bin.length == 0 || bin.data == nullptr)
-        throw std::runtime_error("Empty packet");
+    Binary dnsPayload = extractDnsPayload(bin);
 
-    pcpp::RawPacket rawPacket((const uint8_t*)bin.data, bin.length, timeval(), false);
-    pcpp::Packet packet(&rawPacket);
+    if (dnsPayload.length < 4 || dnsPayload.data == nullptr) {
+        throw std::runtime_error("DNS payload too short for flags");
+    }
 
-    auto dnsLayer = packet.getLayerOfType<pcpp::DnsLayer>();
-    if (!dnsLayer)
-        return false;
+    // 2-3 bytes
+    uint16_t flags = (dnsPayload.data[2] << 8) | dnsPayload.data[3];
 
-    return dnsLayer->getDnsHeader()->responseCode == 0; // 0 = success
+    // rcode is the last 4 bits of flags
+    uint8_t rcode = flags & 0x000F;
+
+    return rcode == 0; // 0 = successful response
 }
-
 void DnsReporter::addBinary(const Binary& bin) {
     try {
         pcpp::RawPacket rawPacket((const uint8_t*)bin.data, bin.length, timeval(), false);
