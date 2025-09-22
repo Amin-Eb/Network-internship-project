@@ -25,6 +25,7 @@ configure_file(
 # ---- Tests ----
 enable_testing()
 find_package(GTest REQUIRED)
+find_library(UDNS_LIB udns REQUIRED)
 
 add_executable(dns-tests
     tests/test_dns.cpp
@@ -38,6 +39,7 @@ target_link_libraries(dns-tests
     Packet++
     Common++
     pcap
+    ${UDNS_LIB}
 )
 
 add_test(NAME dns-tests COMMAND dns-tests)

@@ -24,7 +24,6 @@ struct Report {
 class DnsReporter {
 public:
     void addBinary(const Binary& bin);
-    void addDnsTransaction(const DnsTransaction& tx);
     Report getReport() const;
 
 private:

@@ -1,6 +1,7 @@
 #include "DnsAnalyzer.h"
 #include <stdexcept>
 #include <iostream>
+#include <udns.h>
 #include <pcapplusplus/Packet.h>
 #include <pcapplusplus/DnsLayer.h>
 #include <pcapplusplus/PcapFileDevice.h>

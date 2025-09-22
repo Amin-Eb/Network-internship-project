@@ -22,7 +22,6 @@ TEST(DnsReporterTest, GetInitialReport){
     EXPECT_EQ(0, reporter.getReport().total);
 }
 
-
 TEST(DnsReporterTest, ValidPcapTransactionsFile) {
     Report rep;
     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("../samples/capture.pcapng");
@@ -48,6 +47,7 @@ TEST(DnsReporterTest, ValidPcapTransactionsFile) {
         Binary bin = makeBinaryFromRaw(rawPacket);
         reporter.addBinary(bin);
         dnsCount++;
+        EXPECT_EQ(reporter.getReport().recieved, dnsCount);
         delete[] bin.data;
     }
 
@@ -57,7 +57,6 @@ TEST(DnsReporterTest, ValidPcapTransactionsFile) {
     reader->close();
     delete reader;
     rep = reporter.getReport();
-    EXPECT_EQ(rep.recieved, dnsCount);
     EXPECT_EQ(rep.success, 22);
     EXPECT_EQ(rep.failed, 1);
     return;
