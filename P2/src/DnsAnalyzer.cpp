@@ -56,7 +56,15 @@ inline Binary DnsReporter::extractDnsPayload(const Binary& bin) {
 }
 
 uint16_t DnsReporter::transactionID(const Binary& bin) {
-    return dns_qid(bin.data);
+    Binary dnsPayload = extractDnsPayload(bin);
+
+    if (dnsPayload.length < 2 || dnsPayload.data == nullptr) {
+        throw std::runtime_error("DNS payload too short for transaction ID");
+    }
+
+    // 0-1 bytes
+    uint16_t txid = (dnsPayload.data[0] << 8) | dnsPayload.data[1];
+    return txid;
 }
 
 bool DnsReporter::isResponse(const Binary& bin) {
@@ -94,7 +102,7 @@ void DnsReporter::addBinary(const Binary& bin) {
         pcpp::Packet packet(&rawPacket);
         auto dnsLayer = packet.getLayerOfType<pcpp::DnsLayer>();
         if (!dnsLayer) return; // skip non-DNS
-        uint16_t txid = transactionID(extractDnsPayload(bin));
+        uint16_t txid = transactionID(bin);
         cout << "id is : " << std::hex << txid << endl;
         if (isResponse(bin)) { //res
             auto it = pendingRequests.find(txid);
