@@ -1,10 +1,6 @@
 #include "DnsAnalyzer.h"
 #include <stdexcept>
 #include <iostream>
-#include <udns.h>
-#include <pcapplusplus/Packet.h>
-#include <pcapplusplus/DnsLayer.h>
-#include <pcapplusplus/PcapFileDevice.h>
 #include <arpa/inet.h>
 #include <netinet/ip.h>
 #include <netinet/udp.h>
@@ -99,12 +95,12 @@ bool DnsReporter::isSuccessResponse(const Binary& bin) {
 }
 void DnsReporter::addBinary(const Binary& bin) {
     try {
-        pcpp::RawPacket rawPacket((const uint8_t*)bin.data, bin.length, timeval(), false);
-        pcpp::Packet packet(&rawPacket);
-        auto dnsLayer = packet.getLayerOfType<pcpp::DnsLayer>();
-        if (!dnsLayer) return; // skip non-DNS
+        Binary dnsPayload = extractDnsPayload(bin);
+        if (dnsPayload.length == 0 || dnsPayload.data == nullptr)
+            return;
+        //packet is dns
         uint16_t txid = transactionID(bin);
-        cout << "id is : " << std::hex << txid << endl;
+        //cout << "id is : " << std::hex << txid << endl;
         if (isResponse(bin)) { //res
             auto it = pendingRequests.find(txid);
             if (it != pendingRequests.end()) {
