@@ -25,12 +25,11 @@ class DnsReporter {
 public:
     void addBinary(const Binary& bin);
     Report getReport() const;
-
-private:
-    Report rep;
-    std::map<uint16_t, Binary> pendingRequests;
-    inline static Binary extractDnsPayload(const Binary& bin);
+    static Binary extractDnsPayload(const Binary& bin);
     static bool isSuccessResponse(const Binary& bin);
     static bool isResponse(const Binary& bin);
     static uint16_t transactionID(const Binary& bin);
+private:
+    Report rep;
+    std::map<uint16_t, Binary> pendingRequests;
 };

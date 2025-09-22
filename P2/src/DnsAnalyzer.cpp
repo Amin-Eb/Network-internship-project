@@ -12,7 +12,7 @@
 #include <cstring>
 using namespace std;
 
-inline Binary DnsReporter::extractDnsPayload(const Binary& bin) {
+Binary DnsReporter::extractDnsPayload(const Binary& bin) {
     if (!bin.data || bin.length < 14 + 8) // minimum: ethernet + UDP
         throw std::runtime_error("Packet too short");
 
