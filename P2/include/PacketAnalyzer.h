@@ -21,14 +21,20 @@ struct Report {
     int recieved = 0; // all recieved packets
 };
 
-class DnsReporter {
+class Reporter {
 public:
+    // dns stuff
     void addBinary(const Binary& bin);
-    Report getReport() const;
     static Binary extractDnsPayload(const Binary& bin);
     static bool isSuccessResponse(const Binary& bin);
     static bool isResponse(const Binary& bin);
     static uint16_t transactionID(const Binary& bin);
+
+    // http stuff
+
+    
+    Report getReport() const;
+
 private:
     Report rep;
     std::map<uint16_t, Binary> pendingRequests;

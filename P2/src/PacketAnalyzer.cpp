@@ -1,4 +1,4 @@
-#include "DnsAnalyzer.h"
+#include "PacketAnalyzer.h"
 #include <stdexcept>
 #include <iostream>
 #include <arpa/inet.h>
@@ -8,7 +8,7 @@
 #include <cstring>
 using namespace std;
 
-Binary DnsReporter::extractDnsPayload(const Binary& bin) {
+Binary Reporter::extractDnsPayload(const Binary& bin) {
     if (!bin.data || bin.length < 14 + 8) // minimum: ethernet + UDP
         throw std::runtime_error("Packet too short");
 
@@ -51,7 +51,7 @@ Binary DnsReporter::extractDnsPayload(const Binary& bin) {
     return dnsPayload;
 }
 
-uint16_t DnsReporter::transactionID(const Binary& bin) {
+uint16_t Reporter::transactionID(const Binary& bin) {
     Binary dnsPayload = extractDnsPayload(bin);
 
     if (dnsPayload.length < 2 || dnsPayload.data == nullptr) {
@@ -63,7 +63,7 @@ uint16_t DnsReporter::transactionID(const Binary& bin) {
     return txid;
 }
 
-bool DnsReporter::isResponse(const Binary& bin) {
+bool Reporter::isResponse(const Binary& bin) {
     Binary dnsPayload = extractDnsPayload(bin);
 
     if (dnsPayload.length < 4 || dnsPayload.data == nullptr) {
@@ -78,7 +78,7 @@ bool DnsReporter::isResponse(const Binary& bin) {
 }
 
 
-bool DnsReporter::isSuccessResponse(const Binary& bin) {
+bool Reporter::isSuccessResponse(const Binary& bin) {
     Binary dnsPayload = extractDnsPayload(bin);
 
     if (dnsPayload.length < 4 || dnsPayload.data == nullptr) {
@@ -93,7 +93,7 @@ bool DnsReporter::isSuccessResponse(const Binary& bin) {
 
     return rcode == 0; // 0 = successful response
 }
-void DnsReporter::addBinary(const Binary& bin) {
+void Reporter::addBinary(const Binary& bin) {
     try {
         Binary dnsPayload = extractDnsPayload(bin);
         if (dnsPayload.length == 0 || dnsPayload.data == nullptr)
@@ -123,6 +123,6 @@ void DnsReporter::addBinary(const Binary& bin) {
         std::cerr << "Error parsing Binary: " << e.what() << std::endl;
     }
 }
-Report DnsReporter::getReport() const {
+Report Reporter::getReport() const {
     return rep; 
 }

@@ -3,7 +3,7 @@
 #include <pcapplusplus/Packet.h>
 #include <pcapplusplus/DnsLayer.h>
 #include <pcapplusplus/IPv4Layer.h>
-#include "DnsAnalyzer.h"
+#include "PacketAnalyzer.h"
 
 using namespace std;
 Binary makeBinaryFromRaw(const pcpp::RawPacket& raw) {
@@ -43,7 +43,7 @@ static Binary makeTestDnsPacket() {
 
 TEST(DnsReporterTest, ExtractDnsPayload) {
     Binary bin = makeTestDnsPacket();
-    Binary dnsPayload = DnsReporter::extractDnsPayload(bin);
+    Binary dnsPayload = Reporter::extractDnsPayload(bin);
 
     ASSERT_EQ(dnsPayload.length, bin.length - 14 - 20 - 8); // total - eth - ipv4 - udp
     EXPECT_EQ(dnsPayload.data[0], 0xab); // first byte of transaction ID
@@ -52,24 +52,24 @@ TEST(DnsReporterTest, ExtractDnsPayload) {
 
 TEST(DnsReporterTest, TransactionID) {
     Binary bin = makeTestDnsPacket();
-    uint16_t txid = DnsReporter::transactionID(bin);
+    uint16_t txid = Reporter::transactionID(bin);
     EXPECT_EQ(txid, 0xabcd);
 }
 
 TEST(DnsReporterTest, IsResponse) {
     Binary bin = makeTestDnsPacket();
-    bool qr = DnsReporter::isResponse(bin);
+    bool qr = Reporter::isResponse(bin);
     EXPECT_TRUE(qr); // because flags 0x81, 0x80 => qr=1
 }
 
 TEST(DnsReporterTest, IsSuccessResponse) {
     Binary bin = makeTestDnsPacket();
-    bool success = DnsReporter::isSuccessResponse(bin);
+    bool success = Reporter::isSuccessResponse(bin);
     EXPECT_TRUE(success); // rcode=0
 }
 
 TEST(DnsReporterTest, GetInitialReport){
-    DnsReporter reporter;
+    Reporter reporter;
     EXPECT_EQ(0, reporter.getReport().recieved);
     EXPECT_EQ(0, reporter.getReport().success);
     EXPECT_EQ(0, reporter.getReport().failed);
@@ -88,7 +88,7 @@ TEST(DnsReporterTest, ValidPcapTransactionsFile) {
         delete reader;
     }
 
-    DnsReporter reporter;
+    Reporter reporter;
     pcpp::RawPacket rawPacket;
     int dnsCount = 0;
 
@@ -104,9 +104,6 @@ TEST(DnsReporterTest, ValidPcapTransactionsFile) {
         EXPECT_EQ(reporter.getReport().recieved, dnsCount);
         delete[] bin.data;
     }
-
-    
-
 
     reader->close();
     delete reader;
