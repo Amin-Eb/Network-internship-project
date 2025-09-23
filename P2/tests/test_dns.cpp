@@ -78,7 +78,7 @@ TEST(DnsReporterTest, GetInitialReport){
 
 TEST(DnsReporterTest, ValidPcapTransactionsFile) {
     Report rep;
-    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("../samples/capture.pcapng");
+    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("../samples/htmldns.pcapng");
     if (!reader) {
         std::cerr << "Error: unsupported file type or cannot create reader\n";
     }
@@ -111,7 +111,7 @@ TEST(DnsReporterTest, ValidPcapTransactionsFile) {
     reader->close();
     delete reader;
     rep = reporter.getReport();
-    EXPECT_EQ(rep.success, 22);
-    EXPECT_EQ(rep.failed, 1);
+    EXPECT_EQ(rep.success, 70);
+    EXPECT_EQ(rep.failed, 0);
     return;
 }
