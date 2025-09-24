@@ -53,9 +53,9 @@ jobs:
         cd PcapPlusPlus-23.09
         
         # Configure and build
-        ./configure-linux.sh --default
-        make -j4
-        sudo make install
+        cmake -S . -B build
+        cmake --build build
+        cmake --install .
         
         # Update library cache
         sudo ldconfig
