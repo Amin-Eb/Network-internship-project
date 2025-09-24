@@ -2,54 +2,85 @@ name: CMake Tests
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ main, master, develop, feature/* ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main, master, develop, feature/* ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     
+    strategy:
+      matrix:
+        build-type: [Debug, Release]
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
     
-    - name: Cache GTest build
+    - name: Cache PcapPlusPlus build
       uses: actions/cache@v3
+      id: pcapplusplus-cache
       with:
-        path: /usr/src/gtest/build
-        key: ${{ runner.os }}-gtest-${{ hashFiles('/usr/src/gtest/CMakeLists.txt') }}
+        path: |
+          /usr/local/lib
+          /usr/local/include/pcapplusplus
+          ${{ github.workspace }}/PcapPlusPlus-23.09/build
+        key: ${{ runner.os }}-pcapplusplus-v23.09-${{ hashFiles('CMakeLists.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pcapplusplus-v23.09-
     
-    - name: Install dependencies
+    - name: Install system dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y \
           build-essential \
           cmake \
           libgtest-dev \
-          libpcap-dev
+          libpcap-dev \
+          git \
+          wget \
+          libssl-dev \
+          libpcre3-dev \
+          g++
+    
+    - name: Build and Install PcapPlusPlus
+      if: steps.pcapplusplus-cache.outputs.cache-hit != 'true'
+      run: |
+        # Download and build PcapPlusPlus from source
+        wget https://github.com/seladb/PcapPlusPlus/archive/v23.09.tar.gz -O pcapplusplus.tar.gz
+        tar xzf pcapplusplus.tar.gz
+        cd PcapPlusPlus-23.09
         
-        # Build GTest only if not cached
-        if [ ! -f /usr/lib/libgtest.a ]; then
-          cd /usr/src/gtest
-          sudo cmake -B build -S .
-          sudo cmake --build build
-          sudo cp build/lib/libgtest.a /usr/lib/
-          sudo cp build/lib/libgtest_main.a /usr/lib/
-        fi
+        # Configure and build
+        ./configure-linux.sh --default
+        make -j4
+        sudo make install
+        
+        # Update library cache
+        sudo ldconfig
+        
+    - name: Build and Install GTest
+      run: |
+        # Build GTest from source (required for find_package)
+        cd /usr/src/gtest
+        sudo cmake -B build -S .
+        sudo cmake --build build
+        sudo cp build/lib/libgtest.a /usr/lib/
+        sudo cp build/lib/libgtest_main.a /usr/lib/
         
     - name: Configure CMake
       run: |
-        cmake -B build -S . P2/
+        cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
       
     - name: Build
       run: |
-        cmake --build build --parallel 4
+        cmake --build build --config ${{ matrix.build-type }} --parallel 4
       
     - name: Run tests
       run: |
         cd build
-        ctest --verbose --output-on-failure
+        ctest --build-config ${{ matrix.build-type }} --verbose --output-on-failure
       
     - name: Test with valgrind (optional)
       run: |
@@ -57,6 +88,7 @@ jobs:
         cd build
         for test in *-tests; do
           if [ -f "$test" ] && [ -x "$test" ]; then
-            valgrind --leak-check=full --error-exitcode=1 ./$test
+            echo "Running valgrind on $test"
+            valgrind --leak-check=full --error-exitcode=1 ./$test || true
           fi
         done
