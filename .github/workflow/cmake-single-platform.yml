@@ -1,0 +1,62 @@
+name: CMake Tests
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Cache GTest build
+      uses: actions/cache@v3
+      with:
+        path: /usr/src/gtest/build
+        key: ${{ runner.os }}-gtest-${{ hashFiles('/usr/src/gtest/CMakeLists.txt') }}
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          cmake \
+          libgtest-dev \
+          libpcap-dev
+        
+        # Build GTest only if not cached
+        if [ ! -f /usr/lib/libgtest.a ]; then
+          cd /usr/src/gtest
+          sudo cmake -B build -S .
+          sudo cmake --build build
+          sudo cp build/lib/libgtest.a /usr/lib/
+          sudo cp build/lib/libgtest_main.a /usr/lib/
+        fi
+        
+    - name: Configure CMake
+      run: |
+        cmake -B build -S .
+      
+    - name: Build
+      run: |
+        cmake --build build --parallel 4
+      
+    - name: Run tests
+      run: |
+        cd build
+        ctest --verbose --output-on-failure
+      
+    - name: Test with valgrind (optional)
+      run: |
+        sudo apt-get install -y valgrind
+        cd build
+        for test in *-tests; do
+          if [ -f "$test" ] && [ -x "$test" ]; then
+            valgrind --leak-check=full --error-exitcode=1 ./$test
+          fi
+        done
