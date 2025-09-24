@@ -5,56 +5,71 @@
 #include <netinet/ip.h>
 #include <netinet/udp.h>
 #include <stdexcept>
+#include <pcapplusplus/Packet.h>
+#include <pcapplusplus/DnsLayer.h>
+#include <pcapplusplus/HttpLayer.h>
+#include <pcapplusplus/RawPacket.h>
 #include <cstring>
 using namespace std;
 
-Binary Reporter::extractDnsPayload(const Binary& bin) {
+Binary Reporter::extractDnsPayload(const Binary &bin)
+{
     if (!bin.data || bin.length < 14 + 8) // minimum: ethernet + UDP
         throw std::runtime_error("Packet too short");
 
-    const uint8_t* ptr = bin.data;
+    const uint8_t *ptr = bin.data;
     size_t len = bin.length;
 
     // --- eth ---
-    if (len < 14) throw std::runtime_error("Too short for Ethernet header");
+    if (len < 14)
+        throw std::runtime_error("Too short for Ethernet header");
     uint16_t ethType = (ptr[12] << 8) | ptr[13]; // bytes 12-13
     ptr += 14;
     len -= 14;
 
     // --- ip ---
-    if (ethType == 0x0800) { // IPv4
-        if (len < 20) throw std::runtime_error("Too short for IPv4 header");
+    if (ethType == 0x0800)
+    { // IPv4
+        if (len < 20)
+            throw std::runtime_error("Too short for IPv4 header");
         uint8_t ihl = ptr[0] & 0x0F; // header length in 32-bit words
         size_t ipHeaderLen = ihl * 4;
-        if (len < ipHeaderLen) throw std::runtime_error("IPv4 header truncated");
+        if (len < ipHeaderLen)
+            throw std::runtime_error("IPv4 header truncated");
         ptr += ipHeaderLen;
         len -= ipHeaderLen;
     }
-    else if (ethType == 0x86DD) { // IPv6
-        if (len < 40) throw std::runtime_error("Too short for IPv6 header");
+    else if (ethType == 0x86DD)
+    { // IPv6
+        if (len < 40)
+            throw std::runtime_error("Too short for IPv6 header");
         ptr += 40;
         len -= 40;
     }
-    else {
+    else
+    {
         throw std::runtime_error("Unsupported EtherType");
     }
 
     // --- udp ---
-    if (len < 8) throw std::runtime_error("Too short for UDP header");
+    if (len < 8)
+        throw std::runtime_error("Too short for UDP header");
     ptr += 8;
     len -= 8;
 
     // --- dns ---
     Binary dnsPayload;
-    dnsPayload.data = const_cast<uint8_t*>(ptr); // points inside original packet
+    dnsPayload.data = const_cast<uint8_t *>(ptr); // points inside original packet
     dnsPayload.length = len;
     return dnsPayload;
 }
 
-uint16_t Reporter::transactionID(const Binary& bin) {
+uint16_t Reporter::DnstransactionID(const Binary &bin)
+{
     Binary dnsPayload = extractDnsPayload(bin);
 
-    if (dnsPayload.length < 2 || dnsPayload.data == nullptr) {
+    if (dnsPayload.length < 2 || dnsPayload.data == nullptr)
+    {
         throw std::runtime_error("DNS payload too short for transaction ID");
     }
 
@@ -63,10 +78,12 @@ uint16_t Reporter::transactionID(const Binary& bin) {
     return txid;
 }
 
-bool Reporter::isResponse(const Binary& bin) {
+bool Reporter::isDnsResponse(const Binary &bin)
+{
     Binary dnsPayload = extractDnsPayload(bin);
 
-    if (dnsPayload.length < 4 || dnsPayload.data == nullptr) {
+    if (dnsPayload.length < 4 || dnsPayload.data == nullptr)
+    {
         throw std::runtime_error("DNS payload too short for flags");
     }
 
@@ -77,11 +94,12 @@ bool Reporter::isResponse(const Binary& bin) {
     return (flags & 0x8000) != 0; // 1 = response, 0 = query
 }
 
-
-bool Reporter::isSuccessResponse(const Binary& bin) {
+bool Reporter::isSuccessDnsResponse(const Binary &bin)
+{
     Binary dnsPayload = extractDnsPayload(bin);
 
-    if (dnsPayload.length < 4 || dnsPayload.data == nullptr) {
+    if (dnsPayload.length < 4 || dnsPayload.data == nullptr)
+    {
         throw std::runtime_error("DNS payload too short for flags");
     }
 
@@ -93,36 +111,114 @@ bool Reporter::isSuccessResponse(const Binary& bin) {
 
     return rcode == 0; // 0 = successful response
 }
-void Reporter::addBinary(const Binary& bin) {
-    try {
+void Reporter::addDnsBinary(const Binary &bin)
+{
+    try
+    {
         Binary dnsPayload = extractDnsPayload(bin);
         if (dnsPayload.length == 0 || dnsPayload.data == nullptr)
             return;
-        //packet is dns
-        uint16_t txid = transactionID(bin);
-        //cout << "id is : " << std::hex << txid << endl;
-        if (isResponse(bin)) { //res
+        // packet is dns
+        uint16_t txid = DnstransactionID(bin);
+        // cout << "id is : " << std::hex << txid << endl;
+        if (isDnsResponse(bin))
+        { // res
             auto it = pendingRequests.find(txid);
-            if (it != pendingRequests.end()) {
+            if (it != pendingRequests.end())
+            {
                 // found matching request, form transaction
-                if(isSuccessResponse(bin)){
-                    rep.success++;
-                } else {
-                    rep.failed++;
+                if (isSuccessDnsResponse(bin))
+                {
+                    rep.successDns++;
+                }
+                else
+                {
+                    rep.failedDns++;
                 }
                 pendingRequests.erase(it);
-                rep.total++;
+                rep.totalDns++;
             }
             rep.recieved++;
-        } else { // request
+        }
+        else
+        { // request
             pendingRequests[txid] = bin;
             rep.recieved++;
         }
-
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception &e)
+    {
         std::cerr << "Error parsing Binary: " << e.what() << std::endl;
     }
 }
-Report Reporter::getReport() const {
-    return rep; 
+
+void Reporter::addHttpBinary(const Binary &bin)
+{
+}
+
+int Reporter::getPacketType(const Binary &bin)
+{
+    timeval tv{};
+    pcpp::RawPacket rawPacket((const uint8_t *)bin.data, bin.length, tv, false);
+    pcpp::Packet packet(&rawPacket);
+
+    // DNS?
+    auto dnsLayer = packet.getLayerOfType<pcpp::DnsLayer>();
+    if (dnsLayer != nullptr)
+    {
+        return DNS;
+    }
+
+    // HTTP? (pcap++ has HttpRequestLayer / HttpResponseLayer)
+    auto httpReq = packet.getLayerOfType<pcpp::HttpRequestLayer>();
+    if (httpReq != nullptr)
+    {
+        return HTTP;
+    }
+    auto httpRes = packet.getLayerOfType<pcpp::HttpResponseLayer>();
+    if (httpRes != nullptr)
+    {
+        return HTTP;
+    }
+}
+Binary Reporter::extractHttpPayload(const Binary &bin)
+{
+    // Empty body
+    return Binary{};
+}
+
+bool Reporter::isSuccessHttpResponse(const Binary &bin)
+{
+    // Empty body
+    return false;
+}
+
+std::string Reporter::httpMethod(const Binary &bin)
+{
+    // Empty body
+    return "";
+}
+
+int Reporter::httpStatusCode(const Binary &bin)
+{
+    // Empty body
+    return 0;
+}
+
+bool Reporter::isHttpResponse(const Binary &bin)
+{
+    // Empty body
+    return false;
+}
+
+void Reporter::addBinary(const Binary &bin)
+{
+    if (getPacketType(bin) == DNS)
+    {
+        addDnsBinary(bin);
+    }
+}
+Report Reporter::getReport() const
+{
+    return rep;
 }

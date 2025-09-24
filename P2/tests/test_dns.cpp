@@ -52,28 +52,28 @@ TEST(DnsReporterTest, ExtractDnsPayload) {
 
 TEST(DnsReporterTest, TransactionID) {
     Binary bin = makeTestDnsPacket();
-    uint16_t txid = Reporter::transactionID(bin);
+    uint16_t txid = Reporter::DnstransactionID(bin);
     EXPECT_EQ(txid, 0xabcd);
 }
 
 TEST(DnsReporterTest, IsResponse) {
     Binary bin = makeTestDnsPacket();
-    bool qr = Reporter::isResponse(bin);
+    bool qr = Reporter::isDnsResponse(bin);
     EXPECT_TRUE(qr); // because flags 0x81, 0x80 => qr=1
 }
 
 TEST(DnsReporterTest, IsSuccessResponse) {
     Binary bin = makeTestDnsPacket();
-    bool success = Reporter::isSuccessResponse(bin);
+    bool success = Reporter::isSuccessDnsResponse(bin);
     EXPECT_TRUE(success); // rcode=0
 }
 
 TEST(DnsReporterTest, GetInitialReport){
     Reporter reporter;
     EXPECT_EQ(0, reporter.getReport().recieved);
-    EXPECT_EQ(0, reporter.getReport().success);
-    EXPECT_EQ(0, reporter.getReport().failed);
-    EXPECT_EQ(0, reporter.getReport().total);
+    EXPECT_EQ(0, reporter.getReport().successDns);
+    EXPECT_EQ(0, reporter.getReport().failedDns);
+    EXPECT_EQ(0, reporter.getReport().totalDns);
 }
 
 TEST(DnsReporterTest, ValidPcapTransactionsFile) {
@@ -108,7 +108,7 @@ TEST(DnsReporterTest, ValidPcapTransactionsFile) {
     reader->close();
     delete reader;
     rep = reporter.getReport();
-    EXPECT_EQ(rep.success, 70);
-    EXPECT_EQ(rep.failed, 0);
+    EXPECT_EQ(rep.successDns, 70);
+    EXPECT_EQ(rep.failedDns, 0);
     return;
 }
