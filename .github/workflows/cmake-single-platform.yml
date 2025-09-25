@@ -73,7 +73,7 @@ jobs:
         
     - name: Configure CMake
       run: |
-        cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
+        cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} P2
       
     - name: Build
       run: |
