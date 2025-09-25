@@ -79,7 +79,7 @@ TEST(DnsReporterTest, GetInitialReport){
 
 TEST(DnsReporterTest, ValidPcapPacketsFile) {
     Report rep;
-    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("../samples/htmldns.pcapng");
+    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/htmldns.pcapng");
     if (!reader) {
         std::cerr << "Error: unsupported file type or cannot create reader\n";
     }
