@@ -1,5 +1,6 @@
 [requires]
 gtest/1.15.0
+pcapplusplus/25.05
 
 [generators]
 CMakeDeps

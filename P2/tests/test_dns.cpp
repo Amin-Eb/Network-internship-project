@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <cstring>
 #include <pcapplusplus/PcapFileDevice.h>
 #include <pcapplusplus/Packet.h>
 #include <pcapplusplus/DnsLayer.h>
