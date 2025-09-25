@@ -1,0 +1,96 @@
+name: CMake Tests
+
+on:
+  push:
+    branches: [ main, master, develop, feature/* ]
+  pull_request:
+    branches: [ main, master, develop, feature/* ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        build-type: [Debug, Release]
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Cache PcapPlusPlus build
+      uses: actions/cache@v3
+      id: pcapplusplus-cache
+      with:
+        path: |
+          /usr/local/lib
+          /usr/local/include/pcapplusplus
+          ${{ github.workspace }}/PcapPlusPlus-23.09/build
+        key: ${{ runner.os }}-pcapplusplus-v23.09-${{ hashFiles('CMakeLists.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pcapplusplus-v23.09-
+    
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          cmake \
+          libgtest-dev \
+          libpcap-dev \
+          git \
+          wget \
+          libssl-dev \
+          libpcre3-dev \
+          g++
+    
+    - name: Build and Install PcapPlusPlus
+      if: steps.pcapplusplus-cache.outputs.cache-hit != 'true'
+      run: |
+        # Download and build PcapPlusPlus from source
+        wget https://github.com/seladb/PcapPlusPlus/archive/v23.09.tar.gz -O pcapplusplus.tar.gz
+        tar xzf pcapplusplus.tar.gz
+        cd PcapPlusPlus-23.09
+        
+        # Configure and build
+        mkdir build && cd build
+        cmake ..
+        make -j$(nproc)
+        sudo make install
+        sudo ldconfig
+        
+        # Update library cache
+        sudo ldconfig
+        
+    - name: Build and Install GTest
+      run: |
+        # Build GTest from source (required for find_package)
+        cd /usr/src/gtest
+        sudo cmake -B build -S .
+        sudo cmake --build build
+        sudo cp build/lib/libgtest.a /usr/lib/
+        sudo cp build/lib/libgtest_main.a /usr/lib/
+        
+    - name: Configure CMake
+      run: |
+        cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} P2
+      
+    - name: Build
+      run: |
+        cmake --build build --config ${{ matrix.build-type }} --parallel 4
+      
+    - name: Run tests
+      run: |
+        cd build
+        ctest --build-config ${{ matrix.build-type }} --verbose --output-on-failure
+      
+    - name: Test with valgrind (optional)
+      run: |
+        sudo apt-get install -y valgrind
+        cd build
+        for test in *-tests; do
+          if [ -f "$test" ] && [ -x "$test" ]; then
+            echo "Running valgrind on $test"
+            valgrind --leak-check=full --error-exitcode=1 ./$test || true
+          fi
+        done

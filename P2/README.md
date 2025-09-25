@@ -128,9 +128,7 @@ It is recommended to read below RFCs (request for comments).
 
 
 ### Cpp Libraries understanding HTTP
-[pcap++](https://pcapplusplus.github.io/docs/quickstart)
-[ldns](https://www.nlnetlabs.nl/projects/ldns/about)
-[c-ares](https://c-ares.org/)
+
 
 ### HTTP transaction reporter
 
@@ -165,12 +163,6 @@ There are requests and their responses for registration and ongoing call
 Usually there are 401 unsuccessful transactions before successful called authentication challenge.
 
 ### Official documents about SIP
-
-It is recommended to read below RFCs (request for comments).
-
-1. [DNS Terminology](https://datatracker.ietf.org/doc/html/rfc9499) can be used as a dictionary for DNS related terms. 
-2. [Domain names - concepts and facilities](https://datatracker.ietf.org/doc/html/rfc1034) can explains how DNS works
-3. [Domain names - implementation and specification](https://datatracker.ietf.org/doc/html/rfc1035) is a guideline for DNS servers  implementation
 
 
 ### Cpp Libraries understanding SIP
