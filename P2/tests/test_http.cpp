@@ -28,7 +28,7 @@ Binary makeBinaryFromRaw(const uint8_t* data, size_t len) {
 // Sample HTTP request packet
 // first i used ai agents for mading sample packets, not worked! so we read real ones.
 Binary makeTestHttpRequest() {
-    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("../samples/htmldns.pcapng");
+    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/htmldns.pcapng");
     if (!reader) throw std::runtime_error("Cannot open pcap file");
 
     if (!reader->open()) {
@@ -57,7 +57,7 @@ Binary makeTestHttpRequest() {
 
 // Sample HTTP response packet
 Binary makeTestHttpResponse() {
-     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("../samples/htmldns.pcapng");
+     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/htmldns.pcapng");
     if (!reader) throw std::runtime_error("Cannot open pcap file");
 
     if (!reader->open()) {
@@ -135,7 +135,7 @@ TEST(HttpReporterTest, AddHttpBinaryIncreasesReport) {
 
 TEST(HttpReporterTest, ValidPcapPacketsFile) {
     Report rep;
-    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("../samples/htmldns.pcapng");
+    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/htmldns.pcapng");
     ASSERT_NE(reader, nullptr);
 
     ASSERT_TRUE(reader->open());
