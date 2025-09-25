@@ -31,7 +31,9 @@ jobs:
           ${{ runner.os }}-pcapplusplus-v23.09-
 
     - name: debuging action
-      run: pwd
+      run: |
+        pwd
+        ls
     - name: Install system dependencies
       run: |
         sudo apt-get update
