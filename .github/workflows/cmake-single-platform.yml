@@ -29,7 +29,9 @@ jobs:
         key: ${{ runner.os }}-pcapplusplus-v23.09-${{ hashFiles('CMakeLists.txt') }}
         restore-keys: |
           ${{ runner.os }}-pcapplusplus-v23.09-
-    
+
+    - name: debuging action
+      run: pwd
     - name: Install system dependencies
       run: |
         sudo apt-get update
