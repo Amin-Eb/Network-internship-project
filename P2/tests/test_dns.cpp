@@ -76,7 +76,7 @@ TEST(DnsReporterTest, GetInitialReport){
     EXPECT_EQ(0, reporter.getReport().totalDns);
 }
 
-TEST(DnsReporterTest, ValidPcapTransactionsFile) {
+TEST(DnsReporterTest, ValidPcapPacketsFile) {
     Report rep;
     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("../samples/htmldns.pcapng");
     if (!reader) {

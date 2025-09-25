@@ -6,7 +6,8 @@
 
 enum PacketType {
     DNS = 0,
-    HTTP = 1
+    HTTP = 1,
+    NONE = 2,
 };
 
 struct Binary
@@ -61,4 +62,5 @@ private:
     void addHttpBinary(const Binary& bin);
     Report rep;
     std::map<uint16_t, Binary> pendingRequests;
+    std::map<uint32_t, Binary> pendingHttpRequests; // key: TCP ack number 
 };

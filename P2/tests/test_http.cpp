@@ -1,59 +1,93 @@
 #include <gtest/gtest.h>
 #include <pcapplusplus/PcapFileDevice.h>
 #include <pcapplusplus/Packet.h>
+#include <pcapplusplus/HttpLayer.h>
 #include "PacketAnalyzer.h"
 #include <cstring>
 
 using namespace std;
 
-// Helper to create Binary from raw data
+// RawPacket
+Binary makeBinaryFromRaw(const pcpp::RawPacket& raw) {
+    Binary bin;
+    bin.length = raw.getRawDataLen();
+    bin.data = new uint8_t[bin.length];
+    std::memcpy(bin.data, raw.getRawData(), bin.length);
+    return bin;
+}
+
+// For raw buffers
 Binary makeBinaryFromRaw(const uint8_t* data, size_t len) {
     Binary bin;
-    bin.length = static_cast<uint16_t>(len);
-    bin.data = new uint8_t[bin.length];
-    memcpy(bin.data, data, bin.length);
+    bin.length = len;
+    bin.data = new uint8_t[len];
+    std::memcpy(bin.data, data, len);
     return bin;
 }
 
 // Sample HTTP request packet
+// first i used ai agents for mading sample packets, not worked! so we read real ones.
 Binary makeTestHttpRequest() {
-    static uint8_t packet[14 + 20 + 32 + 24] = {0};
+    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("../samples/htmldns.pcapng");
+    if (!reader) throw std::runtime_error("Cannot open pcap file");
 
-    // Ethernet (14)
-    packet[12] = 0x08;
-    packet[13] = 0x00; // IPv4
+    if (!reader->open()) {
+        delete reader;
+        throw std::runtime_error("Cannot open pcap file");
+    }
 
-    // IPv4 (20)
-    packet[14] = 0x45; // IHL=5, no options
+    pcpp::RawPacket rawPacket;
+    while (reader->getNextPacket(rawPacket)) {
+        pcpp::Packet parsed(&rawPacket);
+        if (parsed.getLayerOfType<pcpp::HttpRequestLayer>()) {
+            Binary bin;
+            bin.length = rawPacket.getRawDataLen();
+            bin.data = new uint8_t[bin.length];
+            std::memcpy(bin.data, rawPacket.getRawData(), bin.length);
+            reader->close();
+            delete reader;
+            return bin;
+        }
+    }
 
-    // TCP (32) - assume fixed, dummy values
-    // ...
-
-    // HTTP payload (24 bytes) - "GET /index.html HTTP/1.1\r\n"
-    const char* httpReq = "GET /index.html HTTP/1.1\r\n";
-    memcpy(packet + 14 + 20 + 32, httpReq, strlen(httpReq));
-
-    return makeBinaryFromRaw(packet, sizeof(packet));
+    reader->close();
+    delete reader;
+    throw std::runtime_error("No HTTP request found in pcap");
 }
 
 // Sample HTTP response packet
 Binary makeTestHttpResponse() {
-    static uint8_t packet[14 + 20 + 32 + 27] = {0};
+     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("../samples/htmldns.pcapng");
+    if (!reader) throw std::runtime_error("Cannot open pcap file");
 
-    // Ethernet + IP + TCP same as above
+    if (!reader->open()) {
+        delete reader;
+        throw std::runtime_error("Cannot open pcap file");
+    }
 
-    // HTTP payload - "HTTP/1.1 200 OK\r\nContent"
-    const char* httpRes = "HTTP/1.1 200 OK\r\nContent";
-    memcpy(packet + 14 + 20 + 32, httpRes, strlen(httpRes));
+    pcpp::RawPacket rawPacket;
+    while (reader->getNextPacket(rawPacket)) {
+        pcpp::Packet parsed(&rawPacket);
+        if (parsed.getLayerOfType<pcpp::HttpResponseLayer>()) {
+            Binary bin;
+            bin.length = rawPacket.getRawDataLen();
+            bin.data = new uint8_t[bin.length];
+            std::memcpy(bin.data, rawPacket.getRawData(), bin.length);
+            reader->close();
+            delete reader;
+            return bin;
+        }
+    }
 
-    return makeBinaryFromRaw(packet, sizeof(packet));
+    reader->close();
+    delete reader;
+    throw std::runtime_error("No HTTP response found in pcap");
 }
 
 TEST(HttpReporterTest, ExtractHttpPayload) {
     Binary req = makeTestHttpRequest();
     Binary res = makeTestHttpResponse();
 
-    // Assume you have a method extractHttpPayload(Binary)
     Binary reqPayload = Reporter::extractHttpPayload(req);
     Binary resPayload = Reporter::extractHttpPayload(res);
 
@@ -65,6 +99,8 @@ TEST(HttpReporterTest, ExtractHttpPayload) {
 
     delete[] req.data;
     delete[] res.data;
+    delete[] reqPayload.data;
+    delete[] resPayload.data;
 }
 
 TEST(HttpReporterTest, IsHttpRequestAndResponse) { 
@@ -72,11 +108,7 @@ TEST(HttpReporterTest, IsHttpRequestAndResponse) {
     Binary res = makeTestHttpResponse();
 
     EXPECT_FALSE(Reporter::isHttpResponse(req));
-
     EXPECT_TRUE(Reporter::isHttpResponse(res));
-
-    delete[] req.data;
-    delete[] res.data;
 }
 
 TEST(HttpReporterTest, HttpStatusCodeAndMethod) {
@@ -85,9 +117,6 @@ TEST(HttpReporterTest, HttpStatusCodeAndMethod) {
 
     EXPECT_EQ(Reporter::httpMethod(req), "GET");
     EXPECT_EQ(Reporter::httpStatusCode(res), 200);
-
-    delete[] req.data;
-    delete[] res.data;
 }
 
 TEST(HttpReporterTest, AddHttpBinaryIncreasesReport) {
@@ -100,9 +129,41 @@ TEST(HttpReporterTest, AddHttpBinaryIncreasesReport) {
 
     Report rep = reporter.getReport();
     EXPECT_EQ(rep.recieved, 2);
-    EXPECT_EQ(rep.successHttp, 1); // after matching request/response
+    EXPECT_EQ(rep.successHttp, 1);
     EXPECT_EQ(rep.failedHttp, 0);
+} 
 
-    delete[] req.data;
-    delete[] res.data;
+TEST(HttpReporterTest, ValidPcapPacketsFile) {
+    Report rep;
+    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("../samples/htmldns.pcapng");
+    ASSERT_NE(reader, nullptr);
+
+    ASSERT_TRUE(reader->open());
+
+    Reporter reporter;
+    pcpp::RawPacket rawPacket;
+    int httpCount = 0;
+
+    while (reader->getNextPacket(rawPacket)) {
+        pcpp::Packet parsed(&rawPacket);
+
+        auto* httpReq = parsed.getLayerOfType<pcpp::HttpRequestLayer>();
+        auto* httpRes = parsed.getLayerOfType<pcpp::HttpResponseLayer>();
+        if (!httpReq && !httpRes) continue;
+
+        Binary bin = makeBinaryFromRaw(rawPacket);
+        reporter.addBinary(bin);
+        httpCount++;
+
+        EXPECT_EQ(reporter.getReport().recieved, httpCount);
+        delete[] bin.data;
+    }
+    reader->close();
+    delete reader;
+    rep = reporter.getReport();
+
+    EXPECT_EQ(rep.successHttp, 21);
+    EXPECT_EQ(rep.failedHttp, 1);
+    EXPECT_EQ(rep.totalHttp, 44);
+    EXPECT_EQ(rep.recieved, 44); // the file contains 41 pure http packets but two of them are assembeled of more packets so the real is 44
 }
