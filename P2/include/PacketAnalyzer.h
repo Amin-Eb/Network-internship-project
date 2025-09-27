@@ -7,7 +7,8 @@
 enum PacketType {
     DNS = 0,
     HTTP = 1,
-    NONE = 2,
+    SIP = 2,
+    NONE = 3,
 };
 
 struct Binary
@@ -32,6 +33,10 @@ struct Report
     int failedHttp = 0;  // faild Http FullRequests
     int successHttp = 0; // successful Http FullRequests
 
+    int totalSip = 0;    // total series of {req, res1, res2, res3} : INVITE => 180 Ringing => 200 OK => ACK.
+    int failedSip = 0;   // faild sip requests
+    int successSip = 0;  // successful sip requests
+
     int recieved = 0; // all recieved packets
 };
 
@@ -54,13 +59,19 @@ public:
     static int httpStatusCode(const Binary& bin);
     static bool isHttpResponse(const Binary& bin);
 
-    
+    // sip stuff
+    static bool isSip(const Binary& bin);
+    static bool isSuccessSipResponse(const Binary &bin);
+    static bool isSipResponse(const Binary &bin);
+    static int sipStatusCode(const Binary &bin);
     Report getReport() const;
 
 private:
     void addDnsBinary(const Binary& bin);
     void addHttpBinary(const Binary& bin);
+    void addSipBinary(const Binary& bin);
+
     Report rep;
-    std::map<uint16_t, Binary> pendingRequests;
-    std::map<uint32_t, Binary> pendingHttpRequests; // key: TCP ack number 
+    std::map<uint16_t, Binary> pendingRequests; // dns
+    std::map<uint32_t, Binary> pendingHttpRequests; // key: TCP ack number , http
 };

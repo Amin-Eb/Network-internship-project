@@ -360,6 +360,27 @@ bool Reporter::isHttpResponse(const Binary &bin)
     return httpRes != nullptr;
 }
 
+bool Reporter::isSip(const Binary &bin){
+    // TODO
+}
+
+bool Reporter::isSipResponse(const Binary &bin){
+    // TODO
+}
+
+bool Reporter::isSuccessSipResponse(const Binary &bin){
+    // TODO
+}
+
+int Reporter::sipStatusCode(const Binary &bin){
+    // TODO
+}
+
+void Reporter::addSipBinary(const Binary &bin){
+    // TODO
+}
+
+
 void Reporter::addBinary(const Binary &bin)
 {
     int type = getPacketType(bin);
