@@ -361,19 +361,19 @@ bool Reporter::isHttpResponse(const Binary &bin)
 }
 
 bool Reporter::isSip(const Binary &bin){
-    // TODO
+    return 0;
 }
 
 bool Reporter::isSipResponse(const Binary &bin){
-    // TODO
+    return 0;
 }
 
 bool Reporter::isSuccessSipResponse(const Binary &bin){
-    // TODO
+    return 0;
 }
 
 int Reporter::sipStatusCode(const Binary &bin){
-    // TODO
+    return 0;
 }
 
 void Reporter::addSipBinary(const Binary &bin){

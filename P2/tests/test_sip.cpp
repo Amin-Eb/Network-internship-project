@@ -22,13 +22,17 @@ Binary makeTestSipRequest() {
         delete reader;
         throw std::runtime_error("Cannot open sip.pcapng");
     }
+    std::cout << "openedreq\n";
 
     pcpp::RawPacket rawPacket;
     while (reader->getNextPacket(rawPacket)) {
         pcpp::Packet parsed(&rawPacket);
         auto* sipReq = parsed.getLayerOfType<pcpp::SipRequestLayer>();
         if (sipReq) {
-            Binary bin = makeBinaryFromRaw(rawPacket);
+            Binary bin;
+            bin.length = rawPacket.getRawDataLen();
+            bin.data = new uint8_t[bin.length];
+            std::memcpy(bin.data, rawPacket.getRawData(), bin.length);
             reader->close();
             delete reader;
             return bin;
@@ -48,13 +52,16 @@ Binary makeTestSipResponse() {
         delete reader;
         throw std::runtime_error("Cannot open sip.pcapng");
     }
-
+    std::cout << "openedres\n";
     pcpp::RawPacket rawPacket;
     while (reader->getNextPacket(rawPacket)) {
         pcpp::Packet parsed(&rawPacket);
         auto* sipRes = parsed.getLayerOfType<pcpp::SipResponseLayer>();
         if (sipRes) {
-            Binary bin = makeBinaryFromRaw(rawPacket);
+            Binary bin;
+            bin.length = rawPacket.getRawDataLen();
+            bin.data = new uint8_t[bin.length];
+            std::memcpy(bin.data, rawPacket.getRawData(), bin.length);
             reader->close();
             delete reader;
             return bin;
@@ -75,7 +82,6 @@ TEST(SipReporterTest, DetectSipPackets) {
 
     EXPECT_FALSE(Reporter::isSipResponse(req));
     EXPECT_TRUE(Reporter::isSipResponse(res));
-
     delete[] req.data;
     delete[] res.data;
 }
@@ -83,9 +89,7 @@ TEST(SipReporterTest, DetectSipPackets) {
 TEST(SipReporterTest, ParseSipStatusCode) {
     Binary res = makeTestSipResponse();
     int code = Reporter::sipStatusCode(res);
-    EXPECT_GE(code, 100);
-    EXPECT_LE(code, 699);
-    delete[] res.data;
+    EXPECT_EQ(code, 100);
 }
 
 TEST(SipReporterTest, AddSipBinaryUpdatesReport) {
