@@ -50,3 +50,16 @@ target_link_libraries(http-tests
 )
 add_test(NAME http-tests COMMAND http-tests)
 
+# ---- sip ----
+add_executable(sip-tests tests/test_sip.cpp)
+target_include_directories(sip-tests PRIVATE include)
+target_link_libraries(sip-tests
+    GTest::GTest
+    GTest::Main
+    PacketAnalyzerLib
+    Pcap++
+    Packet++
+    Common++
+    pcap
+)
+add_test(NAME sip-tests COMMAND sip-tests)
