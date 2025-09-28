@@ -60,6 +60,7 @@ public:
     static bool isHttpResponse(const Binary& bin);
 
     // sip stuff
+    static Binary extractSipPayload(const Binary &bin);
     static bool isSip(const Binary& bin);
     static bool isSuccessSipResponse(const Binary &bin);
     static bool isSipResponse(const Binary &bin);
