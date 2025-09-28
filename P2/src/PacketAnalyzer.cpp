@@ -376,23 +376,40 @@ bool Reporter::isHttpResponse(const Binary &bin)
     return httpRes != nullptr;
 }
 
-bool Reporter::isSip(const Binary &bin){
+bool Reporter::isSip(const Binary &bin)
+{
+    timeval tv{};
+    pcpp::RawPacket rawPacket((const uint8_t *)bin.data, bin.length, tv, false);
+    pcpp::Packet packet(&rawPacket);
+
+    auto *sipReq = packet.getLayerOfType<pcpp::SipRequestLayer>();
+    auto *sipRes = packet.getLayerOfType<pcpp::SipResponseLayer>();
+
+    return sipReq != nullptr || sipRes != nullptr;
+}
+
+bool Reporter::isSipResponse(const Binary &bin)
+{
+    timeval tv{};
+    pcpp::RawPacket rawPacket((const uint8_t *)bin.data, bin.length, tv, false);
+    pcpp::Packet packet(&rawPacket);
+
+    auto *sipRes = packet.getLayerOfType<pcpp::SipResponseLayer>();
+    return sipRes != nullptr;
+}
+
+bool Reporter::isSuccessSipResponse(const Binary &bin)
+{
     return 0;
 }
 
-bool Reporter::isSipResponse(const Binary &bin){
+int Reporter::sipStatusCode(const Binary &bin)
+{
     return 0;
 }
 
-bool Reporter::isSuccessSipResponse(const Binary &bin){
-    return 0;
-}
-
-int Reporter::sipStatusCode(const Binary &bin){
-    return 0;
-}
-
-void Reporter::addSipBinary(const Binary &bin){
+void Reporter::addSipBinary(const Binary &bin)
+{
     // TODO
 }
 
@@ -407,6 +424,10 @@ void Reporter::addBinary(const Binary &bin)
     else if (type == HTTP)
     {
         addHttpBinary(bin);
+    }
+    else if (type == SIP)
+    {
+        addSipBinary(bin);
     }
 }
 Report Reporter::getReport() const
