@@ -4,13 +4,18 @@
 #include <arpa/inet.h>
 #include <netinet/ip.h>
 #include <netinet/udp.h>
+#include <cstring>
 #include <stdexcept>
 #include <pcapplusplus/Packet.h>
 #include <pcapplusplus/DnsLayer.h>
 #include <pcapplusplus/HttpLayer.h>
 #include <pcapplusplus/RawPacket.h>
-#include <cstring>
 #include <pcapplusplus/TcpLayer.h>
+#include <pcapplusplus/SipLayer.h>
+#include <pcapplusplus/PcapFileDevice.h>
+#include <pcapplusplus/Packet.h>
+
+
 using namespace std;
 
 Binary Reporter::extractDnsPayload(const Binary &bin)
@@ -232,6 +237,17 @@ int Reporter::getPacketType(const Binary &bin)
     {
         return HTTP;
     }
+    // SIP ? both res/req will be included
+    auto* sipRes = packet.getLayerOfType<pcpp::SipResponseLayer>();
+    if (sipRes != nullptr)
+    {
+        return SIP;
+    }
+    auto* sipReq = packet.getLayerOfType<pcpp::SipRequestLayer>();
+    if (sipReq != nullptr)
+    {   
+        return SIP;
+    }   
     return NONE;
 }
 Binary Reporter::extractHttpPayload(const Binary &bin)
