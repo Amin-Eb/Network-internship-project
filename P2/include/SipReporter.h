@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <vector>
 #include <map>
+#include <set>
 #include <iostream>
 #include "PacketBinary.h"
 using namespace std;
@@ -17,6 +18,7 @@ class SipReporter
 {
 public:
     static Binary extractSipPayload(const Binary &bin);
+    static std::string extractSipCallId(const Binary &bin);
     static bool isSip(const Binary& bin);
     static bool isSuccessSipResponse(const Binary &bin);
     static bool isSipResponse(const Binary &bin);
@@ -25,6 +27,7 @@ public:
     SipReport getSipReport() { return siprep; }; 
 private:
     SipReport siprep;
+    set<string> sipRequests;
 };
 
 

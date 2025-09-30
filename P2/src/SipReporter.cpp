@@ -108,6 +108,21 @@ int SipReporter::sipStatusCode(const Binary &bin)
 
     return std::atoi(codeStr);
 }
+std::string SipReporter::extractSipCallId(const Binary &bin) {
+    auto* data = bin.data;
+    auto len = bin.length;
+    std::string payload(reinterpret_cast<const char*>(data), len);
+    auto pos = payload.find("Call-ID:");
+    if (pos == std::string::npos) return {};
+    pos += strlen("Call-ID:");
+    // skip spaces
+    while (pos < payload.size() && isspace((unsigned char)payload[pos])) ++pos;
+    auto end = payload.find_first_of("\r\n", pos);
+    if (end == std::string::npos) end = payload.size();
+    std::string callid = payload.substr(pos, end - pos);
+    // trim...
+    return callid;
+}
 
 void SipReporter::addSipBinary(const Binary &bin)
 {
@@ -123,16 +138,34 @@ void SipReporter::addSipBinary(const Binary &bin)
         if (sipReq)
         {
             // Start of a SIP transaction (INVITE, REGISTER, etc.)
+            sipRequests.insert(extractSipCallId(bin));
             siprep.totalSip++;
+            siprep.failedSip++;
         }
         else if (sipRes)
         {
             int code = sipStatusCode(bin);
-
-            if (code >= 200 && code < 300)
-                siprep.successSip++;
-            else if (code >= 300) // failure (>=300 are errors)
-                siprep.failedSip++;
+            
+            if (code >= 200 && code < 300) 
+            {
+                if(sipRequests.find(extractSipCallId(bin)) != sipRequests.end()) 
+                {
+                    siprep.successSip++;
+                    sipRequests.erase(extractSipCallId(bin));
+                    siprep.failedSip--;
+                    //cout << extractSipCallId(bin) << " ok " << endl;
+                }
+            }
+            else if (code >= 400 && code <= 608) 
+            { // failure (>=400 are errors)
+                if(sipRequests.find(extractSipCallId(bin)) != sipRequests.end()) 
+                {
+                    siprep.failedSip++;
+                    sipRequests.erase(extractSipCallId(bin));
+                    siprep.failedSip--;
+                   // cout << extractSipCallId(bin) << " fail " << endl;
+                }
+            }
 
         }
     }

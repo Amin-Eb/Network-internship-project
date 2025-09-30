@@ -65,7 +65,6 @@ Binary makeTestSipResponse() {
             std::memcpy(bin.data, rawPacket.getRawData(), bin.length);
             reader->close();
             delete reader;
-            std::cout << "Found SIP response at packet " << i << "\n";
             return bin;
         }
     }
@@ -93,7 +92,11 @@ TEST(SipReporterTest, ParseSipStatusCode) {
     int code = SipReporter::sipStatusCode(res);
     EXPECT_EQ(code, 100);
 }
-
+TEST(SipReporterTest, ParseSipCallId) {
+    Binary req = makeTestSipResponse();
+    string code = SipReporter::extractSipCallId(req);
+    EXPECT_EQ(code, "HLErGJvm9K");
+}
 TEST(SipReporterTest, AddSipBinaryUpdatesReport) {
     SipReporter sipreporter;
     Binary req = makeTestSipRequest();
@@ -137,6 +140,6 @@ TEST(SipReporterTest, FullPcapScanWithSipLayer) {
 
     SipReport siprep = sipreporter.getSipReport();
     EXPECT_EQ(siprep.totalSip, 94); //included "MESSAGE"  and "BYE " sip requests beside of other normal ones
-    EXPECT_EQ(siprep.failedSip, 1); // TODO , no res reqs count as failed!
-    EXPECT_EQ(siprep.successSip, 6);
+    EXPECT_EQ(siprep.failedSip, 89); // no res requests counted as failed beside real failed ones
+    EXPECT_EQ(siprep.successSip, 5);
 }
