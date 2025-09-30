@@ -95,16 +95,16 @@ TEST(SipReporterTest, ParseSipStatusCode) {
 }
 
 TEST(SipReporterTest, AddSipBinaryUpdatesReport) {
-    Reporter reporter;
+    SipReporter sipreporter;
     Binary req = makeTestSipRequest();
     Binary res = makeTestSipResponse();
 
-    reporter.addBinary(req);
-    reporter.addBinary(res);
+    sipreporter.addSipBinary(req);
+    sipreporter.addSipBinary(res);
 
-    Report rep = reporter.getReport();
-    EXPECT_EQ(rep.recieved, 2);
-    EXPECT_EQ(rep.sipreport.totalSip, 1);
+    SipReport rep = sipreporter.getSipReport();
+    //EXPECT_EQ(rep.recieved, 2); recieved is tested on main reporter test suit
+    EXPECT_EQ(rep.totalSip, 1);
     //EXPECT_EQ(rep.successSip + rep.failedSip, 1); no! because we havnt full res of the req to decide
 
     delete[] req.data;
@@ -116,7 +116,7 @@ TEST(SipReporterTest, FullPcapScanWithSipLayer) {
     ASSERT_NE(reader, nullptr);
     ASSERT_TRUE(reader->open());
 
-    Reporter reporter;
+    SipReporter sipreporter;
     pcpp::RawPacket rawPacket;
     int sipCount = 0;
 
@@ -126,18 +126,17 @@ TEST(SipReporterTest, FullPcapScanWithSipLayer) {
         if (!sipLayer) continue;
 
         Binary bin = makeBinaryFromRaw(rawPacket);
-        reporter.addBinary(bin);
+        sipreporter.addSipBinary(bin);
         sipCount++;
-        EXPECT_EQ(reporter.getReport().recieved, sipCount);
+        //EXPECT_EQ(reporter.getReport().recieved, sipCount);
         delete[] bin.data;
     }
 
     reader->close();
     delete reader;
 
-    Report rep = reporter.getReport();
-    EXPECT_EQ(rep.sipreport.totalSip, 94); //included "MESSAGE"  and "BYE " sip requests beside of other normal ones
-    EXPECT_EQ(rep.recieved, sipCount);
-    EXPECT_EQ(rep.sipreport.failedSip, 1); // TODO , no res reqs count as failed!
-    EXPECT_EQ(rep.sipreport.successSip, 6);
+    SipReport siprep = sipreporter.getSipReport();
+    EXPECT_EQ(siprep.totalSip, 94); //included "MESSAGE"  and "BYE " sip requests beside of other normal ones
+    EXPECT_EQ(siprep.failedSip, 1); // TODO , no res reqs count as failed!
+    EXPECT_EQ(siprep.successSip, 6);
 }
