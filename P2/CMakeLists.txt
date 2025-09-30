@@ -15,7 +15,7 @@ if(ENABLE_COVERAGE)
 endif()
 
 # ---- Library ----
-add_library(PacketAnalyzerLib STATIC src/PacketAnalyzer.cpp)
+add_library(PacketAnalyzerLib STATIC src/PacketAnalyzer.cpp src/DnsReporter.cpp)
 target_include_directories(PacketAnalyzerLib PUBLIC include)
 
 # ---- Tests ----
@@ -26,9 +26,9 @@ find_package(GTest REQUIRED)
 add_executable(dns-tests tests/test_dns.cpp)
 target_include_directories(dns-tests PRIVATE include)
 target_link_libraries(dns-tests
+    PacketAnalyzerLib
     GTest::GTest
     GTest::Main
-    PacketAnalyzerLib
     Pcap++
     Packet++
     Common++
@@ -40,9 +40,9 @@ add_test(NAME dns-tests COMMAND dns-tests)
 add_executable(http-tests tests/test_http.cpp)
 target_include_directories(http-tests PRIVATE include)
 target_link_libraries(http-tests
+    PacketAnalyzerLib
     GTest::GTest
     GTest::Main
-    PacketAnalyzerLib
     Pcap++
     Packet++
     Common++
@@ -54,9 +54,9 @@ add_test(NAME http-tests COMMAND http-tests)
 add_executable(sip-tests tests/test_sip.cpp)
 target_include_directories(sip-tests PRIVATE include)
 target_link_libraries(sip-tests
+    PacketAnalyzerLib
     GTest::GTest
     GTest::Main
-    PacketAnalyzerLib
     Pcap++
     Packet++
     Common++

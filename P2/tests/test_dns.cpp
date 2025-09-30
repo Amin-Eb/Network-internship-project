@@ -44,7 +44,7 @@ static Binary makeTestDnsPacket() {
 
 TEST(DnsReporterTest, ExtractDnsPayload) {
     Binary bin = makeTestDnsPacket();
-    Binary dnsPayload = Reporter::extractDnsPayload(bin);
+    Binary dnsPayload = DnsReporter::extractDnsPayload(bin);
 
     ASSERT_EQ(dnsPayload.length, bin.length - 14 - 20 - 8); // total - eth - ipv4 - udp
     EXPECT_EQ(dnsPayload.data[0], 0xab); // first byte of transaction ID
@@ -53,28 +53,28 @@ TEST(DnsReporterTest, ExtractDnsPayload) {
 
 TEST(DnsReporterTest, TransactionID) {
     Binary bin = makeTestDnsPacket();
-    uint16_t txid = Reporter::DnstransactionID(bin);
+    uint16_t txid = DnsReporter::DnstransactionID(bin);
     EXPECT_EQ(txid, 0xabcd);
 }
 
 TEST(DnsReporterTest, IsResponse) {
     Binary bin = makeTestDnsPacket();
-    bool qr = Reporter::isDnsResponse(bin);
+    bool qr = DnsReporter::isDnsResponse(bin);
     EXPECT_TRUE(qr); // because flags 0x81, 0x80 => qr=1
 }
 
 TEST(DnsReporterTest, IsSuccessResponse) {
     Binary bin = makeTestDnsPacket();
-    bool success = Reporter::isSuccessDnsResponse(bin);
+    bool success = DnsReporter::isSuccessDnsResponse(bin);
     EXPECT_TRUE(success); // rcode=0
 }
 
 TEST(DnsReporterTest, GetInitialReport){
     Reporter reporter;
     EXPECT_EQ(0, reporter.getReport().recieved);
-    EXPECT_EQ(0, reporter.getReport().successDns);
-    EXPECT_EQ(0, reporter.getReport().failedDns);
-    EXPECT_EQ(0, reporter.getReport().totalDns);
+    EXPECT_EQ(0, reporter.getReport().dnsreport.successDns);
+    EXPECT_EQ(0, reporter.getReport().dnsreport.failedDns);
+    EXPECT_EQ(0, reporter.getReport().dnsreport.totalDns);
 }
 
 TEST(DnsReporterTest, ValidPcapPacketsFile) {
@@ -109,7 +109,7 @@ TEST(DnsReporterTest, ValidPcapPacketsFile) {
     reader->close();
     delete reader;
     rep = reporter.getReport();
-    EXPECT_EQ(rep.successDns, 70);
-    EXPECT_EQ(rep.failedDns, 0);
+    EXPECT_EQ(rep.dnsreport.successDns, 70);
+    EXPECT_EQ(rep.dnsreport.failedDns, 0);
     return;
 }
