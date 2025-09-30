@@ -79,18 +79,18 @@ TEST(SipReporterTest, DetectSipPackets) {
     Binary req = makeTestSipRequest();
     Binary res = makeTestSipResponse();
 
-    EXPECT_TRUE(Reporter::isSip(req));
-    EXPECT_TRUE(Reporter::isSip(res));
+    EXPECT_TRUE(SipReporter::isSip(req));
+    EXPECT_TRUE(SipReporter::isSip(res));
 
-    EXPECT_FALSE(Reporter::isSipResponse(req));
-    EXPECT_TRUE(Reporter::isSipResponse(res));
+    EXPECT_FALSE(SipReporter::isSipResponse(req));
+    EXPECT_TRUE(SipReporter::isSipResponse(res));
     delete[] req.data;
     delete[] res.data;
 }
 
 TEST(SipReporterTest, ParseSipStatusCode) {
     Binary res = makeTestSipResponse();
-    int code = Reporter::sipStatusCode(res);
+    int code = SipReporter::sipStatusCode(res);
     EXPECT_EQ(code, 100);
 }
 
@@ -104,7 +104,7 @@ TEST(SipReporterTest, AddSipBinaryUpdatesReport) {
 
     Report rep = reporter.getReport();
     EXPECT_EQ(rep.recieved, 2);
-    EXPECT_EQ(rep.totalSip, 1);
+    EXPECT_EQ(rep.sipreport.totalSip, 1);
     //EXPECT_EQ(rep.successSip + rep.failedSip, 1); no! because we havnt full res of the req to decide
 
     delete[] req.data;
@@ -136,7 +136,8 @@ TEST(SipReporterTest, FullPcapScanWithSipLayer) {
     delete reader;
 
     Report rep = reporter.getReport();
-    EXPECT_EQ(rep.totalSip, 94); //included "MESSAGE"  and "BYE " sip requests beside of other normal ones
+    EXPECT_EQ(rep.sipreport.totalSip, 94); //included "MESSAGE"  and "BYE " sip requests beside of other normal ones
     EXPECT_EQ(rep.recieved, sipCount);
-    EXPECT_EQ(rep.failedSip, 1);
+    EXPECT_EQ(rep.sipreport.failedSip, 1); // TODO , no res reqs count as failed!
+    EXPECT_EQ(rep.sipreport.successSip, 6);
 }
