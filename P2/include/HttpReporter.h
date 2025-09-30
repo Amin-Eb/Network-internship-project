@@ -3,6 +3,7 @@
 #include <arpa/inet.h>
 #include <netinet/ip.h>
 #include <netinet/udp.h>
+#include <set>
 #include <cstring>
 #include <stdexcept>
 #include "PacketBinary.h"
@@ -29,5 +30,5 @@ public:
     HttpReport getHttpReport(){ return httprep; }
 private:
     HttpReport httprep;
-    std::map<uint32_t, Binary> pendingHttpRequests; // key: TCP ack number , http
+    std::set<uint32_t> pendingHttpRequests; // key: TCP ack number of reqs, http
 };

@@ -14,9 +14,13 @@ void HttpReporter::addHttpBinary(const Binary &bin)
 
         auto tcpLayer = packet.getLayerOfType<pcpp::TcpLayer>();
         uint32_t seqNum = 0;
-        if (tcpLayer)
+        uint32_t ackNum = 0;
+        if (tcpLayer){
+            // the response of each request has that requests ack number as its seq number!
+            
             seqNum = ntohl(tcpLayer->getTcpHeader()->sequenceNumber);
-
+            ackNum = ntohl(tcpLayer->getTcpHeader()->ackNumber);
+        }
         auto httpReq = packet.getLayerOfType<pcpp::HttpRequestLayer>();
         auto httpRes = packet.getLayerOfType<pcpp::HttpResponseLayer>();
 
@@ -25,7 +29,8 @@ void HttpReporter::addHttpBinary(const Binary &bin)
             httprep.totalHttp++;
             // Keep request until we see a response
             if (seqNum != 0){
-                pendingHttpRequests[seqNum] = bin;
+                pendingHttpRequests.insert(ackNum);
+                httprep.failedHttp++;
             }
 
         }
@@ -42,6 +47,7 @@ void HttpReporter::addHttpBinary(const Binary &bin)
                 else
                     httprep.failedHttp++;
                 pendingHttpRequests.erase(seqNum);
+                httprep.failedHttp--;
             }
             else
             {
