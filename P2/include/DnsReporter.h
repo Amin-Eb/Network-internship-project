@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <vector>
-#include <map>
+#include <set>
 #include <iostream>
 #include "PacketBinary.h"
 using namespace std;
@@ -30,5 +30,5 @@ public:
     DnsReport getDnsReport(){ return dnsrep; }
 private:
     DnsReport dnsrep;
-    std::map<uint16_t, Binary> pendingRequests; // dns
+    set<uint16_t> pendingDnsRequests; // dns
 };

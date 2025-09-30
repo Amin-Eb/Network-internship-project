@@ -116,12 +116,15 @@ void DnsReporter::addDnsBinary(const Binary &bin)
             return;
         // packet is dns
         uint16_t txid = DnstransactionID(bin);
+        if(txid == 0) return;
         // cout << "id is : " << std::hex << txid << endl;
         if (isDnsResponse(bin))
         { // res
-            auto it = pendingRequests.find(txid);
-            if (it != pendingRequests.end())
+            auto it = pendingDnsRequests.find(txid);
+            if (it != pendingDnsRequests.end())
             {
+                dnsrep.failedDns --;
+                cout << "removed " << std::hex << txid << endl;
                 // found matching request, form transaction
                 if (isSuccessDnsResponse(bin))
                 {
@@ -129,15 +132,18 @@ void DnsReporter::addDnsBinary(const Binary &bin)
                 }
                 else
                 {
+                    cout << std::hex << txid << "failed !!!"<< endl;
                     dnsrep.failedDns++;
                 }
-                pendingRequests.erase(it);
+                pendingDnsRequests.erase(it);
                 dnsrep.totalDns++;
             }
         }
         else
         { // request
-            pendingRequests[txid] = bin;
+            dnsrep.failedDns++;
+            pendingDnsRequests.insert(txid);
+            cout << "added " << std::hex << txid << endl;
         }
     }
     catch (const std::exception &e)
