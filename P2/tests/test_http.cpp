@@ -120,27 +120,26 @@ TEST(HttpReporterTest, HttpStatusCodeAndMethod) {
 }
 
 TEST(HttpReporterTest, AddHttpBinaryIncreasesReport) {
-    Reporter reporter;
+    HttpReporter httpreporter;
     Binary req = makeTestHttpRequest();
     Binary res = makeTestHttpResponse();
 
-    reporter.addBinary(req);
-    reporter.addBinary(res);
+    httpreporter.addHttpBinary(req);
+    httpreporter.addHttpBinary(res);
 
-    Report rep = reporter.getReport();
-    EXPECT_EQ(rep.recieved, 2);
-    EXPECT_EQ(rep.httpreport.successHttp, 1);
-    EXPECT_EQ(rep.httpreport.failedHttp, 0);
+    HttpReport rep = httpreporter.getHttpReport();
+    EXPECT_EQ(rep.successHttp, 1);
+    EXPECT_EQ(rep.failedHttp, 0);
 } 
 
 TEST(HttpReporterTest, ValidPcapPacketsFile) {
-    Report rep;
+    HttpReport rep;
     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/htmldns.pcapng");
     ASSERT_NE(reader, nullptr);
 
     ASSERT_TRUE(reader->open());
 
-    Reporter reporter;
+    HttpReporter httpreporter;
     pcpp::RawPacket rawPacket;
     int httpCount = 0;
 
@@ -152,18 +151,18 @@ TEST(HttpReporterTest, ValidPcapPacketsFile) {
         if (!httpReq && !httpRes) continue;
 
         Binary bin = makeBinaryFromRaw(rawPacket);
-        reporter.addBinary(bin);
+        httpreporter.addHttpBinary(bin);
         httpCount++;
 
-        EXPECT_EQ(reporter.getReport().recieved, httpCount);
+        //EXPECT_EQ(reporter.getReport().recieved, httpCount); counting recieved packets isnt this class job! search it in Reporter class tests
         delete[] bin.data;
     }
     reader->close();
     delete reader;
-    rep = reporter.getReport();
+    rep = httpreporter.getHttpReport();
 
-    EXPECT_EQ(rep.httpreport.successHttp, 21);
-    EXPECT_EQ(rep.httpreport.failedHttp, 1);
-    EXPECT_EQ(rep.httpreport.totalHttp, 44);
-    EXPECT_EQ(rep.recieved, 44); // the file contains 41 pure http packets but two of them are assembeled of more packets so the real is 44
+    EXPECT_EQ(rep.successHttp, 21);
+    EXPECT_EQ(rep.failedHttp, 1);
+    EXPECT_EQ(rep.totalHttp, 44);
+    //EXPECT_EQ(rep.recieved, 44); // the file contains 41 pure http packets but two of them are assembeled of more packets so the real is 44
 }
