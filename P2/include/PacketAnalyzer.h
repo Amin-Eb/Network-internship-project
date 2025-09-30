@@ -5,6 +5,7 @@
 #include <iostream>
 #include "PacketBinary.h"
 #include "DnsReporter.h"
+#include "HttpReporter.h"
 
 enum PacketType {
     DNS = 0,
@@ -17,10 +18,7 @@ enum PacketType {
 struct Report
 {
     DnsReport dnsreport;
-
-    int totalHttp = 0;   // total tuple of {req, res1, req2, req3, res2, req4, ...}
-    int failedHttp = 0;  // faild Http FullRequests
-    int successHttp = 0; // successful Http FullRequests
+    HttpReport httpreport;
 
     int totalSip = 0;    // total series of {req, res1, res2, res3} : INVITE => 180 Ringing => 200 OK => ACK.
     int failedSip = 0;   // faild sip requests
@@ -36,13 +34,7 @@ public:
     static int getPacketType(const Binary &bin);
 
    
-    // http stuff
-    static Binary extractHttpPayload(const Binary& bin);
-    static bool isSuccessHttpResponse(const Binary &bin);
-    static std::string httpMethod(const Binary& bin);
-    static int httpStatusCode(const Binary& bin);
-    static bool isHttpResponse(const Binary& bin);
-
+    
     // sip stuff
     static Binary extractSipPayload(const Binary &bin);
     static bool isSip(const Binary& bin);
@@ -52,10 +44,9 @@ public:
     Report getReport() const;
 
 private:
-    void addHttpBinary(const Binary& bin);
     void addSipBinary(const Binary& bin);
 
     Report rep;
     DnsReporter dnsreporter;
-    std::map<uint32_t, Binary> pendingHttpRequests; // key: TCP ack number , http
+    HttpReporter httpreporter;
 };

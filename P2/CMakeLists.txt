@@ -15,7 +15,7 @@ if(ENABLE_COVERAGE)
 endif()
 
 # ---- Library ----
-add_library(PacketAnalyzerLib STATIC src/PacketAnalyzer.cpp src/DnsReporter.cpp)
+add_library(PacketAnalyzerLib STATIC src/PacketAnalyzer.cpp src/DnsReporter.cpp src/HttpReporter.cpp)
 target_include_directories(PacketAnalyzerLib PUBLIC include)
 
 # ---- Tests ----

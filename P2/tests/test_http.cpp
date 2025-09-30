@@ -88,8 +88,8 @@ TEST(HttpReporterTest, ExtractHttpPayload) {
     Binary req = makeTestHttpRequest();
     Binary res = makeTestHttpResponse();
 
-    Binary reqPayload = Reporter::extractHttpPayload(req);
-    Binary resPayload = Reporter::extractHttpPayload(res);
+    Binary reqPayload = HttpReporter::extractHttpPayload(req);
+    Binary resPayload = HttpReporter::extractHttpPayload(res);
 
     EXPECT_EQ(reqPayload.length, req.length - 14 - 20 - 32);
     EXPECT_EQ(resPayload.length, res.length - 14 - 20 - 32);
@@ -107,16 +107,16 @@ TEST(HttpReporterTest, IsHttpRequestAndResponse) {
     Binary req = makeTestHttpRequest();
     Binary res = makeTestHttpResponse();
 
-    EXPECT_FALSE(Reporter::isHttpResponse(req));
-    EXPECT_TRUE(Reporter::isHttpResponse(res));
+    EXPECT_FALSE(HttpReporter::isHttpResponse(req));
+    EXPECT_TRUE(HttpReporter::isHttpResponse(res));
 }
 
 TEST(HttpReporterTest, HttpStatusCodeAndMethod) {
     Binary req = makeTestHttpRequest();
     Binary res = makeTestHttpResponse();
 
-    EXPECT_EQ(Reporter::httpMethod(req), "GET");
-    EXPECT_EQ(Reporter::httpStatusCode(res), 200);
+    EXPECT_EQ(HttpReporter::httpMethod(req), "GET");
+    EXPECT_EQ(HttpReporter::httpStatusCode(res), 200);
 }
 
 TEST(HttpReporterTest, AddHttpBinaryIncreasesReport) {
@@ -129,8 +129,8 @@ TEST(HttpReporterTest, AddHttpBinaryIncreasesReport) {
 
     Report rep = reporter.getReport();
     EXPECT_EQ(rep.recieved, 2);
-    EXPECT_EQ(rep.successHttp, 1);
-    EXPECT_EQ(rep.failedHttp, 0);
+    EXPECT_EQ(rep.httpreport.successHttp, 1);
+    EXPECT_EQ(rep.httpreport.failedHttp, 0);
 } 
 
 TEST(HttpReporterTest, ValidPcapPacketsFile) {
@@ -162,8 +162,8 @@ TEST(HttpReporterTest, ValidPcapPacketsFile) {
     delete reader;
     rep = reporter.getReport();
 
-    EXPECT_EQ(rep.successHttp, 21);
-    EXPECT_EQ(rep.failedHttp, 1);
-    EXPECT_EQ(rep.totalHttp, 44);
+    EXPECT_EQ(rep.httpreport.successHttp, 21);
+    EXPECT_EQ(rep.httpreport.failedHttp, 1);
+    EXPECT_EQ(rep.httpreport.totalHttp, 44);
     EXPECT_EQ(rep.recieved, 44); // the file contains 41 pure http packets but two of them are assembeled of more packets so the real is 44
 }
