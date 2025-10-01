@@ -38,8 +38,9 @@ jobs:
     - name: Install
       run: |
         cd P2
-        chmod +x install-Vaction.sh
-        ./install-Vaction.sh
+        ls
+        chmod +x install-Vactions.sh
+        ./install-Vactions.sh
     - name: Run tests
       run: |
         cd P2
