@@ -124,7 +124,7 @@ void DnsReporter::addDnsBinary(const Binary &bin)
             if (it != pendingDnsRequests.end())
             {
                 dnsrep.failedDns --;
-                cout << "removed " << std::hex << txid << endl;
+                //cout << "removed " << std::hex << txid << endl;
                 // found matching request, form transaction
                 if (isSuccessDnsResponse(bin))
                 {
@@ -132,7 +132,7 @@ void DnsReporter::addDnsBinary(const Binary &bin)
                 }
                 else
                 {
-                    cout << std::hex << txid << "failed !!!"<< endl;
+                  //  cout << std::hex << txid << "failed !!!"<< endl;
                     dnsrep.failedDns++;
                 }
                 pendingDnsRequests.erase(it);
@@ -143,7 +143,7 @@ void DnsReporter::addDnsBinary(const Binary &bin)
         { // request
             dnsrep.failedDns++;
             pendingDnsRequests.insert(txid);
-            cout << "added " << std::hex << txid << endl;
+            //cout << "added " << std::hex << txid << endl;
         }
     }
     catch (const std::exception &e)
