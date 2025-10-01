@@ -50,7 +50,7 @@ jobs:
     - name: Test with valgrind (optional)
       run: |
         sudo apt-get install -y valgrind
-        cd build
+        cd P2/build
         for test in *-tests; do
           if [ -f "$test" ] && [ -x "$test" ]; then
             echo "Running valgrind on $test"
