@@ -44,7 +44,7 @@ static Binary makeTestDnsPacket() {
 
 TEST(DnsReporterTest, ExtractDnsPayload) {
     Binary bin = makeTestDnsPacket();
-    Binary dnsPayload = Reporter::extractDnsPayload(bin);
+    Binary dnsPayload = DnsReporter::extractDnsPayload(bin);
 
     ASSERT_EQ(dnsPayload.length, bin.length - 14 - 20 - 8); // total - eth - ipv4 - udp
     EXPECT_EQ(dnsPayload.data[0], 0xab); // first byte of transaction ID
@@ -53,32 +53,31 @@ TEST(DnsReporterTest, ExtractDnsPayload) {
 
 TEST(DnsReporterTest, TransactionID) {
     Binary bin = makeTestDnsPacket();
-    uint16_t txid = Reporter::DnstransactionID(bin);
+    uint16_t txid = DnsReporter::DnstransactionID(bin);
     EXPECT_EQ(txid, 0xabcd);
 }
 
 TEST(DnsReporterTest, IsResponse) {
     Binary bin = makeTestDnsPacket();
-    bool qr = Reporter::isDnsResponse(bin);
+    bool qr = DnsReporter::isDnsResponse(bin);
     EXPECT_TRUE(qr); // because flags 0x81, 0x80 => qr=1
 }
 
 TEST(DnsReporterTest, IsSuccessResponse) {
     Binary bin = makeTestDnsPacket();
-    bool success = Reporter::isSuccessDnsResponse(bin);
+    bool success = DnsReporter::isSuccessDnsResponse(bin);
     EXPECT_TRUE(success); // rcode=0
 }
 
 TEST(DnsReporterTest, GetInitialReport){
-    Reporter reporter;
-    EXPECT_EQ(0, reporter.getReport().recieved);
-    EXPECT_EQ(0, reporter.getReport().successDns);
-    EXPECT_EQ(0, reporter.getReport().failedDns);
-    EXPECT_EQ(0, reporter.getReport().totalDns);
+    DnsReporter reporter;
+    EXPECT_EQ(0, reporter.getDnsReport().successDns);
+    EXPECT_EQ(0, reporter.getDnsReport().failedDns);
+    EXPECT_EQ(0, reporter.getDnsReport().totalDns);
 }
 
 TEST(DnsReporterTest, ValidPcapPacketsFile) {
-    Report rep;
+    DnsReport rep;
     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/htmldns.pcapng");
     if (!reader) {
         std::cerr << "Error: unsupported file type or cannot create reader\n";
@@ -89,7 +88,7 @@ TEST(DnsReporterTest, ValidPcapPacketsFile) {
         delete reader;
     }
 
-    Reporter reporter;
+    DnsReporter dnsreporter;
     pcpp::RawPacket rawPacket;
     int dnsCount = 0;
 
@@ -100,15 +99,14 @@ TEST(DnsReporterTest, ValidPcapPacketsFile) {
         if (!dns) continue; // skip non-DNS
 
         Binary bin = makeBinaryFromRaw(rawPacket);
-        reporter.addBinary(bin);
+        dnsreporter.addDnsBinary(bin);
         dnsCount++;
-        EXPECT_EQ(reporter.getReport().recieved, dnsCount);
         delete[] bin.data;
     }
 
     reader->close();
     delete reader;
-    rep = reporter.getReport();
+    rep = dnsreporter.getDnsReport();
     EXPECT_EQ(rep.successDns, 70);
     EXPECT_EQ(rep.failedDns, 0);
     return;

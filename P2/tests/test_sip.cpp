@@ -1,0 +1,145 @@
+#include <gtest/gtest.h>
+#include <pcapplusplus/PcapFileDevice.h>
+#include <pcapplusplus/Packet.h>
+#include <pcapplusplus/SipLayer.h>
+#include "PacketAnalyzer.h"
+#include <cstring>
+
+// convert RawPacket -> Binary
+Binary makeBinaryFromRaw(const pcpp::RawPacket& raw) {
+    Binary bin;
+    bin.length = raw.getRawDataLen();
+    bin.data = new uint8_t[bin.length];
+    std::memcpy(bin.data, raw.getRawData(), bin.length);
+    return bin;
+}
+
+// Get first SIP request using SipLayer of pcap++
+Binary makeTestSipRequest() {
+    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/sip.pcapng");
+    if (!reader) throw std::runtime_error("Cannot open pcap file");
+    if (!reader->open()) {
+        delete reader;
+        throw std::runtime_error("Cannot open sip.pcapng");
+    }
+    //std::cout << "openedreq\n";
+    pcpp::RawPacket rawPacket;
+    while (reader->getNextPacket(rawPacket)) {
+        pcpp::Packet parsed(&rawPacket);
+        auto* sipReq = parsed.getLayerOfType<pcpp::SipRequestLayer>();
+        if (sipReq) {
+            Binary bin;
+            bin.length = rawPacket.getRawDataLen();
+            bin.data = new uint8_t[bin.length];
+            std::memcpy(bin.data, rawPacket.getRawData(), bin.length);
+            reader->close();
+            delete reader;
+            return bin;
+        }
+    }
+
+    reader->close();
+    delete reader;
+    throw std::runtime_error("No SIP request found");
+}
+
+// Get first SIP response using SipLayer of pcap++
+Binary makeTestSipResponse() {
+    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/sip.pcapng");
+    if (!reader) throw std::runtime_error("Cannot open pcap file");
+    if (!reader->open()) {
+        delete reader;
+        throw std::runtime_error("Cannot open sip.pcapng");
+    }
+    //std::cout << "openedres\n";
+    int i = 0;
+    pcpp::RawPacket rawPacket;
+    while (reader->getNextPacket(rawPacket)) {
+        i++;
+        pcpp::Packet parsed(&rawPacket);
+        auto* sipRes = parsed.getLayerOfType<pcpp::SipResponseLayer>();
+        if (sipRes) {
+            Binary bin;
+            bin.length = rawPacket.getRawDataLen();
+            bin.data = new uint8_t[bin.length];
+            std::memcpy(bin.data, rawPacket.getRawData(), bin.length);
+            reader->close();
+            delete reader;
+            return bin;
+        }
+    }
+
+    reader->close();
+    delete reader;
+    throw std::runtime_error("No SIP response found");
+}
+
+TEST(SipReporterTest, DetectSipPackets) {
+    Binary req = makeTestSipRequest();
+    Binary res = makeTestSipResponse();
+
+    EXPECT_TRUE(SipReporter::isSip(req));
+    EXPECT_TRUE(SipReporter::isSip(res));
+
+    EXPECT_FALSE(SipReporter::isSipResponse(req));
+    EXPECT_TRUE(SipReporter::isSipResponse(res));
+    delete[] req.data;
+    delete[] res.data;
+}
+
+TEST(SipReporterTest, ParseSipStatusCode) {
+    Binary res = makeTestSipResponse();
+    int code = SipReporter::sipStatusCode(res);
+    EXPECT_EQ(code, 100);
+}
+TEST(SipReporterTest, ParseSipCallId) {
+    Binary req = makeTestSipResponse();
+    string code = SipReporter::extractSipCallId(req);
+    EXPECT_EQ(code, "HLErGJvm9K");
+}
+TEST(SipReporterTest, AddSipBinaryUpdatesReport) {
+    SipReporter sipreporter;
+    Binary req = makeTestSipRequest();
+    Binary res = makeTestSipResponse();
+
+    sipreporter.addSipBinary(req);
+    sipreporter.addSipBinary(res);
+
+    SipReport rep = sipreporter.getSipReport();
+    //EXPECT_EQ(rep.recieved, 2); recieved is tested on main reporter test suit
+    EXPECT_EQ(rep.totalSip, 1);
+    //EXPECT_EQ(rep.successSip + rep.failedSip, 1); no! because we havnt full res of the req to decide
+
+    delete[] req.data;
+    delete[] res.data;
+}
+
+TEST(SipReporterTest, FullPcapScanWithSipLayer) {
+    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/sip.pcapng");
+    ASSERT_NE(reader, nullptr);
+    ASSERT_TRUE(reader->open());
+
+    SipReporter sipreporter;
+    pcpp::RawPacket rawPacket;
+    int sipCount = 0;
+
+    while (reader->getNextPacket(rawPacket)) {
+        pcpp::Packet parsed(&rawPacket);
+        auto* sipLayer = parsed.getLayerOfType<pcpp::SipLayer>();
+        if (!sipLayer) continue;
+
+        Binary bin = makeBinaryFromRaw(rawPacket);
+        sipreporter.addSipBinary(bin);
+        sipCount++;
+        //EXPECT_EQ(reporter.getReport().recieved, sipCount);
+        delete[] bin.data;
+    }
+
+    reader->close();
+    delete reader;
+
+    SipReport siprep = sipreporter.getSipReport();
+    EXPECT_EQ(siprep.totalSip, 94); //included "MESSAGE"  and "BYE " sip requests beside of other normal ones
+    EXPECT_EQ(siprep.failedSip, 89); // no res requests counted as failed beside real failed ones
+    EXPECT_EQ(siprep.successSip, 5);
+}

@@ -3,10 +3,26 @@ project(PacketAnalyzer)
 
 set(CMAKE_CXX_STANDARD 17)
 
-include_directories(${PROJECT_SOURCE_DIR}/include)
+# Conan integration
+include(${CMAKE_BINARY_DIR}/conan_toolchain.cmake)
 
+# Find Conan packages
+find_package(GTest REQUIRED)
+find_package(PcapPlusPlus REQUIRED)
+find_package(libpcap REQUIRED)
+
+# Debug output to verify PcapPlusPlus and libpcap
+message(STATUS "PcapPlusPlus_FOUND: ${PcapPlusPlus_FOUND}")
+message(STATUS "PcapPlusPlus_INCLUDE_DIRS: ${PcapPlusPlus_INCLUDE_DIRS}")
+message(STATUS "PcapPlusPlus_LIBRARIES: ${PcapPlusPlus_LIBRARIES}")
+message(STATUS "libpcap_FOUND: ${libpcap_FOUND}")
+message(STATUS "libpcap_INCLUDE_DIRS: ${libpcap_INCLUDE_DIRS}")
+message(STATUS "libpcap_LIBRARIES: ${libpcap_LIBRARIES}")
+
+# Copy sample files to build directory
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/samples DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
+# Coverage option
 option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
 if(ENABLE_COVERAGE)
     message(STATUS "Coverage enabled")
@@ -15,38 +31,71 @@ if(ENABLE_COVERAGE)
 endif()
 
 # ---- Library ----
-add_library(PacketAnalyzerLib STATIC src/PacketAnalyzer.cpp)
-target_include_directories(PacketAnalyzerLib PUBLIC include)
+add_library(PacketAnalyzerLib STATIC 
+    src/PacketAnalyzer.cpp 
+    src/DnsReporter.cpp 
+    src/HttpReporter.cpp 
+    src/SipReporter.cpp
+)
+target_include_directories(PacketAnalyzerLib PUBLIC 
+    ${PROJECT_SOURCE_DIR}/include
+    ${PcapPlusPlus_INCLUDE_DIRS}
+    ${libpcap_INCLUDE_DIRS}
+)
 
 # ---- Tests ----
 enable_testing()
-find_package(GTest REQUIRED)
 
 # ---- dns ----
 add_executable(dns-tests tests/test_dns.cpp)
-target_include_directories(dns-tests PRIVATE include)
+target_include_directories(dns-tests PRIVATE 
+    ${PROJECT_SOURCE_DIR}/include
+    ${PcapPlusPlus_INCLUDE_DIRS}
+    ${libpcap_INCLUDE_DIRS}
+)
 target_link_libraries(dns-tests
-    GTest::GTest
-    GTest::Main
     PacketAnalyzerLib
-    Pcap++
-    Packet++
-    Common++
-    pcap
+    GTest::gtest
+    GTest::gtest_main
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
+    libpcap::libpcap
 )
 add_test(NAME dns-tests COMMAND dns-tests)
 
 # ---- http ----
 add_executable(http-tests tests/test_http.cpp)
-target_include_directories(http-tests PRIVATE include)
+target_include_directories(http-tests PRIVATE 
+    ${PROJECT_SOURCE_DIR}/include
+    ${PcapPlusPlus_INCLUDE_DIRS}
+    ${libpcap_INCLUDE_DIRS}
+)
 target_link_libraries(http-tests
-    GTest::GTest
-    GTest::Main
     PacketAnalyzerLib
-    Pcap++
-    Packet++
-    Common++
-    pcap
+    GTest::gtest
+    GTest::gtest_main
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
+    libpcap::libpcap
 )
 add_test(NAME http-tests COMMAND http-tests)
 
+# ---- sip ----
+add_executable(sip-tests tests/test_sip.cpp)
+target_include_directories(sip-tests PRIVATE 
+    ${PROJECT_SOURCE_DIR}/include
+    ${PcapPlusPlus_INCLUDE_DIRS}
+    ${libpcap_INCLUDE_DIRS}
+)
+target_link_libraries(sip-tests
+    PacketAnalyzerLib
+    GTest::gtest
+    GTest::gtest_main
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
+    libpcap::libpcap
+)
+add_test(NAME sip-tests COMMAND sip-tests)

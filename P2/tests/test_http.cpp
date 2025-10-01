@@ -88,8 +88,8 @@ TEST(HttpReporterTest, ExtractHttpPayload) {
     Binary req = makeTestHttpRequest();
     Binary res = makeTestHttpResponse();
 
-    Binary reqPayload = Reporter::extractHttpPayload(req);
-    Binary resPayload = Reporter::extractHttpPayload(res);
+    Binary reqPayload = HttpReporter::extractHttpPayload(req);
+    Binary resPayload = HttpReporter::extractHttpPayload(res);
 
     EXPECT_EQ(reqPayload.length, req.length - 14 - 20 - 32);
     EXPECT_EQ(resPayload.length, res.length - 14 - 20 - 32);
@@ -107,40 +107,39 @@ TEST(HttpReporterTest, IsHttpRequestAndResponse) {
     Binary req = makeTestHttpRequest();
     Binary res = makeTestHttpResponse();
 
-    EXPECT_FALSE(Reporter::isHttpResponse(req));
-    EXPECT_TRUE(Reporter::isHttpResponse(res));
+    EXPECT_FALSE(HttpReporter::isHttpResponse(req));
+    EXPECT_TRUE(HttpReporter::isHttpResponse(res));
 }
 
 TEST(HttpReporterTest, HttpStatusCodeAndMethod) {
     Binary req = makeTestHttpRequest();
     Binary res = makeTestHttpResponse();
 
-    EXPECT_EQ(Reporter::httpMethod(req), "GET");
-    EXPECT_EQ(Reporter::httpStatusCode(res), 200);
+    EXPECT_EQ(HttpReporter::httpMethod(req), "GET");
+    EXPECT_EQ(HttpReporter::httpStatusCode(res), 200);
 }
 
 TEST(HttpReporterTest, AddHttpBinaryIncreasesReport) {
-    Reporter reporter;
+    HttpReporter httpreporter;
     Binary req = makeTestHttpRequest();
     Binary res = makeTestHttpResponse();
 
-    reporter.addBinary(req);
-    reporter.addBinary(res);
+    httpreporter.addHttpBinary(req);
+    httpreporter.addHttpBinary(res);
 
-    Report rep = reporter.getReport();
-    EXPECT_EQ(rep.recieved, 2);
+    HttpReport rep = httpreporter.getHttpReport();
     EXPECT_EQ(rep.successHttp, 1);
     EXPECT_EQ(rep.failedHttp, 0);
 } 
 
 TEST(HttpReporterTest, ValidPcapPacketsFile) {
-    Report rep;
+    HttpReport rep;
     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/htmldns.pcapng");
     ASSERT_NE(reader, nullptr);
 
     ASSERT_TRUE(reader->open());
 
-    Reporter reporter;
+    HttpReporter httpreporter;
     pcpp::RawPacket rawPacket;
     int httpCount = 0;
 
@@ -152,18 +151,18 @@ TEST(HttpReporterTest, ValidPcapPacketsFile) {
         if (!httpReq && !httpRes) continue;
 
         Binary bin = makeBinaryFromRaw(rawPacket);
-        reporter.addBinary(bin);
+        httpreporter.addHttpBinary(bin);
         httpCount++;
 
-        EXPECT_EQ(reporter.getReport().recieved, httpCount);
+        //EXPECT_EQ(reporter.getReport().recieved, httpCount); counting recieved packets isnt this class job! search it in Reporter class tests
         delete[] bin.data;
     }
     reader->close();
     delete reader;
-    rep = reporter.getReport();
+    rep = httpreporter.getHttpReport();
 
     EXPECT_EQ(rep.successHttp, 21);
     EXPECT_EQ(rep.failedHttp, 1);
     EXPECT_EQ(rep.totalHttp, 44);
-    EXPECT_EQ(rep.recieved, 44); // the file contains 41 pure http packets but two of them are assembeled of more packets so the real is 44
+    //EXPECT_EQ(rep.recieved, 44); // the file contains 41 pure http packets but two of them are assembeled of more packets so the real is 44
 }
