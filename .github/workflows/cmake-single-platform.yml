@@ -37,10 +37,12 @@ jobs:
           g++ 
     - name: Install
       run: |
+        cd P2
         chmod +x install-Vaction.sh
         ./install-Vaction.sh
     - name: Run tests
       run: |
+        cd P2
         cd build
         ctest --verbose --output-on-failure
       
