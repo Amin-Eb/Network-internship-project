@@ -133,3 +133,22 @@ if(ENABLE_INTERFACE_TESTS)
     add_compile_definitions(ENABLE_INTERFACE_TESTS)
 endif()
 add_test(NAME capture-tests COMMAND capture-tests)
+
+# ---- analyzer ----
+add_executable(analyzer-tests tests/test_analyzer.cpp)
+target_include_directories(analyzer-tests PRIVATE 
+    ${PROJECT_SOURCE_DIR}/include
+    ${PcapPlusPlus_INCLUDE_DIRS}
+    ${libpcap_INCLUDE_DIRS}
+)
+target_link_libraries(analyzer-tests
+    PacketAnalyzerLib
+    GTest::gtest
+    GTest::gtest_main
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
+    PacketAnalyzerLib
+    libpcap::libpcap
+)
+add_test(NAME analyzer-tests COMMAND analyzer-tests)
