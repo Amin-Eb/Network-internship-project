@@ -116,7 +116,7 @@ target_link_libraries(sip-tests
 )
 add_test(NAME sip-tests COMMAND sip-tests)
 
-# ---- Capture ----
+# ---- capture ----
 add_executable(capture-tests tests/test_capture.cpp)
 target_link_libraries(capture-tests
     GTest::gtest
@@ -128,4 +128,8 @@ target_link_libraries(capture-tests
     PacketAnalyzerLib
     libpcap::libpcap
 )
+option(ENABLE_INTERFACE_TESTS "Enable tests that require a real network interface" OFF)
+if(ENABLE_INTERFACE_TESTS)
+    add_compile_definitions(ENABLE_INTERFACE_TESTS)
+endif()
 add_test(NAME capture-tests COMMAND capture-tests)

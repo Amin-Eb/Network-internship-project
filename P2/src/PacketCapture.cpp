@@ -1,87 +1,81 @@
-// src/PacketCapture.cpp
 #include "PacketCapture.h"
-#include <pcap/pcap.h>
-#include <cstring>
 #include <iostream>
+#include <cstring>
 
-int PacketCapture::fromFile(const std::string& filename, Reporter& analyzer) {
-    char errbuf[PCAP_ERRBUF_SIZE];
-    pcap_t* p = pcap_open_offline(filename.c_str(), errbuf);
-    if (!p) {
-        std::cerr << "pcap_open_offline failed: " << errbuf << "\n";
-        return -1;
+using namespace std;
+
+PacketCapture::PacketCapture() : handle(nullptr) { memset(errbuf, 0, sizeof(errbuf)); }
+
+PacketCapture::~PacketCapture() { close(); }
+
+bool PacketCapture::openFile(const string& filename) 
+{
+    close();
+    handle = pcap_open_offline(filename.c_str(), errbuf);
+    if (!handle) 
+    {
+        cerr << "pcap_open_offline failed: " << errbuf << "\n";
+        return 0;
+    }
+    return 1;
+}
+
+bool PacketCapture::openInterface(const string& ifname, const string& bpf_filter) 
+{
+    close();
+    handle = pcap_open_live(ifname.c_str(), 65535, 1, 1000, errbuf);
+    if (!handle) 
+    {
+        cerr << "pcap_open_live error: " << errbuf << "\n";
+        return 0;
     }
 
+    if (!bpf_filter.empty()) 
+    {
+        struct bpf_program fp;
+        if (pcap_compile(handle, &fp, bpf_filter.c_str(), 1, PCAP_NETMASK_UNKNOWN) == -1) 
+        {
+            cerr << "pcap_compile failed: " << pcap_geterr(handle) << "\n";
+            return 0;
+        }
+        if (pcap_setfilter(handle, &fp) == -1)
+            cerr << "pcap_setfilter failed: " << pcap_geterr(handle) << "\n";
+        pcap_freecode(&fp);
+    }
+
+    return 1;
+}
+
+bool PacketCapture::getNextPacket(Binary& outPacket) 
+{
+    if (!handle)
+    {
+        return 0;
+    }
     struct pcap_pkthdr* header;
     const u_char* data;
-    int res;
-    while ((res = pcap_next_ex(p, &header, &data)) >= 0) {
-        if (res == 0) continue;
+    int res = pcap_next_ex(handle, &header, &data);
 
-        Binary bin;
-        bin.length = static_cast<uint16_t>(header->caplen);
-        bin.data = new uint8_t[bin.length];
-        std::memcpy(bin.data, data, bin.length);
-
-        analyzer.addBinary(bin);
-
-        delete[] bin.data;
+    if (res == 1) 
+    {
+        outPacket.length = static_cast<uint16_t>(header->caplen);
+        outPacket.data = new uint8_t[outPacket.length];
+        memcpy(outPacket.data, data, outPacket.length);
+        return true;
     }
-
-    if (res == -1)
-        std::cerr << "pcap read error: " << pcap_geterr(p) << "\n";
-
-    pcap_close(p);
+    if (res == 0)
+    {
+        return getNextPacket(outPacket);
+    }
+    // res == -1 (error) or -2 (EOF)
     return 0;
 }
 
-int PacketCapture::fromInterface(const std::string& ifname,
-                                  const std::string& bpf_filter,
-                                  Reporter& analyzer,
-                                  int limit) {// if no limit set by user, cnt never == cnt == 0 so no stop!
-    char errbuf[PCAP_ERRBUF_SIZE];
-    pcap_t* p = pcap_open_live(ifname.c_str(), 65535, 1, 1000, errbuf);
-    if (!p) {
-        std::cerr << "pcap_open_live error: " << errbuf << "\n";
-        return -1;
+void PacketCapture::close() 
+{
+    if (handle)
+    {
+        pcap_close(handle);
+        handle = nullptr;
     }
-
-    if (!bpf_filter.empty()) {
-        struct bpf_program fp;
-        if (pcap_compile(p, &fp, bpf_filter.c_str(), 1, PCAP_NETMASK_UNKNOWN) == -1) {
-            std::cerr << "pcap_compile failed: " << pcap_geterr(p) << "\n";
-            return -2;
-        } else {
-            if (pcap_setfilter(p, &fp) == -1)
-                std::cerr << "pcap_setfilter failed: " << pcap_geterr(p) << "\n";
-            pcap_freecode(&fp);
-        }
-    }
-
-    struct pcap_pkthdr* header;
-    const u_char* data;
-    int res;
-    int cnt = 0;
-    while ((res = pcap_next_ex(p, &header, &data)) >= 0) {
-        cnt ++;
-        if (res == 0) continue;
-
-        Binary bin;
-        bin.length = static_cast<uint16_t>(header->caplen);
-        bin.data = new uint8_t[bin.length];
-        std::memcpy(bin.data, data, bin.length);
-
-        analyzer.addBinary(bin);
-
-        delete[] bin.data;
-        if(cnt == limit) return 0;
-    }
-
-    if (res == -1){
-        std::cerr << "pcap read error: " << pcap_geterr(p) << "\n";
-        return -3;
-    }
-
-    pcap_close(p);
-    return 0;
 }
