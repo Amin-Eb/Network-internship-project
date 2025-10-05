@@ -30,7 +30,7 @@ if(ENABLE_COVERAGE)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
 endif()
 
-# ---- Library ----
+# ---- Analyzer Library ----
 add_library(PacketAnalyzerLib STATIC 
     src/PacketAnalyzer.cpp 
     src/DnsReporter.cpp 
@@ -41,6 +41,22 @@ target_include_directories(PacketAnalyzerLib PUBLIC
     ${PROJECT_SOURCE_DIR}/include
     ${PcapPlusPlus_INCLUDE_DIRS}
     ${libpcap_INCLUDE_DIRS}
+)
+
+
+# ---- Capture library ----
+add_library(PacketCaptureLib STATIC
+    src/PacketCapture.cpp
+)
+
+target_include_directories(PacketCaptureLib PUBLIC
+    ${PROJECT_SOURCE_DIR}/include
+    ${libpcap_INCLUDE_DIRS}
+)
+
+target_link_libraries(PacketCaptureLib
+    PacketAnalyzerLib       # user of analyzer
+    libpcap::libpcap        # direct libpcap dependency
 )
 
 # ---- Tests ----
@@ -99,3 +115,40 @@ target_link_libraries(sip-tests
     libpcap::libpcap
 )
 add_test(NAME sip-tests COMMAND sip-tests)
+
+# ---- capture ----
+add_executable(capture-tests tests/test_capture.cpp)
+target_link_libraries(capture-tests
+    GTest::gtest
+    GTest::gtest_main
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
+    PacketCaptureLib
+    PacketAnalyzerLib
+    libpcap::libpcap
+)
+option(ENABLE_INTERFACE_TESTS "Enable tests that require a real network interface" OFF)
+if(ENABLE_INTERFACE_TESTS)
+    add_compile_definitions(ENABLE_INTERFACE_TESTS)
+endif()
+add_test(NAME capture-tests COMMAND capture-tests)
+
+# ---- analyzer ----
+add_executable(analyzer-tests tests/test_analyzer.cpp)
+target_include_directories(analyzer-tests PRIVATE 
+    ${PROJECT_SOURCE_DIR}/include
+    ${PcapPlusPlus_INCLUDE_DIRS}
+    ${libpcap_INCLUDE_DIRS}
+)
+target_link_libraries(analyzer-tests
+    PacketAnalyzerLib
+    GTest::gtest
+    GTest::gtest_main
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
+    PacketAnalyzerLib
+    libpcap::libpcap
+)
+add_test(NAME analyzer-tests COMMAND analyzer-tests)
