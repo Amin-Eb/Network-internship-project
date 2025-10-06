@@ -78,7 +78,7 @@ void Reporter::addBinary(const Binary &bin)
     else if (type == SIP)
     {
         sipreporter.addSipBinary(bin);
-        rep.sipreport = sipreporter.getSipReport();
+        rep.sipreport = &sipreporter.getSipReport();
     }
 }
 Report Reporter::getReport() const

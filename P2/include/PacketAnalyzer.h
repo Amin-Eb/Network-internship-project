@@ -20,7 +20,7 @@ struct Report
 {
     DnsReport* dnsreport;
     HttpReport* httpreport;
-    SipReport sipreport;
+    SipReport* sipreport;
 
     int recieved = 0; // all recieved packets
 };
