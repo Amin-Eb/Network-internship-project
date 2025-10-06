@@ -146,9 +146,6 @@ target_link_libraries(analyzer-tests
     GTest::gtest
     GTest::gtest_main
     pcapplusplus::pcap
-    pcapplusplus::packet
-    pcapplusplus::common
     PacketAnalyzerLib
-    libpcap::libpcap
 )
 add_test(NAME analyzer-tests COMMAND analyzer-tests)

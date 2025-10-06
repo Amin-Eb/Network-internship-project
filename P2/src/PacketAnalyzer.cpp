@@ -68,12 +68,12 @@ void Reporter::addBinary(const Binary &bin)
     if (type == DNS)
     {
         dnsreporter.addDnsBinary(bin);
-        rep.dnsreport = dnsreporter.getDnsReport();
+        rep.dnsreport = &dnsreporter.getDnsReport();
     }
     else if (type == HTTP)
     {
         httpreporter.addHttpBinary(bin);
-        rep.httpreport = httpreporter.getHttpReport();
+        rep.httpreport = &httpreporter.getHttpReport();
     }
     else if (type == SIP)
     {

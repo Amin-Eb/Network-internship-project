@@ -70,14 +70,15 @@ TEST(DnsReporterTest, IsSuccessResponse) {
 }
 
 TEST(DnsReporterTest, GetInitialReport){
-    DnsReporter reporter;
-    EXPECT_EQ(0, reporter.getDnsReport().successDns);
-    EXPECT_EQ(0, reporter.getDnsReport().failedDns);
-    EXPECT_EQ(0, reporter.getDnsReport().totalDns);
+    DnsReport sharedrep;
+    DnsReporter reporter(sharedrep);
+    EXPECT_EQ(0, reporter.getDnsReport().successDns.load());
+    EXPECT_EQ(0, reporter.getDnsReport().failedDns.load());
+    EXPECT_EQ(0, reporter.getDnsReport().totalDns.load());
 }
 
 TEST(DnsReporterTest, ValidPcapPacketsFile) {
-    DnsReport rep;
+    DnsReport sharedrep;
     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/htmldns.pcapng");
     if (!reader) {
         std::cerr << "Error: unsupported file type or cannot create reader\n";
@@ -88,7 +89,7 @@ TEST(DnsReporterTest, ValidPcapPacketsFile) {
         delete reader;
     }
 
-    DnsReporter dnsreporter;
+    DnsReporter dnsreporter(sharedrep);
     pcpp::RawPacket rawPacket;
     int dnsCount = 0;
 
@@ -106,8 +107,7 @@ TEST(DnsReporterTest, ValidPcapPacketsFile) {
 
     reader->close();
     delete reader;
-    rep = dnsreporter.getDnsReport();
-    EXPECT_EQ(rep.successDns, 70);
-    EXPECT_EQ(rep.failedDns, 0);
+    EXPECT_EQ(sharedrep.successDns.load(), 70);
+    EXPECT_EQ(sharedrep.failedDns.load(), 0);
     return;
 }

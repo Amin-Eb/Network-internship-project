@@ -120,26 +120,26 @@ TEST(HttpReporterTest, HttpStatusCodeAndMethod) {
 }
 
 TEST(HttpReporterTest, AddHttpBinaryIncreasesReport) {
-    HttpReporter httpreporter;
+    HttpReport sharedrep;
+    HttpReporter httpreporter(sharedrep);
     Binary req = makeTestHttpRequest();
     Binary res = makeTestHttpResponse();
 
     httpreporter.addHttpBinary(req);
     httpreporter.addHttpBinary(res);
 
-    HttpReport rep = httpreporter.getHttpReport();
-    EXPECT_EQ(rep.successHttp, 1);
-    EXPECT_EQ(rep.failedHttp, 0);
+    EXPECT_EQ(sharedrep.successHttp.load(), 1);
+    EXPECT_EQ(sharedrep.failedHttp.load(), 0);
 } 
 
 TEST(HttpReporterTest, ValidPcapPacketsFile) {
-    HttpReport rep;
+    HttpReport sharedrep;
     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/htmldns.pcapng");
     ASSERT_NE(reader, nullptr);
 
     ASSERT_TRUE(reader->open());
 
-    HttpReporter httpreporter;
+    HttpReporter httpreporter(sharedrep);
     pcpp::RawPacket rawPacket;
     int httpCount = 0;
 
@@ -159,10 +159,9 @@ TEST(HttpReporterTest, ValidPcapPacketsFile) {
     }
     reader->close();
     delete reader;
-    rep = httpreporter.getHttpReport();
 
-    EXPECT_EQ(rep.successHttp, 21);
-    EXPECT_EQ(rep.failedHttp, 1);
-    EXPECT_EQ(rep.totalHttp, 44);
+    EXPECT_EQ(sharedrep.successHttp.load(), 21);
+    EXPECT_EQ(sharedrep.failedHttp.load(), 1);
+    EXPECT_EQ(sharedrep.totalHttp.load(), 44);
     //EXPECT_EQ(rep.recieved, 44); // the file contains 41 pure http packets but two of them are assembeled of more packets so the real is 44
 }

@@ -18,8 +18,8 @@ enum PacketType {
 
 struct Report
 {
-    DnsReport dnsreport;
-    HttpReport httpreport;
+    DnsReport* dnsreport;
+    HttpReport* httpreport;
     SipReport sipreport;
 
     int recieved = 0; // all recieved packets
