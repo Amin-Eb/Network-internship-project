@@ -81,7 +81,7 @@ void Reporter::addBinary(const Binary &bin)
         rep.sipreport = &sipreporter.getSipReport();
     }
 }
-Report Reporter::getReport() const
+Report& Reporter::getReport() const
 {
     return rep;
 }

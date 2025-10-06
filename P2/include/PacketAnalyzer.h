@@ -28,12 +28,18 @@ struct Report
 class Reporter
 {
 public:
+    explicit Reporter(Report& sharedReport)
+        : rep(sharedReport),
+          dnsreporter(*sharedReport.dnsreport),
+          httpreporter(*sharedReport.httpreport),
+          sipreporter(*sharedReport.sipreport) {}
+
     void addBinary(const Binary &bin);
     static int getPacketType(const Binary &bin);
-    Report getReport() const;
+    Report& getReport() const;
 
 private:
-    Report rep;
+    Report& rep;
     DnsReporter dnsreporter;
     HttpReporter httpreporter;
     SipReporter sipreporter;
