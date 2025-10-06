@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <atomic>
 #include "PacketBinary.h"
 #include "DnsReporter.h"
 #include "HttpReporter.h"
@@ -22,7 +23,7 @@ struct Report
     HttpReport* httpreport;
     SipReport* sipreport;
 
-    int recieved = 0; // all recieved packets
+    atomic<int> recieved = 0; // all recieved packets
 };
 
 class Reporter
