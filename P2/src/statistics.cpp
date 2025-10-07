@@ -1,7 +1,5 @@
 #include <iostream>
-#include <thread>
 #include <atomic>
-#include <httplib.h>
 #include <prometheus/exposer.h>
 #include <prometheus/registry.h>
 #include <prometheus/counter.h>
@@ -9,7 +7,7 @@
 #include "PacketAnalyzer.h"
 
 using namespace std;
-using namespace httplib;
+using namespace prometheus;
 
 // ----------------- shared Reports -----------------
 DnsReport dnsrep;
@@ -18,57 +16,75 @@ SipReport siprep;
 
 Report sharedrep;
 
-// ----------------- metrics Server -----------------
-std::string generateMetrics() {
-    std::string out;
+// ----------------- Prometheus -----------------
+//faild fields may go up or down so we need gauge, others are just up so counters are enough.
 
-    out += "# HELP packets_received Total packets received\n";
-    out += "# TYPE packets_received counter\n";
-    out += "packets_received " + std::to_string(sharedrep.recieved.load()) + "\n";
 
-    out += "# HELP dns_total Total DNS transactions\n";
-    out += "# TYPE dns_total counter\n";
-    out += "dns_total " + std::to_string(sharedrep.dnsreport->totalDns.load()) + "\n";
-    out += "# HELP dns_success Successful DNS transactions\n";
-    out += "# TYPE dns_success counter\n";
-    out += "dns_success " + std::to_string(sharedrep.dnsreport->successDns.load()) + "\n";
-    out += "# HELP dns_failed Failed DNS transactions\n";
-    out += "# TYPE dns_failed counter\n";
-    out += "dns_failed " + std::to_string(sharedrep.dnsreport->failedDns.load()) + "\n";
+shared_ptr<Registry> registry = make_shared<Registry>();
 
-    out += "# HELP http_total Total HTTP transactions\n";
-    out += "# TYPE http_total counter\n";
-    out += "http_total " + std::to_string(sharedrep.httpreport->totalHttp.load()) + "\n";
-    out += "# HELP http_success Successful HTTP transactions\n";
-    out += "# TYPE http_success counter\n";
-    out += "http_success " + std::to_string(sharedrep.httpreport->successHttp.load()) + "\n";
-    out += "# HELP http_failed Failed HTTP transactions\n";
-    out += "# TYPE http_failed counter\n";
-    out += "http_failed " + std::to_string(sharedrep.httpreport->failedHttp.load()) + "\n";
+auto& dns_total = BuildCounter()
+    .Name("dns_total")
+    .Help("Total DNS transactions")
+    .Register(*registry);
 
-    out += "# HELP sip_total Total SIP transactions\n";
-    out += "# TYPE sip_total counter\n";
-    out += "sip_total " + std::to_string(sharedrep.sipreport->totalSip.load()) + "\n";
-    out += "# HELP sip_success Successful SIP transactions\n";
-    out += "# TYPE sip_success counter\n";
-    out += "sip_success " + std::to_string(sharedrep.sipreport->successSip.load()) + "\n";
-    out += "# HELP sip_failed Failed SIP transactions\n";
-    out += "# TYPE sip_failed counter\n";
-    out += "sip_failed " + std::to_string(sharedrep.sipreport->failedSip.load()) + "\n";
+auto& dns_success = BuildCounter()
+    .Name("dns_success")
+    .Help("Successful DNS transactions")
+    .Register(*registry);
 
-    return out;
-}
+auto& dns_failed = BuildGauge()
+    .Name("dns_failed")
+    .Help("Failed DNS transactions")
+    .Register(*registry);
 
-void startMetricsServer(int port = 8080) {
-    Server svr;
+auto& http_total = BuildCounter()
+    .Name("http_total")
+    .Help("Total HTTP transactions")
+    .Register(*registry);
 
-    svr.Get("/metrics", [](const Request&, Response& res) {
-        res.set_content(generateMetrics(), "text/plain; version=0.0.4");
-    });
+auto& http_success = BuildCounter()
+    .Name("http_success")
+    .Help("Successful HTTP transactions")
+    .Register(*registry);
 
-    cout << "Prometheus metrics server running on port " << port << endl;
-    svr.listen("0.0.0.0", port);
-}
+auto& http_failed = BuildGauge()
+    .Name("http_failed")
+    .Help("Failed HTTP transactions")
+    .Register(*registry);
+
+auto& sip_total = BuildCounter()
+    .Name("sip_total")
+    .Help("Total SIP transactions")
+    .Register(*registry);
+
+auto& sip_success = BuildCounter()
+    .Name("sip_success")
+    .Help("Successful SIP transactions")
+    .Register(*registry);
+
+auto& sip_failed = BuildGauge()
+    .Name("sip_failed")
+    .Help("Failed SIP transactions")
+    .Register(*registry);
+
+auto& packets_received = BuildCounter()
+    .Name("packets_received")
+    .Help("Total packets received")
+    .Register(*registry);
+
+auto& dns_total_counter = dns_total.Add({});
+auto& dns_success_counter = dns_success.Add({});
+auto& dns_failed_counter = dns_failed.Add({});
+
+auto& http_total_counter = http_total.Add({});
+auto& http_success_counter = http_success.Add({});
+auto& http_failed_counter = http_failed.Add({});
+
+auto& sip_total_counter = sip_total.Add({});
+auto& sip_success_counter = sip_success.Add({});
+auto& sip_failed_counter = sip_failed.Add({});
+
+auto& packets_received_counter = packets_received.Add({});
 
 int main(int argc, char* argv[])
 {
@@ -76,35 +92,58 @@ int main(int argc, char* argv[])
     sharedrep.httpreport = &httprep;
     sharedrep.sipreport = &siprep;
 
-    Reporter reporter(sharedrep); // wraps the analyzers
+    Reporter reporter(sharedrep);
 
     PacketCapture cap;
     Binary bin;
 
-    int reportBuff = 10; // default: every 10 packets
-    if(argc > 1)
+    int reportBuff = 10; // update every 10 packets for default
+    if (argc > 1)
         reportBuff = stoi(argv[1]);
 
-
     string interface = "eth0"; // default interface
-    if(argc > 2)
+    if (argc > 2)
         interface = argv[2];
 
-    // start prometheus HTTP server on a separate thread
-    thread metricsThread(startMetricsServer, 8080);
-    metricsThread.detach();
+    // Start Prometheus metrics HTTP server
+    Exposer exposer{"0.0.0.0:8080"};
+    exposer.RegisterCollectable(registry);
 
-    if (!cap.openInterface(interface)) { 
+    if (!cap.openInterface(interface)) {
         cerr << "Failed to open interface or file!" << endl;
         return 1;
     }
 
+
+    //old values
+    int dns_s = 0, dns_t = 0;
+    int htt_s = 0, htt_t = 0;
+    int sip_s = 0, sip_t = 0;
+    int rec = 0;
+
     cout << "Starting packet capture..." << endl;
+
     while (cap.getNextPacket(bin))
     {
         reporter.addBinary(bin);
-        if (sharedrep.recieved.load() % reportBuff == 0) {
-            cout << "[INFO] " << sharedrep.recieved.load() << " packets processed." << endl;
+
+        if (sharedrep.recieved.load() % reportBuff == 0)
+        {
+            packets_received_counter.Increment( sharedrep.recieved.load() - rec); rec =  sharedrep.recieved.load();
+
+            dns_total_counter.Increment(sharedrep.dnsreport->totalDns.load() - dns_t); dns_t = sharedrep.dnsreport->totalDns.load();
+            dns_success_counter.Increment(sharedrep.dnsreport->successDns.load() - dns_s); dns_s = sharedrep.dnsreport->successDns.load();
+            dns_failed_counter.Set(sharedrep.dnsreport->failedDns.load());
+
+            http_total_counter.Increment(sharedrep.httpreport->totalHttp.load() - htt_t); htt_t = sharedrep.httpreport->totalHttp.load();
+            http_success_counter.Increment(sharedrep.httpreport->successHttp.load() - htt_s); htt_s = sharedrep.httpreport->successHttp.load();
+            http_failed_counter.Set(sharedrep.httpreport->failedHttp.load());
+
+            sip_total_counter.Increment(sharedrep.sipreport->totalSip.load() - sip_t); sip_t = sharedrep.sipreport->totalSip.load();
+            sip_success_counter.Increment(sharedrep.sipreport->successSip.load() - sip_s); sip_s = sharedrep.sipreport->successSip.load();
+            sip_failed_counter.Set(sharedrep.sipreport->failedSip.load());
+            
+             cout << "[INFO] " << sharedrep.recieved.load() << " packets processed." << endl;
             cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
             cout << sharedrep.dnsreport->failedDns.load() << " DNS failed / "
                 << sharedrep.dnsreport->successDns.load() << " DNS success / "
@@ -117,6 +156,7 @@ int main(int argc, char* argv[])
                 << sharedrep.sipreport->totalSip.load() << " SIP total\n";
             // metrics are already atomic, Prometheus can scrape anytime
         }
+
         delete[] bin.data;
     }
 
