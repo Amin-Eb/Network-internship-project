@@ -11,6 +11,7 @@ find_package(GTest REQUIRED)
 find_package(PcapPlusPlus REQUIRED)
 find_package(libpcap REQUIRED)
 find_package(httplib REQUIRED)
+find_package(prometheus-cpp REQUIRED)
 
 # Debug output to verify PcapPlusPlus and libpcap
 message(STATUS "PcapPlusPlus_FOUND: ${PcapPlusPlus_FOUND}")
@@ -165,5 +166,6 @@ target_link_libraries(statistics
     PacketAnalyzerLib
     PacketCaptureLib
     httplib::httplib 
+    prometheus-cpp::prometheus-cpp
     PcapPlusPlus::PcapPlusPlus
 )
