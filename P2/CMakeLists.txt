@@ -10,6 +10,8 @@ include(${CMAKE_BINARY_DIR}/conan_toolchain.cmake)
 find_package(GTest REQUIRED)
 find_package(PcapPlusPlus REQUIRED)
 find_package(libpcap REQUIRED)
+find_package(httplib REQUIRED)
+find_package(prometheus-cpp REQUIRED)
 
 # Debug output to verify PcapPlusPlus and libpcap
 message(STATUS "PcapPlusPlus_FOUND: ${PcapPlusPlus_FOUND}")
@@ -146,9 +148,24 @@ target_link_libraries(analyzer-tests
     GTest::gtest
     GTest::gtest_main
     pcapplusplus::pcap
-    pcapplusplus::packet
-    pcapplusplus::common
     PacketAnalyzerLib
-    libpcap::libpcap
 )
 add_test(NAME analyzer-tests COMMAND analyzer-tests)
+
+
+# ---- statistics ----
+add_executable(statistics
+    src/statistics.cpp
+)
+
+target_include_directories(statistics PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+)
+
+target_link_libraries(statistics
+    PacketAnalyzerLib
+    PacketCaptureLib
+    httplib::httplib 
+    prometheus-cpp::prometheus-cpp
+    PcapPlusPlus::PcapPlusPlus
+)

@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <atomic>
 #include "PacketBinary.h"
 #include "DnsReporter.h"
 #include "HttpReporter.h"
@@ -18,22 +19,28 @@ enum PacketType {
 
 struct Report
 {
-    DnsReport dnsreport;
-    HttpReport httpreport;
-    SipReport sipreport;
+    DnsReport* dnsreport;
+    HttpReport* httpreport;
+    SipReport* sipreport;
 
-    int recieved = 0; // all recieved packets
+    atomic<int> recieved = 0; // all recieved packets
 };
 
 class Reporter
 {
 public:
+    explicit Reporter(Report& sharedReport)
+        : rep(sharedReport),
+          dnsreporter(*sharedReport.dnsreport),
+          httpreporter(*sharedReport.httpreport),
+          sipreporter(*sharedReport.sipreport) {}
+
     void addBinary(const Binary &bin);
     static int getPacketType(const Binary &bin);
-    Report getReport() const;
+    Report& getReport() const;
 
 private:
-    Report rep;
+    Report& rep;
     DnsReporter dnsreporter;
     HttpReporter httpreporter;
     SipReporter sipreporter;

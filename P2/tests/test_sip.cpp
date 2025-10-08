@@ -98,16 +98,16 @@ TEST(SipReporterTest, ParseSipCallId) {
     EXPECT_EQ(code, "HLErGJvm9K");
 }
 TEST(SipReporterTest, AddSipBinaryUpdatesReport) {
-    SipReporter sipreporter;
+    SipReport sharedrep;
+    SipReporter sipreporter(sharedrep);
     Binary req = makeTestSipRequest();
     Binary res = makeTestSipResponse();
 
     sipreporter.addSipBinary(req);
     sipreporter.addSipBinary(res);
 
-    SipReport rep = sipreporter.getSipReport();
     //EXPECT_EQ(rep.recieved, 2); recieved is tested on main reporter test suit
-    EXPECT_EQ(rep.totalSip, 1);
+    EXPECT_EQ(sharedrep.totalSip, 1);
     //EXPECT_EQ(rep.successSip + rep.failedSip, 1); no! because we havnt full res of the req to decide
 
     delete[] req.data;
@@ -118,8 +118,8 @@ TEST(SipReporterTest, FullPcapScanWithSipLayer) {
     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/sip.pcapng");
     ASSERT_NE(reader, nullptr);
     ASSERT_TRUE(reader->open());
-
-    SipReporter sipreporter;
+    SipReport sharedrep;
+    SipReporter sipreporter(sharedrep);
     pcpp::RawPacket rawPacket;
     int sipCount = 0;
 
@@ -138,8 +138,7 @@ TEST(SipReporterTest, FullPcapScanWithSipLayer) {
     reader->close();
     delete reader;
 
-    SipReport siprep = sipreporter.getSipReport();
-    EXPECT_EQ(siprep.totalSip, 94); //included "MESSAGE"  and "BYE " sip requests beside of other normal ones
-    EXPECT_EQ(siprep.failedSip, 89); // no res requests counted as failed beside real failed ones
-    EXPECT_EQ(siprep.successSip, 5);
+    EXPECT_EQ(sharedrep.totalSip.load(), 94); //included "MESSAGE"  and "BYE " sip requests beside of other normal ones
+    EXPECT_EQ(sharedrep.failedSip.load(), 89); // no res requests counted as failed beside real failed ones
+    EXPECT_EQ(sharedrep.successSip.load(), 5);
 }

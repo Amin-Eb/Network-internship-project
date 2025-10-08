@@ -1,6 +1,8 @@
 [requires]
 gtest/1.15.0
 pcapplusplus/25.05
+cpp-httplib/0.15.3
+prometheus-cpp/1.2.4
 
 [generators]
 CMakeDeps
