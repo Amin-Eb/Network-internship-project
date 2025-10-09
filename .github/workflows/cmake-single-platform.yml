@@ -2,7 +2,7 @@ name: CMake Tests
 
 on:
   push:
-    branches: [ main, master, develop, feature/* ]
+    branches: [ main, master, develop, feature/*, layer7 ]
   pull_request:
     branches: [ main, master, develop, feature/* ]
 
