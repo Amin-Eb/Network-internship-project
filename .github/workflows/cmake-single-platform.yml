@@ -22,6 +22,7 @@ jobs:
       run: |
         git clone https://github.com/ntop/nDPI.git
         cd nDPI
+        ./autogen.sh
         make
         sudo make install
         ls /usr/local/lib | grep ndpi
