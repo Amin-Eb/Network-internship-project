@@ -20,8 +20,12 @@ jobs:
     
     - name: debuging action
       run: |
-        pwd
-        ls
+        git clone https://github.com/ntop/nDPI.git
+        cd nDPI
+        make
+        sudo make install
+        ls /usr/local/lib | grep ndpi
+        ls /usr/local/include/ndpi
     - name: Install system dependencies
       run: |
         sudo apt-get update
