@@ -51,6 +51,8 @@ add_library(PacketAnalyzerLib STATIC
 )
 target_include_directories(PacketAnalyzerLib PUBLIC 
     ${PROJECT_SOURCE_DIR}/include
+    ${PcapPlusPlus_INCLUDE_DIRS}
+    ${libpcap_INCLUDE_DIRS}
     ${NDPI_INCLUDE_DIR}
 )
 
