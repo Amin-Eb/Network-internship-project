@@ -2,7 +2,7 @@ name: CMake Tests
 
 on:
   push:
-    branches: [ main, master, develop, feature/*, layer7 ]
+    branches: [ main, master, develop, feature/* ]
   pull_request:
     branches: [ main, master, develop, feature/* ]
 
@@ -18,7 +18,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
     
-    - name: debuging action
+    - name: configure nDPI
       run: |
         sudo apt-get install -y build-essential git gettext flex bison libtool autoconf automake pkg-config libpcap-dev libjson-c-dev libnuma-dev libpcre2-dev libmaxminddb-dev librrd-dev
         git clone https://github.com/ntop/nDPI.git
@@ -27,12 +27,6 @@ jobs:
         ./configure --prefix=/usr/local  # Explicitly set prefix
         make
         sudo make install
-        echo "Checking installation in /usr/local/"
-        ls /usr/local/lib | grep ndpi || echo "No ndpi libraries in /usr/local/lib"
-        ls /usr/local/include/ndpi || echo "No ndpi headers in /usr/local/include/ndpi"
-        echo "Checking system directories:"
-        ls /usr/lib | grep ndpi || echo "No ndpi libraries in /usr/lib"
-        ls /usr/include | grep ndpi || echo "No ndpi headers in /usr/include"
     - name: Install system dependencies
       run: |
           sudo apt-get update
