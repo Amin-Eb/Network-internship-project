@@ -16,6 +16,8 @@ using namespace std;
 static ndpi_detection_module_struct* g_ndpi_mod = nullptr;
 static bool ndpi_init_flag;
 
+const int IPv4ETHTYPE = 0x0800, IPv6ETHTYPE = 0x86DD;
+const int IPHEADERv4 = 0x45 , IPHEADERv6 = 0x60;
 
 static void initNdpiOnce() {
     ndpi_init_flag = 1;
@@ -42,10 +44,10 @@ int Reporter::getPacketType(const Binary &bin) {
     // ---  Ethernet/IP detection ---
     uint16_t ethType = (data[12] << 8) | data[13];
     size_t ipOffset = 0;
-    if (ethType == 0x0800 || ethType == 0x86DD) { // IPv4 or IPv6
+    if (ethType == IPv4ETHTYPE || ethType == IPv6ETHTYPE) { // IPv4 or IPv6
         ipOffset = 14; // skip Ethernet header because ndpi doesnt work with it and no result
         ethType = ntohs(ethType);
-    } else if (data[0] == 0x45 || data[0] == 0x60) {
+    } else if (data[0] == IPHEADERv4 || data[0] == IPHEADERv6) {
         ipOffset = 0;
     } else {
         return NONE; // unknown type
