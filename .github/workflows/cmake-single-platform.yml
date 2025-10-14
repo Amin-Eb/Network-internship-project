@@ -24,9 +24,21 @@ jobs:
         git clone https://github.com/ntop/nDPI.git
         cd nDPI
         ./autogen.sh
-        ./configure --prefix=/usr/local  # Explicitly set prefix
+        ./configure --prefix=/usr/local/  # Explicitly set prefix
         make
         sudo make install
+        sudo ldconfig
+        sudo mkdir -p /usr/local/include/ndpi
+        sudo cp /usr/local/include/ndpi*.h /usr/local/include/ndpi/
+        # Verify the fix
+        echo "nDPI headers now in:"
+        ls -la /usr/local/include/ndpi/
+        echo "Checking installation in /usr/local/"
+        ls /usr/local/lib | grep ndpi || echo "No ndpi libraries in /usr/local/lib"
+        ls /usr/local/include 
+        echo "Checking system directories:"
+        ls /usr/lib | grep ndpi || echo "No ndpi libraries in /usr/lib"
+        ls /usr/include | grep ndpi || echo "No ndpi headers in /usr/include"
     - name: Install system dependencies
       run: |
           sudo apt-get update
@@ -44,6 +56,7 @@ jobs:
       run: |
         cd P2
         ls
+        ls /usr/local/include/
         chmod +x install_Vactions.sh
         ./install_Vactions.sh
     - name: Run tests
