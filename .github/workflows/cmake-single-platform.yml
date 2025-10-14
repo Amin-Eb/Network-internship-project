@@ -27,6 +27,7 @@ jobs:
         ./configure --prefix=/usr/local  # Explicitly set prefix
         make
         sudo make install
+        sudo ldconfig
     - name: Install system dependencies
       run: |
           sudo apt-get update
@@ -44,6 +45,7 @@ jobs:
       run: |
         cd P2
         ls
+        ls /usr/local/include/ndpi
         chmod +x install_Vactions.sh
         ./install_Vactions.sh
     - name: Run tests
