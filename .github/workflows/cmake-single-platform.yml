@@ -24,7 +24,7 @@ jobs:
         git clone https://github.com/ntop/nDPI.git
         cd nDPI
         ./autogen.sh
-        ./configure --prefix=/usr/local  # Explicitly set prefix
+        ./configure --prefix=/usr/local/  # Explicitly set prefix
         make
         sudo make install
         sudo ldconfig
@@ -45,7 +45,7 @@ jobs:
       run: |
         cd P2
         ls
-        ls /usr/local/include/ndpi
+        ls /usr/local/include/
         chmod +x install_Vactions.sh
         ./install_Vactions.sh
     - name: Run tests
