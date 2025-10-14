@@ -30,7 +30,7 @@ jobs:
         sudo ldconfig
         echo "Checking installation in /usr/local/"
         ls /usr/local/lib | grep ndpi || echo "No ndpi libraries in /usr/local/lib"
-        ls /usr/local/include/ndpi || echo "No ndpi headers in /usr/local/include/ndpi"
+        ls /usr/local/include 
         echo "Checking system directories:"
         ls /usr/lib | grep ndpi || echo "No ndpi libraries in /usr/lib"
         ls /usr/include | grep ndpi || echo "No ndpi headers in /usr/include"
