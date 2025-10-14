@@ -30,14 +30,7 @@ static void initNdpiOnce() {
     ndpi_load_protocols_file(g_ndpi_mod, NULL);  // load default protocols
     ndpi_finalize_initialization(g_ndpi_mod);
 }
-int Reporter::getPacketType(const Binary &bin) {
-    if (!bin.data || bin.length < 1)
-        return NONE;
-
-    if(!ndpi_init_flag) initNdpiOnce();
-    if (!g_ndpi_mod)
-        return NONE;
-
+pair<const uint8_t*, size_t> Reporter::getIpPacket(const Binary &bin) {
     const uint8_t* data = bin.data;
     size_t len = bin.length;
 
@@ -50,14 +43,31 @@ int Reporter::getPacketType(const Binary &bin) {
     } else if (data[0] == IPHEADERv4 || data[0] == IPHEADERv6) {
         ipOffset = 0;
     } else {
-        return NONE; // unknown type
+        return {data, -1}; // unknown type   or errors , we use -1 in second of pair as error
     }
 
     if (len <= ipOffset)
-        return NONE;
-
+        return {data, -1};
+    
     const uint8_t* ipPacket = data + ipOffset; // move pointer after eth part
     size_t ipLen = len - ipOffset;
+    return {ipPacket , ipLen};
+}
+int Reporter::getPacketType(const Binary &bin) {
+    if (!bin.data || bin.length < 1)
+        return NONE;
+
+    if(!ndpi_init_flag) initNdpiOnce();
+    if (!g_ndpi_mod)
+        return NONE;
+
+    auto fetchedIpPacket = getIpPacket(bin);
+
+    if (fetchedIpPacket.second == -1) 
+        return NONE;
+
+    const uint8_t* ipPacket = fetchedIpPacket.first; 
+    size_t ipLen = fetchedIpPacket.second;
 
     struct ndpi_flow_struct flow{};
     memset(&flow, 0, sizeof(flow));

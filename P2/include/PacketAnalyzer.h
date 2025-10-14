@@ -38,6 +38,7 @@ public:
     void addBinary(const Binary &bin);
     static int getPacketType(const Binary &bin);
     Report& getReport() const;
+    static pair<const uint8_t*, size_t> getIpPacket(const Binary &bin);
 
 private:
     Report& rep;
