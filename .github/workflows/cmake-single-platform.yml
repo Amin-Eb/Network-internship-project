@@ -28,6 +28,11 @@ jobs:
         make
         sudo make install
         sudo ldconfig
+        sudo mkdir -p /usr/local/include/ndpi
+        sudo cp /usr/local/include/ndpi*.h /usr/local/include/ndpi/
+        # Verify the fix
+        echo "nDPI headers now in:"
+        ls -la /usr/local/include/ndpi/
         echo "Checking installation in /usr/local/"
         ls /usr/local/lib | grep ndpi || echo "No ndpi libraries in /usr/local/lib"
         ls /usr/local/include 
