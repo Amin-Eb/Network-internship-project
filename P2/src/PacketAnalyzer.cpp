@@ -10,25 +10,26 @@
 #include <cstring>
 #include <stdexcept>
 #include <ndpi/ndpi_api.h>
-
+#include <mutex>
 using namespace std;
 
 static ndpi_detection_module_struct* g_ndpi_mod = nullptr;
-static bool ndpi_init_flag;
+once_flag ndpi_init_flag;
 
 const int IPv4ETHTYPE = 0x0800, IPv6ETHTYPE = 0x86DD;
 const int IPHEADERv4 = 0x45 , IPHEADERv6 = 0x60;
 
 static void initNdpiOnce() {
-    ndpi_init_flag = 1;
-    g_ndpi_mod = ndpi_init_detection_module(NULL);
-    if (!g_ndpi_mod) 
-    {
-        cerr << "ndpi falied!" << endl;
-        return;
-    }
-    ndpi_load_protocols_file(g_ndpi_mod, NULL);  // load default protocols
-    ndpi_finalize_initialization(g_ndpi_mod);
+    call_once(ndpi_init_flag, [](){
+        g_ndpi_mod = ndpi_init_detection_module(NULL);
+        if (!g_ndpi_mod) 
+        {
+            cerr << "ndpi falied!" << endl;
+            return;
+        }
+        ndpi_load_protocols_file(g_ndpi_mod, NULL);  // load default protocols
+        ndpi_finalize_initialization(g_ndpi_mod);
+    });
 }
 pair<const uint8_t*, size_t> Reporter::getIpPacket(const Binary &bin) {
     const uint8_t* data = bin.data;
@@ -57,7 +58,7 @@ int Reporter::getPacketType(const Binary &bin) {
     if (!bin.data || bin.length < 1)
         return NONE;
 
-    if(!ndpi_init_flag) initNdpiOnce();
+    initNdpiOnce();
     if (!g_ndpi_mod)
         return NONE;
 
