@@ -12,6 +12,16 @@ using namespace std;
 class PacketUtils
 {
 public:
+    PacketUtils() {
+        initNdpiOnce(); 
+    }
+    ~PacketUtils() {
+        if (g_ndpi_mod) {
+            ndpi_exit_detection_module(g_ndpi_mod);
+            g_ndpi_mod = nullptr;
+        }
+    }
+
     const int IPv4ETHTYPE = 0x0800, IPv6ETHTYPE = 0x86DD;
     const int IPHEADERv4 = 0x45 , IPHEADERv6 = 0x60;
 
@@ -21,6 +31,5 @@ public:
 private:
     ndpi_detection_module_struct* g_ndpi_mod = nullptr;
     once_flag ndpi_init_flag;
-
     void initNdpiOnce();
 };

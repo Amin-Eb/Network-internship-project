@@ -8,6 +8,7 @@
 #include "DnsReporter.h"
 #include "HttpReporter.h"
 #include "SipReporter.h"
+#include "PacketUtils.h"
 
 struct Report
 {
@@ -31,6 +32,7 @@ public:
     Report& getReport() const;
 
 private:
+    PacketUtils utils;
     Report& rep;
     DnsReporter dnsreporter;
     HttpReporter httpreporter;

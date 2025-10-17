@@ -11,12 +11,10 @@
 #include <stdexcept>
 #include <ndpi/ndpi_api.h>
 #include <mutex>
-#include "PacketUtils.h"
 using namespace std;
 
 void Reporter::addBinary(const Binary &bin)
 {
-    PacketUtils utils;
     rep.recieved ++;
     int type = utils.getPacketType(bin);
     if (type == DNS)

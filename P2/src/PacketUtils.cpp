@@ -42,7 +42,6 @@ int PacketUtils::getPacketType(const Binary &bin) {
     if (!bin.data || bin.length < 1)
         return NONE;
 
-    initNdpiOnce();
     if (!g_ndpi_mod)
         return NONE;
 
