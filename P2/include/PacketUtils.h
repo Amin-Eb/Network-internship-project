@@ -1,0 +1,26 @@
+#pragma once
+#include <stdexcept>
+#include <iostream>
+#include <arpa/inet.h>
+#include <netinet/ip.h>
+#include <netinet/udp.h>
+#include <ndpi/ndpi_api.h>
+#include <mutex>
+#include "PacketBinary.h"
+using namespace std;
+
+class PacketUtils
+{
+public:
+    const int IPv4ETHTYPE = 0x0800, IPv6ETHTYPE = 0x86DD;
+    const int IPHEADERv4 = 0x45 , IPHEADERv6 = 0x60;
+
+    pair<const uint8_t*, size_t> getIpPacket(const Binary &bin);
+    int getPacketType(const Binary &bin);
+
+private:
+    ndpi_detection_module_struct* g_ndpi_mod = nullptr;
+    once_flag ndpi_init_flag;
+
+    void initNdpiOnce();
+};

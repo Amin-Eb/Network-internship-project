@@ -9,14 +9,6 @@
 #include "HttpReporter.h"
 #include "SipReporter.h"
 
-enum PacketType {
-    DNS = 0,
-    HTTP = 1,
-    SIP = 2,
-    NONE = 3,
-};
-
-
 struct Report
 {
     DnsReport* dnsreport;
@@ -36,9 +28,7 @@ public:
           sipreporter(*sharedReport.sipreport) {}
 
     void addBinary(const Binary &bin);
-    static int getPacketType(const Binary &bin);
     Report& getReport() const;
-    static pair<const uint8_t*, size_t> getIpPacket(const Binary &bin);
 
 private:
     Report& rep;

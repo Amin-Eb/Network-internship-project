@@ -72,6 +72,17 @@ target_link_libraries(PacketCaptureLib
     libpcap::libpcap        # direct libpcap dependency
 )
 
+# ---- Utils library ----
+add_library(PacketUtilsLib STATIC 
+    src/PacketUtils.cpp
+)
+target_include_directories(PacketUtilsLib PUBLIC 
+    ${PROJECT_SOURCE_DIR}/include
+    ${PcapPlusPlus_INCLUDE_DIRS}
+    ${libpcap_INCLUDE_DIRS}
+    ${NDPI_INCLUDE_DIR}
+)
+
 # ---- Tests ----
 enable_testing()
 
@@ -147,21 +158,20 @@ if(ENABLE_INTERFACE_TESTS)
 endif()
 add_test(NAME capture-tests COMMAND capture-tests)
 
-# ---- analyzer ----
-add_executable(analyzer-tests tests/test_analyzer.cpp)
-target_include_directories(analyzer-tests PRIVATE 
+# ---- utils ----
+add_executable(utils-tests tests/test_utils.cpp)
+target_include_directories(utils-tests PRIVATE 
     ${PROJECT_SOURCE_DIR}/include
     ${PcapPlusPlus_INCLUDE_DIRS}
     ${libpcap_INCLUDE_DIRS}
 )
-target_link_libraries(analyzer-tests
-    PacketAnalyzerLib
+target_link_libraries(utils-tests
+    PacketUtilsLib
     GTest::gtest
     GTest::gtest_main
     pcapplusplus::pcap
-    PacketAnalyzerLib
 )
-add_test(NAME analyzer-tests COMMAND analyzer-tests)
+add_test(NAME utils-tests COMMAND utils-tests)
 
 
 # ---- statistics ----
@@ -176,6 +186,7 @@ target_include_directories(statistics PRIVATE
 target_link_libraries(statistics
     PacketAnalyzerLib
     PacketCaptureLib
+    PacketUtilsLib
     httplib::httplib 
     prometheus-cpp::prometheus-cpp
     PcapPlusPlus::PcapPlusPlus

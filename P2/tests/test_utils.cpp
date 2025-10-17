@@ -1,13 +1,12 @@
 #include <gtest/gtest.h>
 #include <pcapplusplus/PcapFileDevice.h>
 #include <pcapplusplus/Packet.h>
-#include "PacketAnalyzer.h"
-#include "DnsReporter.h"
+#include "PacketUtils.h"
 #include <cstring>
 
 using namespace std;
 
-TEST(AnalyzerTest, packetTypeTest)
+TEST(UtilsTest, packetTypeTest)
 {
     pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/htmldns.pcapng");
     if (!reader) throw std::runtime_error("Cannot open pcap file");
@@ -18,7 +17,7 @@ TEST(AnalyzerTest, packetTypeTest)
     }
     
     int cnt_type[4] = {0, 0, 0, 0};
-
+    PacketUtils utils;  
     pcpp::RawPacket rawPacket;
     while (reader->getNextPacket(rawPacket)) {
         Binary bin;
@@ -26,7 +25,7 @@ TEST(AnalyzerTest, packetTypeTest)
         bin.length = rawPacket.getRawDataLen();
         bin.data = new uint8_t[bin.length];
         std::memcpy(bin.data, rawPacket.getRawData(), bin.length);
-        cnt_type[Reporter::getPacketType(bin)] ++;
+        cnt_type[utils.getPacketType(bin)] ++;
     }
 
     reader->close();
