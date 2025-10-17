@@ -53,19 +53,19 @@ TEST(DnsReporterTest, ExtractDnsPayload) {
 
 TEST(DnsReporterTest, TransactionID) {
     Binary bin = makeTestDnsPacket();
-    uint16_t txid = DnsReporter::DnstransactionID(bin);
+    uint16_t txid = DnsReporter::DnstransactionID(DnsReporter::extractDnsPayload(bin));
     EXPECT_EQ(txid, 0xabcd);
 }
 
 TEST(DnsReporterTest, IsResponse) {
     Binary bin = makeTestDnsPacket();
-    bool qr = DnsReporter::isDnsResponse(bin);
+    bool qr = DnsReporter::isDnsResponse(DnsReporter::extractDnsPayload(bin));
     EXPECT_TRUE(qr); // because flags 0x81, 0x80 => qr=1
 }
 
 TEST(DnsReporterTest, IsSuccessResponse) {
     Binary bin = makeTestDnsPacket();
-    bool success = DnsReporter::isSuccessDnsResponse(bin);
+    bool success = DnsReporter::isSuccessDnsResponse(DnsReporter::extractDnsPayload(bin));
     EXPECT_TRUE(success); // rcode=0
 }
 

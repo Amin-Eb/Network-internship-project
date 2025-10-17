@@ -1,0 +1,42 @@
+        -:    0:Source:/home/aebov/Desktop/tests/P2/include/SipReporter.h
+        -:    0:Graph:build/CMakeFiles/statistics.dir/src/statistics.cpp.gcno
+        -:    0:Data:build/CMakeFiles/statistics.dir/src/statistics.cpp.gcda
+        -:    0:Runs:0
+        -:    1:#pragma once
+        -:    2:#include <cstdint>
+        -:    3:#include <vector>
+        -:    4:#include <map>
+        -:    5:#include <set>
+        -:    6:#include <iostream>
+        -:    7:#include <atomic>
+        -:    8:#include "PacketBinary.h"
+        -:    9:using namespace std;
+        -:   10:
+        -:   11:struct SipReport
+        -:   12:{
+        -:   13:    atomic<int> totalSip = 0;    // total series of {req, res1, res2, res3} : INVITE => 180 Ringing => 200 OK => ACK.
+        -:   14:    atomic<int> failedSip = 0;   // faild sip requests
+        -:   15:    atomic<int> successSip = 0;  // successful sip requests
+        -:   16:};
+        -:   17:
+        -:   18:class SipReporter
+        -:   19:{
+        -:   20:public:
+    #####:   21:    explicit SipReporter(SipReport& sharedReport)
+    #####:   22:        : siprep(sharedReport) {}
+        -:   23:
+        -:   24:    static Binary extractSipPayload(const Binary &bin);
+        -:   25:    static std::string extractSipCallId(const Binary &bin);
+        -:   26:    static bool isSip(const Binary& bin);
+        -:   27:    static bool isSuccessSipResponse(const Binary &bin);
+        -:   28:    static bool isSipResponse(const Binary &bin);
+        -:   29:    static int sipStatusCode(const Binary &bin);
+        -:   30:    void addSipBinary(const Binary& bin);
+        -:   31:    SipReport& getSipReport() { return siprep; }; 
+        -:   32:private:
+        -:   33:    SipReport& siprep;
+        -:   34:    set<string> sipRequests;
+        -:   35:};
+        -:   36:
+        -:   37:
+        -:   38:

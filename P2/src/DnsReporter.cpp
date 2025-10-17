@@ -60,9 +60,9 @@ Binary DnsReporter::extractDnsPayload(const Binary &bin)
     return dnsPayload;
 }
 
-uint16_t DnsReporter::DnstransactionID(const Binary &bin)
+uint16_t DnsReporter::DnstransactionID(const Binary &dnsPayload)
 {
-    Binary dnsPayload = extractDnsPayload(bin);
+    //Binary dnsPayload = extractDnsPayload(bin);
 
     if (dnsPayload.length < 2 || dnsPayload.data == nullptr)
     {
@@ -74,9 +74,9 @@ uint16_t DnsReporter::DnstransactionID(const Binary &bin)
     return txid;
 }
 
-bool DnsReporter::isDnsResponse(const Binary &bin)
+bool DnsReporter::isDnsResponse(const Binary &dnsPayload)
 {
-    Binary dnsPayload = extractDnsPayload(bin);
+    //Binary dnsPayload = extractDnsPayload(bin);
 
     if (dnsPayload.length < 4 || dnsPayload.data == nullptr)
     {
@@ -90,9 +90,9 @@ bool DnsReporter::isDnsResponse(const Binary &bin)
     return (flags & 0x8000) != 0; // 1 = response, 0 = query
 }
 
-bool DnsReporter::isSuccessDnsResponse(const Binary &bin)
+bool DnsReporter::isSuccessDnsResponse(const Binary &dnsPayload)
 {
-    Binary dnsPayload = extractDnsPayload(bin);
+    //Binary dnsPayload = extractDnsPayload(bin);
 
     if (dnsPayload.length < 4 || dnsPayload.data == nullptr)
     {
@@ -115,16 +115,16 @@ void DnsReporter::addDnsBinary(const Binary &bin)
         if (dnsPayload.length == 0 || dnsPayload.data == nullptr)
             return;
         // packet is dns
-        uint16_t txid = DnstransactionID(bin);
+        uint16_t txid = DnstransactionID(dnsPayload);
         if(txid == 0) return;
-        if (isDnsResponse(bin))
+        if (isDnsResponse(dnsPayload))
         { // res
             auto it = pendingDnsRequests.find(txid);
             if (it != pendingDnsRequests.end())
             {
                 dnsrep.failedDns --;
                 // found matching request, form transaction
-                if (isSuccessDnsResponse(bin))
+                if (isSuccessDnsResponse(dnsPayload))
                 {
                     dnsrep.successDns++;
                 }
