@@ -25,7 +25,7 @@ TEST(AnalyzerTest, addBinarytest)
     PacketCapture cap;
     Binary bin;
 
-    if (!cap.openFile("capture.pcapng")) {
+    if (!cap.openFile("samples/capture.pcapng")) {
         cerr << "Failed to open interface or file!" << endl;
     }
     
