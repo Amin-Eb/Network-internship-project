@@ -29,10 +29,24 @@ void HttpReporter::addHttpBinary(const Binary &bin)
             httprep.totalHttp++;
             // Keep request until we see a response
             if (seqNum != 0){
-                pendingHttpRequests.insert(ackNum);
-                httprep.failedHttp++;
+                if(pendingHttpResponses.count(ackNum))
+                {
+                    if(pendingHttpResponses[ackNum] == 1){
+                        httprep.successHttp++;
+                        pendingHttpResponses.erase(ackNum);
+                    }
+                    else if(pendingHttpResponses[ackNum] == -1){
+                        httprep.failedHttp ++;
+                        pendingHttpResponses.erase(ackNum);
+                    }
+                    
+                }
+                else 
+                {
+                    pendingHttpRequests.insert(ackNum);
+                    httprep.failedHttp++; // count pending as faild
+                }
             }
-
         }
         else if (httpRes)
         { 
@@ -42,20 +56,21 @@ void HttpReporter::addHttpBinary(const Binary &bin)
 
             if (seqNum != 0 && pendingHttpRequests.count(seqNum))
             {
+                //cout << seqNum << endl;
                 if (status >= 200 && status < 300)
                     httprep.successHttp++;
                 else
                     httprep.failedHttp++;
                 pendingHttpRequests.erase(seqNum);
-                httprep.failedHttp--;
+                httprep.failedHttp--; // we counted pending as failed so we need failed -1
             }
             else
             {
                 // Response without matching request
                 if (status >= 200 && status < 300)
-                    httprep.successHttp++;
+                    pendingHttpResponses[seqNum] = 1;
                 else
-                    httprep.failedHttp++;
+                    pendingHttpResponses[seqNum] = -1;
             }
         }
     }

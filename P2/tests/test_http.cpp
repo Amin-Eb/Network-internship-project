@@ -142,18 +142,11 @@ TEST(HttpReporterTest, ValidPcapPacketsFile) {
     HttpReporter httpreporter(sharedrep);
     pcpp::RawPacket rawPacket;
     int httpCount = 0;
-
     while (reader->getNextPacket(rawPacket)) {
         pcpp::Packet parsed(&rawPacket);
-
-        auto* httpReq = parsed.getLayerOfType<pcpp::HttpRequestLayer>();
-        auto* httpRes = parsed.getLayerOfType<pcpp::HttpResponseLayer>();
-        if (!httpReq && !httpRes) continue;
-
         Binary bin = makeBinaryFromRaw(rawPacket);
         httpreporter.addHttpBinary(bin);
         httpCount++;
-
         //EXPECT_EQ(reporter.getReport().recieved, httpCount); counting recieved packets isnt this class job! search it in Reporter class tests
         delete[] bin.data;
     }
