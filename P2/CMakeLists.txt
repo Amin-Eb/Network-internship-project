@@ -48,6 +48,7 @@ add_library(PacketAnalyzerLib STATIC
     src/DnsReporter.cpp 
     src/HttpReporter.cpp 
     src/SipReporter.cpp
+    src/TcpReporter.cpp
 )
 target_include_directories(PacketAnalyzerLib PUBLIC 
     ${PROJECT_SOURCE_DIR}/include
@@ -103,6 +104,25 @@ target_link_libraries(statistics
 
 # ---- Tests ----
 enable_testing()
+
+# ---- tcp ----
+add_executable(tcp-tests tests/test_tcp.cpp)
+target_include_directories(tcp-tests PRIVATE 
+    ${PROJECT_SOURCE_DIR}/include
+    ${PcapPlusPlus_INCLUDE_DIRS}
+    ${libpcap_INCLUDE_DIRS}
+)
+target_link_libraries(tcp-tests
+    PacketAnalyzerLib
+    PacketUtilsLib
+    GTest::gtest
+    GTest::gtest_main
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
+    libpcap::libpcap
+)
+add_test(NAME tcp-tests COMMAND tcp-tests)
 
 # ---- dns ----
 add_executable(dns-tests tests/test_dns.cpp)

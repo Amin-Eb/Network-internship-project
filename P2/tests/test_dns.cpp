@@ -94,7 +94,6 @@ TEST(DnsReporterTest, ValidPcapPacketsFile) {
     int dnsCount = 0;
 
     while (reader->getNextPacket(rawPacket)) {
-    //    cout << "count is " << dnsCount << endl;
         pcpp::Packet parsed(&rawPacket);
         auto* dns = parsed.getLayerOfType<pcpp::DnsLayer>();
         if (!dns) continue; // skip non-DNS
