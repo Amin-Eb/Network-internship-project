@@ -13,6 +13,16 @@ find_package(libpcap REQUIRED)
 find_package(httplib REQUIRED)
 find_package(prometheus-cpp REQUIRED)
 
+set(NDPI_INCLUDE_DIR "/usr/local/include/ndpi")
+set(NDPI_LIBRARY "/usr/local/lib/libndpi.so")
+
+if (EXISTS "${NDPI_INCLUDE_DIR}/ndpi_api.h" AND EXISTS "${NDPI_LIBRARY}")
+    include_directories(${NDPI_INCLUDE_DIR})
+    link_libraries(${NDPI_LIBRARY})
+else()
+    message(FATAL_ERROR "nDPI not found at ${NDPI_INCLUDE_DIR}")
+endif()
+
 # Debug output to verify PcapPlusPlus and libpcap
 message(STATUS "PcapPlusPlus_FOUND: ${PcapPlusPlus_FOUND}")
 message(STATUS "PcapPlusPlus_INCLUDE_DIRS: ${PcapPlusPlus_INCLUDE_DIRS}")
@@ -43,6 +53,7 @@ target_include_directories(PacketAnalyzerLib PUBLIC
     ${PROJECT_SOURCE_DIR}/include
     ${PcapPlusPlus_INCLUDE_DIRS}
     ${libpcap_INCLUDE_DIRS}
+    ${NDPI_INCLUDE_DIR}
 )
 
 
@@ -59,6 +70,35 @@ target_include_directories(PacketCaptureLib PUBLIC
 target_link_libraries(PacketCaptureLib
     PacketAnalyzerLib       # user of analyzer
     libpcap::libpcap        # direct libpcap dependency
+)
+
+# ---- Utils library ----
+add_library(PacketUtilsLib STATIC 
+    src/PacketUtils.cpp
+)
+target_include_directories(PacketUtilsLib PUBLIC 
+    ${PROJECT_SOURCE_DIR}/include
+    ${PcapPlusPlus_INCLUDE_DIRS}
+    ${libpcap_INCLUDE_DIRS}
+    ${NDPI_INCLUDE_DIR}
+)
+
+# ---- statistics ----
+add_executable(statistics
+    src/statistics.cpp
+)
+
+target_include_directories(statistics PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+)
+
+target_link_libraries(statistics
+    PacketAnalyzerLib
+    PacketCaptureLib
+    PacketUtilsLib
+    httplib::httplib 
+    prometheus-cpp::prometheus-cpp
+    PcapPlusPlus::PcapPlusPlus
 )
 
 # ---- Tests ----
@@ -136,6 +176,21 @@ if(ENABLE_INTERFACE_TESTS)
 endif()
 add_test(NAME capture-tests COMMAND capture-tests)
 
+# ---- utils ----
+add_executable(utils-tests tests/test_utils.cpp)
+target_include_directories(utils-tests PRIVATE 
+    ${PROJECT_SOURCE_DIR}/include
+    ${PcapPlusPlus_INCLUDE_DIRS}
+    ${libpcap_INCLUDE_DIRS}
+)
+target_link_libraries(utils-tests
+    PacketUtilsLib
+    GTest::gtest
+    GTest::gtest_main
+    pcapplusplus::pcap
+)
+add_test(NAME utils-tests COMMAND utils-tests)
+
 # ---- analyzer ----
 add_executable(analyzer-tests tests/test_analyzer.cpp)
 target_include_directories(analyzer-tests PRIVATE 
@@ -145,27 +200,10 @@ target_include_directories(analyzer-tests PRIVATE
 )
 target_link_libraries(analyzer-tests
     PacketAnalyzerLib
+    PacketUtilsLib
+    PacketCaptureLib
     GTest::gtest
     GTest::gtest_main
     pcapplusplus::pcap
-    PacketAnalyzerLib
 )
 add_test(NAME analyzer-tests COMMAND analyzer-tests)
-
-
-# ---- statistics ----
-add_executable(statistics
-    src/statistics.cpp
-)
-
-target_include_directories(statistics PRIVATE
-    ${PROJECT_SOURCE_DIR}/include
-)
-
-target_link_libraries(statistics
-    PacketAnalyzerLib
-    PacketCaptureLib
-    httplib::httplib 
-    prometheus-cpp::prometheus-cpp
-    PcapPlusPlus::PcapPlusPlus
-)

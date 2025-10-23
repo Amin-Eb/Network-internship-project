@@ -19,7 +19,6 @@ Report sharedrep;
 // ----------------- Prometheus -----------------
 //faild fields may go up or down so we need gauge, others are just up so counters are enough.
 
-
 shared_ptr<Registry> registry = make_shared<Registry>();
 
 auto& dns_total = BuildCounter()
