@@ -5,7 +5,7 @@ sudo apt-get update && sudo apt-get install -y \
        build-essential autoconf automake libtool m4
 conan profile detect
 gcc --version
-mkdir build
+sudo apt install libc6-dev
 conan install . --output-folder=build --build=missing
 sudo chmod +x build
 pwd
