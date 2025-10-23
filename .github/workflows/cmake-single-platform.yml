@@ -59,6 +59,11 @@ jobs:
         ls /usr/local/include/
         chmod +x install_Vactions.sh
         ./install_Vactions.sh
+    - name: Debug flex config.log
+      if: failure()
+      run: |
+        find ~/.conan2 -type f -name config.log -print -exec tail -n 40 {} \;
+
     - name: Run tests
       run: |
         cd P2
