@@ -99,9 +99,7 @@ target_link_libraries(statistics
     PacketUtilsLib
     httplib::httplib 
     prometheus-cpp::prometheus-cpp
-    PcapPlusPlus::Pcap++
-    PcapPlusPlus::Packet++
-    PcapPlusPlus::Common++
+    PcapPlusPlus::PcapPlusPlus
 )
 
 # ---- Tests ----
@@ -119,9 +117,9 @@ target_link_libraries(tcp-tests
     PacketUtilsLib
     GTest::gtest
     GTest::gtest_main
-    PcapPlusPlus::Pcap++
-    PcapPlusPlus::Packet++
-    PcapPlusPlus::Common++
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
     libpcap::libpcap
 )
 add_test(NAME tcp-tests COMMAND tcp-tests)
@@ -137,9 +135,9 @@ target_link_libraries(dns-tests
     PacketAnalyzerLib
     GTest::gtest
     GTest::gtest_main
-    PcapPlusPlus::Pcap++
-    PcapPlusPlus::Packet++
-    PcapPlusPlus::Common++
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
     libpcap::libpcap
 )
 add_test(NAME dns-tests COMMAND dns-tests)
@@ -155,9 +153,9 @@ target_link_libraries(http-tests
     PacketAnalyzerLib
     GTest::gtest
     GTest::gtest_main
-    PcapPlusPlus::Pcap++
-    PcapPlusPlus::Packet++
-    PcapPlusPlus::Common++
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
     libpcap::libpcap
 )
 add_test(NAME http-tests COMMAND http-tests)
@@ -173,9 +171,9 @@ target_link_libraries(sip-tests
     PacketAnalyzerLib
     GTest::gtest
     GTest::gtest_main
-    PcapPlusPlus::Pcap++
-    PcapPlusPlus::Packet++
-    PcapPlusPlus::Common++
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
     libpcap::libpcap
 )
 add_test(NAME sip-tests COMMAND sip-tests)
@@ -185,9 +183,9 @@ add_executable(capture-tests tests/test_capture.cpp)
 target_link_libraries(capture-tests
     GTest::gtest
     GTest::gtest_main
-    PcapPlusPlus::Pcap++
-    PcapPlusPlus::Packet++
-    PcapPlusPlus::Common++
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
     PacketCaptureLib
     PacketAnalyzerLib
     libpcap::libpcap
@@ -209,9 +207,7 @@ target_link_libraries(utils-tests
     PacketUtilsLib
     GTest::gtest
     GTest::gtest_main
-    PcapPlusPlus::Pcap++
-    PcapPlusPlus::Packet++
-    PcapPlusPlus::Common++
+    pcapplusplus::pcap
 )
 add_test(NAME utils-tests COMMAND utils-tests)
 
@@ -228,8 +224,6 @@ target_link_libraries(analyzer-tests
     PacketCaptureLib
     GTest::gtest
     GTest::gtest_main
-    PcapPlusPlus::Pcap++
-    PcapPlusPlus::Packet++
-    PcapPlusPlus::Common++
+    pcapplusplus::pcap
 )
 add_test(NAME analyzer-tests COMMAND analyzer-tests)
