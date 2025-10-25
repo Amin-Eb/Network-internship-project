@@ -3,6 +3,8 @@
 #include <iostream>
 #include "PacketUtils.h"
 #include "PacketBinary.h"
+#include "TcpNeeds.h"
+#include "Constants.h"
 
 bool TcpReporter::extractIPv4TcpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &tcpPtr, size_t &tcpLen) {
     if (len < ETH_HEADER_LEN + IPV4_HEADER_MIN_LEN) return false;

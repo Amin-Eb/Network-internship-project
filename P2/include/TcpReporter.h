@@ -1,11 +1,14 @@
 #pragma once
 #include "PacketBinary.h"
+#include "TcpNeeds.h"
 #include <unordered_map>
 #include <atomic>
 #include <mutex>
 #include <netinet/in.h>
 #include <cstring>
 #include <string>
+#include "Constants.h"
+
 
 using namespace std;
 

@@ -52,6 +52,7 @@ add_library(PacketAnalyzerLib STATIC
 )
 target_include_directories(PacketAnalyzerLib PUBLIC 
     ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/3rdparty
     ${PcapPlusPlus_INCLUDE_DIRS}
     ${libpcap_INCLUDE_DIRS}
     ${NDPI_INCLUDE_DIR}
@@ -66,6 +67,7 @@ add_library(PacketCaptureLib STATIC
 target_include_directories(PacketCaptureLib PUBLIC
     ${PROJECT_SOURCE_DIR}/include
     ${libpcap_INCLUDE_DIRS}
+    ${PROJECT_SOURCE_DIR}/3rdparty
 )
 
 target_link_libraries(PacketCaptureLib
@@ -79,6 +81,7 @@ add_library(PacketUtilsLib STATIC
 )
 target_include_directories(PacketUtilsLib PUBLIC 
     ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/3rdparty
     ${PcapPlusPlus_INCLUDE_DIRS}
     ${libpcap_INCLUDE_DIRS}
     ${NDPI_INCLUDE_DIR}
@@ -91,6 +94,7 @@ add_executable(statistics
 
 target_include_directories(statistics PRIVATE
     ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/3rdparty
 )
 
 target_link_libraries(statistics
@@ -109,6 +113,7 @@ enable_testing()
 add_executable(tcp-tests tests/test_tcp.cpp)
 target_include_directories(tcp-tests PRIVATE 
     ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/3rdparty
     ${PcapPlusPlus_INCLUDE_DIRS}
     ${libpcap_INCLUDE_DIRS}
 )
@@ -128,6 +133,7 @@ add_test(NAME tcp-tests COMMAND tcp-tests)
 add_executable(dns-tests tests/test_dns.cpp)
 target_include_directories(dns-tests PRIVATE 
     ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/3rdparty
     ${PcapPlusPlus_INCLUDE_DIRS}
     ${libpcap_INCLUDE_DIRS}
 )
@@ -146,6 +152,7 @@ add_test(NAME dns-tests COMMAND dns-tests)
 add_executable(http-tests tests/test_http.cpp)
 target_include_directories(http-tests PRIVATE 
     ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/3rdparty
     ${PcapPlusPlus_INCLUDE_DIRS}
     ${libpcap_INCLUDE_DIRS}
 )
@@ -164,6 +171,7 @@ add_test(NAME http-tests COMMAND http-tests)
 add_executable(sip-tests tests/test_sip.cpp)
 target_include_directories(sip-tests PRIVATE 
     ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/3rdparty
     ${PcapPlusPlus_INCLUDE_DIRS}
     ${libpcap_INCLUDE_DIRS}
 )
@@ -200,6 +208,7 @@ add_test(NAME capture-tests COMMAND capture-tests)
 add_executable(utils-tests tests/test_utils.cpp)
 target_include_directories(utils-tests PRIVATE 
     ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/3rdparty
     ${PcapPlusPlus_INCLUDE_DIRS}
     ${libpcap_INCLUDE_DIRS}
 )
@@ -215,6 +224,7 @@ add_test(NAME utils-tests COMMAND utils-tests)
 add_executable(analyzer-tests tests/test_analyzer.cpp)
 target_include_directories(analyzer-tests PRIVATE 
     ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/3rdparty
     ${PcapPlusPlus_INCLUDE_DIRS}
     ${libpcap_INCLUDE_DIRS}
 )

@@ -36,5 +36,5 @@ public:
 private:
     HttpReport& httprep;
     std::set<uint32_t> pendingHttpRequests; // key: TCP ack number of reqs, http
-    std::map<uint32_t, bool> pendingHttpResponses;
+    std::map<uint32_t, int> pendingHttpResponses;
 };
