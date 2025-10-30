@@ -109,25 +109,7 @@ target_link_libraries(statistics
 # ---- Tests ----
 enable_testing()
 
-# ---- tcp ----
-add_executable(tcp-tests tests/test_tcp.cpp)
-target_include_directories(tcp-tests PRIVATE 
-    ${PROJECT_SOURCE_DIR}/include
-    ${PROJECT_SOURCE_DIR}/3rdparty
-    ${PcapPlusPlus_INCLUDE_DIRS}
-    ${libpcap_INCLUDE_DIRS}
-)
-target_link_libraries(tcp-tests
-    PacketAnalyzerLib
-    PacketUtilsLib
-    GTest::gtest
-    GTest::gtest_main
-    pcapplusplus::pcap
-    pcapplusplus::packet
-    pcapplusplus::common
-    libpcap::libpcap
-)
-add_test(NAME tcp-tests COMMAND tcp-tests)
+
 
 # ---- dns ----
 add_executable(dns-tests tests/test_dns.cpp)
@@ -237,3 +219,23 @@ target_link_libraries(analyzer-tests
     pcapplusplus::pcap
 )
 add_test(NAME analyzer-tests COMMAND analyzer-tests)
+
+# ---- tcp ----
+add_executable(tcp-tests tests/test_tcp.cpp)
+target_include_directories(tcp-tests PRIVATE 
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/3rdparty
+    ${PcapPlusPlus_INCLUDE_DIRS}
+    ${libpcap_INCLUDE_DIRS}
+)
+target_link_libraries(tcp-tests
+    PacketAnalyzerLib
+    PacketUtilsLib
+    GTest::gtest
+    GTest::gtest_main
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
+    libpcap::libpcap
+)
+add_test(NAME tcp-tests COMMAND tcp-tests)
