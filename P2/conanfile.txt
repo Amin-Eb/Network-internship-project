@@ -1,4 +1,5 @@
 [requires]
+flex/2.6.4
 gtest/1.15.0
 pcapplusplus/25.05
 cpp-httplib/0.15.3

@@ -28,6 +28,9 @@ public:
     pair<const uint8_t*, size_t> getIpPacket(const Binary &bin);
     int getPacketType(const Binary &bin);
 
+    static bool isIPv4(const uint8_t *data, size_t len);
+    static bool isIPv6(const uint8_t *data, size_t len);
+
 private:
     ndpi_detection_module_struct* g_ndpi_mod = nullptr;
     once_flag ndpi_init_flag;

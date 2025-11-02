@@ -1,0 +1,30 @@
+{
+    "version": "0.5",
+    "requires": [
+        "zlib/1.3.1#b8bc2603263cf7eccbd6e17e66b0ed76%1733936244.862",
+        "prometheus-cpp/1.2.4#0c778513df14dc88bb15ed2e5627ee9e%1730724350.189",
+        "pcapplusplus/25.05#0e1152305642a33f18388ab3eec72515%1747647814.371",
+        "openssl/3.6.0#edf7648e96cca0d688e4ab1a84eafc67%1759511229.719",
+        "m4/1.4.19#b38ced39a01e31fef5435bc634461fd2%1700758725.451",
+        "libpcap/1.10.1#a695cc40cd747339eb11ed9dde42babd%1750157241.27",
+        "libcurl/8.15.0#f94d17d44efcc8d467e3bdd7e694a892%1755694467.056",
+        "gtest/1.15.0#9eba70e54373fb7325151ad3375934a1%1743410805.366",
+        "flex/2.6.4#e5cd857e69595b17f7599ba56be7dad2%1761206488.085",
+        "cpp-httplib/0.15.3#5b13f7689ab8fb111a4d36c05c1483c1%1748426323.713",
+        "civetweb/1.16#f4a42c8aa0bc0fe4bbe2a2270af0cea2%1750148475.207"
+    ],
+    "build_requires": [
+        "pkgconf/2.2.0#4ac315b50ef734072b00ff3aacbf52bf%1755505628.021",
+        "ninja/1.13.1#294f8721dbcde145674f7ba44994700e%1753400352.374",
+        "meson/1.9.1#abbc783cd297bedce14581b4aec060b8%1758626166.349",
+        "m4/1.4.19#b38ced39a01e31fef5435bc634461fd2%1700758725.451",
+        "libtool/2.4.7#14e7739cc128bc1623d2ed318008e47e%1755679003.847",
+        "gnu-config/cci.20210814#69fde734e1a46fd1655b4af46ab40945%1746203214.947",
+        "flex/2.6.4#e5cd857e69595b17f7599ba56be7dad2%1761206488.085",
+        "bison/3.8.2#c3490cbe0078b6fd3eb4cf5ed64144dc%1755688988.644",
+        "automake/1.16.5#b91b7c384c3deaa9d535be02da14d04f%1755524470.56",
+        "autoconf/2.71#51077f068e61700d65bb05541ea1e4b0%1731054366.86"
+    ],
+    "python_requires": [],
+    "config_requires": []
+}

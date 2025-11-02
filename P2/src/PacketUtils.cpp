@@ -1,4 +1,5 @@
 #include "PacketUtils.h"
+#include "Constants.h"
 
 
 void PacketUtils::initNdpiOnce(){
@@ -83,4 +84,19 @@ int PacketUtils::getPacketType(const Binary &bin) {
             return SIP;  
         default: return NONE;
     }
+}
+
+
+bool PacketUtils::isIPv4(const uint8_t *data, size_t len) 
+{ 
+    if (len < ETH_HEADER_LEN + 1) return false;
+    uint8_t version = (data[ETH_HEADER_LEN] >> 4) & 0xF;
+    return version == 4;
+}
+
+bool PacketUtils::isIPv6(const uint8_t *data, size_t len) 
+{
+    if (len < ETH_HEADER_LEN + 1) return false;
+    uint8_t version = (data[ETH_HEADER_LEN] >> 4) & 0xF;
+    return version == 6;
 }

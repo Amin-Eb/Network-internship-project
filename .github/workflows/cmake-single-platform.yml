@@ -29,8 +29,7 @@ jobs:
         sudo make install
         sudo ldconfig
         sudo mkdir -p /usr/local/include/ndpi
-        sudo cp /usr/local/include/ndpi*.h /usr/local/include/ndpi/
-        # Verify the fix
+        #sudo cp /usr/local/include/ndpi/*.h /usr/local/include/ndpi/        # Verify the fix
         echo "nDPI headers now in:"
         ls -la /usr/local/include/ndpi/
         echo "Checking installation in /usr/local/"
@@ -59,6 +58,11 @@ jobs:
         ls /usr/local/include/
         chmod +x install_Vactions.sh
         ./install_Vactions.sh
+    - name: Debug flex config.log
+      if: failure()
+      run: |
+        find ~/.conan2 -type f -name config.log -print -exec tail -n 40 {} \;
+
     - name: Run tests
       run: |
         cd P2
