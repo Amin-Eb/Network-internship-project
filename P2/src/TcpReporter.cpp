@@ -8,8 +8,53 @@
 #include "TcpNeeds.h"
 #include "Constants.h"
 
+enum {
+    IPV4 = 0x0800,
+    IPV6 = 0x86dd,
+};
+
+bool TcpReporter::extractTcpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &tcpPtr, size_t &tcpLen) {
+    if (len < ETH_HEADER_LEN + IPV4_HEADER_LEN) 
+        return false;
+        
+    const uint16_t IpV = (data[12] << 8) | (data[13]);
+    uint32_t offset = 0;
+    if(IpV == IPV4) 
+        offset = 23;
+    else if(IpV == IPV6) 
+        offset = 20;
+    else return false;
+    if(static_cast<int>(data[offset]) != 6) // not TCP
+        return false;
+
+    const uint8_t *ipHeader = data + ETH_HEADER_LEN;
+    tcpPtr = ipHeader + (IpV == IPV4? IPV4_HEADER_LEN : IPV6_HEADER_LEN);
+    if(IpV == IPV6) {
+        char src[INET6_ADDRSTRLEN], dst[INET6_ADDRSTRLEN];
+        inet_ntop(AF_INET6, ipHeader + 8, src, sizeof(src));
+        inet_ntop(AF_INET6, ipHeader + 24, dst, sizeof(dst));
+        key.src = src;
+        key.dst = dst;
+    }
+    else {
+        char src[INET_ADDRSTRLEN], dst[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, ipHeader + 12, src, sizeof(src));
+        inet_ntop(AF_INET, ipHeader + 16, dst, sizeof(dst));
+        key.src = src;
+        key.dst = dst;
+    }
+
+    if (len < (tcpPtr - data) + TCP_HEADER_MIN_LEN) return false;
+    key.sport = ntohs(*(uint16_t*)tcpPtr);
+    key.dport = ntohs(*(uint16_t*)(tcpPtr + 2));
+
+    size_t totalLen = ntohs(*(uint16_t*)(ipHeader + 2));
+    tcpLen = totalLen - (IpV == IPV4? ETH_HEADER_LEN + IPV4_HEADER_LEN : 0);
+
+    return true;
+} 
 bool TcpReporter::extractIPv4TcpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &tcpPtr, size_t &tcpLen) {
-    if (len < ETH_HEADER_LEN + IPV4_HEADER_MIN_LEN) return false;
+    if (len < ETH_HEADER_LEN + IPV4_HEADER_LEN) return false;
 
     const uint8_t *ipHeader = data + ETH_HEADER_LEN;
     uint8_t ihl = (ipHeader[0] & 0x0F) * 4;
@@ -165,10 +210,8 @@ void TcpReporter::addTcpBinary(const Binary &bin) {
     const uint8_t *tcpPtr = nullptr;
     size_t tcpLen = 0;
 
-    bool ok = false;
-    if (PacketUtils::isIPv4(data, len)) ok = extractIPv4TcpInfo(data, len, key, tcpPtr, tcpLen);
-    else if (PacketUtils::isIPv6(data, len)) ok = extractIPv6TcpInfo(data, len, key, tcpPtr, tcpLen);
-    if (!ok) return;
+    if (!extractTcpInfo(data, len, key, tcpPtr, tcpLen)) 
+        return;
     tcprep.totalTcpPackets++;
     if (key.src == client)
             tcprep.bytesUploaded += bin.length;

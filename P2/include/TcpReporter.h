@@ -87,6 +87,7 @@ private:
     unordered_map<FlowKey, TcpFlow, FlowKeyHash> flow_data;
     
     void finalizeFlow(const FlowKey &key);
+    bool extractTcpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &tcpPtr, size_t &tcpLen);
     bool extractIPv4TcpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &tcpPtr, size_t &tcpLen);
     bool extractIPv6TcpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &tcpPtr, size_t &tcpLen);
     void handleTcpFlags(const FlowKey &key, uint8_t flags, size_t payloadLen,const uint8_t* &tcpPtr);
