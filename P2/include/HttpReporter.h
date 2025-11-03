@@ -33,6 +33,7 @@ public:
     static int httpStatusCode(const Binary& bin);
     static bool isHttpResponse(const Binary& bin);
     HttpReport& getHttpReport(){ return httprep; }
+    int pendingRequestsCount(){ return pendingHttpRequests.size(); }
 private:
     HttpReport& httprep;
     std::set<uint32_t> pendingHttpRequests; // key: TCP ack number of reqs, http

@@ -88,9 +88,7 @@ target_include_directories(PacketUtilsLib PUBLIC
 )
 
 # ---- statistics ----
-add_executable(statistics
-    src/statistics.cpp
-)
+add_executable(statistics src/statistics.cpp)
 
 target_include_directories(statistics PRIVATE
     ${PROJECT_SOURCE_DIR}/include
@@ -98,11 +96,11 @@ target_include_directories(statistics PRIVATE
 )
 
 target_link_libraries(statistics
+    prometheus-cpp::prometheus-cpp
     PacketAnalyzerLib
     PacketCaptureLib
     PacketUtilsLib
     httplib::httplib 
-    prometheus-cpp::prometheus-cpp
     PcapPlusPlus::PcapPlusPlus
 )
 

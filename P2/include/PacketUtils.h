@@ -30,7 +30,7 @@ public:
 
     static bool isIPv4(const uint8_t *data, size_t len);
     static bool isIPv6(const uint8_t *data, size_t len);
-
+    static size_t flowHash(const Binary &bin);
 private:
     ndpi_detection_module_struct* g_ndpi_mod = nullptr;
     once_flag ndpi_init_flag;

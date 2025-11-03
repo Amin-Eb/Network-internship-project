@@ -53,54 +53,6 @@ bool TcpReporter::extractTcpInfo(const uint8_t *data, size_t len, FlowKey &key, 
 
     return true;
 } 
-bool TcpReporter::extractIPv4TcpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &tcpPtr, size_t &tcpLen) {
-    if (len < ETH_HEADER_LEN + IPV4_HEADER_LEN) return false;
-
-    const uint8_t *ipHeader = data + ETH_HEADER_LEN;
-    uint8_t ihl = (ipHeader[0] & 0x0F) * 4;
-    uint8_t proto = ipHeader[9];
-    if (proto != 6) return false; // not TCP
-
-    char src[INET_ADDRSTRLEN], dst[INET_ADDRSTRLEN];
-    inet_ntop(AF_INET, ipHeader + 12, src, sizeof(src));
-    inet_ntop(AF_INET, ipHeader + 16, dst, sizeof(dst));
-    key.src = src;
-    key.dst = dst;
-
-    tcpPtr = ipHeader + ihl;
-    if (len < (tcpPtr - data) + TCP_HEADER_MIN_LEN) return false;
-
-    key.sport = ntohs(*(uint16_t*)tcpPtr);
-    key.dport = ntohs(*(uint16_t*)(tcpPtr + 2));
-
-    size_t totalLen = ntohs(*(uint16_t*)(ipHeader + 2));
-    tcpLen = totalLen - ihl;
-
-    return true;
-}
-
-bool TcpReporter::extractIPv6TcpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &tcpPtr, size_t &tcpLen) {
-    if (len < ETH_HEADER_LEN + IPV6_HEADER_LEN) return false;
-
-    const uint8_t *ipHeader = data + ETH_HEADER_LEN;
-    uint8_t nextHdr = ipHeader[6];
-    if (nextHdr != 6) return false; // not TCP
-
-    char src[INET6_ADDRSTRLEN], dst[INET6_ADDRSTRLEN];
-    inet_ntop(AF_INET6, ipHeader + 8, src, sizeof(src));
-    inet_ntop(AF_INET6, ipHeader + 24, dst, sizeof(dst));
-    key.src = src;
-    key.dst = dst;
-
-    tcpPtr = ipHeader + IPV6_HEADER_LEN;
-    if (len < (tcpPtr - data) + TCP_HEADER_MIN_LEN) return false;
-
-    key.sport = ntohs(*(uint16_t*)tcpPtr);
-    key.dport = ntohs(*(uint16_t*)(tcpPtr + 2));
-    tcpLen = ntohs(*(uint16_t*)(ipHeader + 4)); // payload length
-
-    return true;
-}
 
 void TcpReporter::finalizeFlow(const FlowKey &key) {
     if (saveContent) {
