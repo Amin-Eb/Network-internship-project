@@ -118,7 +118,7 @@ size_t PacketUtils::flowHash(const Binary &bin)
     }
     else{
         char src[INET6_ADDRSTRLEN], dst[INET6_ADDRSTRLEN];
-        inet_ntop(AF_INET6, bin.data + 14 + 40 + 8, src, sizeof(src));
+        inet_ntop(AF_INET6, bin.data + 14 + 40 + 8, src, sizeof(src)); // bin.data + eth + ipv6 + pos
         inet_ntop(AF_INET6, bin.data + 14 + 40 + 24, dst, sizeof(dst));
         srcAddr = std::hash<string>{}(src);
         dstAddr = std::hash<string>{}(dst);
