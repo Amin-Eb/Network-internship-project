@@ -29,6 +29,7 @@ public:
     static int sipStatusCode(const Binary &bin);
     void addSipBinary(const Binary& bin);
     SipReport& getSipReport() { return siprep; }; 
+    int countPendingSipRequests(){ return sipRequests.size(); }
 private:
     SipReport& siprep;
     set<string> sipRequests;
