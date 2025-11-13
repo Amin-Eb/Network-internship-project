@@ -118,7 +118,7 @@ TEST(TcpReporterTest, ReassembleTcpDataCommingInShuffledOrder) {
     std::mt19937 gen(rd());
     
     // Shuffle the vector
-    std::shuffle(vc.begin() + 4, vc.end() -4, gen); //skip befor and after of stablished part
+    std::shuffle(vc.begin() + 4, vc.end() -6, gen); //skip befor and after of stablished part
 
     for(Binary bin : vc) sctpreporter.addSctpBinary(bin),delete[] bin.data;
 

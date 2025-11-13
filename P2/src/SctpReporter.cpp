@@ -11,7 +11,7 @@ void SctpReporter::finalizeFlow(const FlowKey &key) {
     if (itFlow == flow_data.end()) return;
 
     SctpFlow &flow = itFlow->second;
-   
+
     if (saveContent) {
         for (auto &streamPair : flow.streams) {
             uint32_t ssn = streamPair.first;
