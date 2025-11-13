@@ -79,7 +79,7 @@ TEST(SctpReporterTest, ReassembleSctpDataCommingInSortedOrder) {
     EXPECT_EQ(sharedrep.openAssociations.load(),1);
     EXPECT_EQ(sharedrep.normalClosed.load(),2);
 
-    FILE* pipe = popen("md5sum 155.230.24.155_32836_to_203.255.252.194_80_stream_3.bin", "r"); // the image file
+     FILE* pipe = popen("md5sum 155.230.24.155_32836_and_203.255.252.194_80_stream_3download.bin", "r"); // the image file
     if (!pipe) 
         EXPECT_FALSE(true);
     
@@ -88,9 +88,9 @@ TEST(SctpReporterTest, ReassembleSctpDataCommingInSortedOrder) {
     while (fgets(buffer, sizeof(buffer), pipe) != nullptr) 
         result += buffer;
     
-    EXPECT_EQ(result, "d9aeaef2a3e33b942a39ea143b3b189f  155.230.24.155_32836_to_203.255.252.194_80_stream_3.bin\n");
+    EXPECT_EQ(result, "d9aeaef2a3e33b942a39ea143b3b189f  155.230.24.155_32836_and_203.255.252.194_80_stream_3download.bin\n");
     pclose(pipe);
-    return; 
+    return;  
 }
 
 TEST(TcpReporterTest, ReassembleTcpDataCommingInShuffledOrder) {
@@ -129,7 +129,7 @@ TEST(TcpReporterTest, ReassembleTcpDataCommingInShuffledOrder) {
     EXPECT_EQ(sharedrep.openAssociations.load(),1);
     EXPECT_EQ(sharedrep.normalClosed.load(),2);
 
-    FILE* pipe = popen("md5sum 155.230.24.155_32836_to_203.255.252.194_80_stream_3.bin", "r"); // the image file
+    FILE* pipe = popen("md5sum 155.230.24.155_32836_and_203.255.252.194_80_stream_3download.bin", "r"); // the image file
     if (!pipe) 
         EXPECT_FALSE(true);
     
@@ -138,7 +138,7 @@ TEST(TcpReporterTest, ReassembleTcpDataCommingInShuffledOrder) {
     while (fgets(buffer, sizeof(buffer), pipe) != nullptr) 
         result += buffer;
     
-    EXPECT_EQ(result, "d9aeaef2a3e33b942a39ea143b3b189f  155.230.24.155_32836_to_203.255.252.194_80_stream_3.bin\n");
+    EXPECT_EQ(result, "d9aeaef2a3e33b942a39ea143b3b189f  155.230.24.155_32836_and_203.255.252.194_80_stream_3download.bin\n");
     pclose(pipe);
     return; 
-}
+} 

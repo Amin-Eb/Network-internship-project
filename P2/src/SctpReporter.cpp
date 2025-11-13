@@ -11,7 +11,7 @@ void SctpReporter::finalizeFlow(const FlowKey &key) {
     if (itFlow == flow_data.end()) return;
 
     SctpFlow &flow = itFlow->second;
-    
+   
     if (saveContent) {
         for (auto &streamPair : flow.streams) {
             uint32_t ssn = streamPair.first;
@@ -146,7 +146,7 @@ void SctpReporter::handleSctpChunks(const FlowKey &key, size_t payloadLen, const
             }
             case 7: { // SHUTDOWN
                 // normal close
-                flows[key].stateMask = STATE_NULL;
+                flows[key].stateMask |= STATE_NULL;
                 tcprep.normalClosed++;
                 if (tcprep.openAssociations.load() > 0) tcprep.openAssociations--;
                 // finalize and save data
@@ -155,7 +155,7 @@ void SctpReporter::handleSctpChunks(const FlowKey &key, size_t payloadLen, const
             }
             case 6: { // ABORT
                 // failed association or abort
-                flows[key].stateMask = STATE_NULL;
+                flows[key].stateMask |= STATE_NULL;
                 if (tcprep.openAssociations.load() > 0) tcprep.openAssociations--;
                 finalizeFlow(key);
                 break;

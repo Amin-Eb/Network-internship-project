@@ -70,6 +70,8 @@ struct SctpFlow {
     string second;
     uint16_t fport = 0;
     uint16_t sport = 0;
+    uint32_t srcVerif = 0;
+    uint32_t dstVerif = 0;
 };
 
 class SctpReporter
