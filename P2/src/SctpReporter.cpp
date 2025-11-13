@@ -106,8 +106,8 @@ void SctpReporter::handleSctpChunks(const FlowKey &key, size_t payloadLen, const
             case 0: { // DATA
                 if(clients.find(key.dst) == clients.end()) break; // for now we just keep the downloaded things from clients
                 if (chunkData + 12 <= cur + chunkLen) {
-                    uint32_t tsn = ntohs(*(uint32_t*)chunkData);
-                    uint16_t ssn = ntohs(*(uint16_t*)chunkData + 6);
+                    uint32_t tsn = ntohl(*(uint32_t*) (chunkData));
+                    uint16_t ssn = ntohs(*(uint16_t*) (chunkData + 6));
                     const uint8_t *userPtr = chunkData + 12;
                     size_t userLen = cur + chunkLen - userPtr;
                     if (userLen > 0) {
@@ -118,7 +118,7 @@ void SctpReporter::handleSctpChunks(const FlowKey &key, size_t payloadLen, const
                 }
                 break;
             }
-            case 1: { // INIT
+            case 1: { 
                 if(flows[key].stateMask == STATE_INIT) // if flow inited before but not answered yet, we dont touch the statistics
                     break;
                 SctpFlow flowd = SctpFlow();
@@ -161,6 +161,7 @@ void SctpReporter::handleSctpChunks(const FlowKey &key, size_t payloadLen, const
                 break;
             }
             default:
+                // other chunk types ignored for counters, but could be processed later
                 break;
         }
 
@@ -177,7 +178,6 @@ void SctpReporter::addSctpBinary(const Binary &bin) {
     const uint8_t *sctpPtr = nullptr;
     size_t sctpLen = 0;
     if (!extractSctpInfo(data, len, key, sctpPtr, sctpLen)) return;
-
     // update counters
     tcprep.totalSctpPackets++;
     // bytesUploaded / Downloaded estimate based on client set
