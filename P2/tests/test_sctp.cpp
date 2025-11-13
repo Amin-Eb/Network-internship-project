@@ -30,7 +30,6 @@ TEST(SctpReporterTest, SampleCreatedSctpStatistics) {
 
     SctpReporter sctpreporter(sharedrep,"155.230.24.155");
     pcpp::RawPacket rawPacket;
-    sctpreporter.setSaveContent(1);
 
     while (reader->getNextPacket(rawPacket)) {
         pcpp::Packet parsed(&rawPacket);
@@ -48,10 +47,10 @@ TEST(SctpReporterTest, SampleCreatedSctpStatistics) {
 
     return;
 }
-/*
-TEST(TcpReporterTest, RecognizesTcpOnesAmongAll) {
-    TcpReport sharedrep;
-    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/htmldns.pcapng");
+
+TEST(SctpReporterTest, ReassembleSctpDataCommingInSortedOrder) {
+    SctpReport sharedrep;
+    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/sctp-www.cap");
     if (!reader) {
         std::cerr << "Error: unsupported file type or cannot create reader\n";
     }
@@ -61,55 +60,26 @@ TEST(TcpReporterTest, RecognizesTcpOnesAmongAll) {
         delete reader;
     }
 
-    TcpReporter tcpreporter(sharedrep,"192.168.1.104");
-    pcpp::RawPacket rawPacket;
-    int dnsCount = 0;
-
-    while (reader->getNextPacket(rawPacket)) {
-        pcpp::Packet parsed(&rawPacket);
-        Binary bin = makeBinaryFromRaw(rawPacket);
-        tcpreporter.addTcpBinary(bin);
-        dnsCount++;
-        delete[] bin.data;
-    }
-
-    reader->close();
-    delete reader;
-    EXPECT_EQ(sharedrep.totalTcpPackets.load(),4852);
-    return;
-}
-TEST(TcpReporterTest, ReassembleTcpDataCommingInSortedOrder) {
-    TcpReport sharedrep;
-    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/tcp_frags.pcap");
-    if (!reader) {
-        std::cerr << "Error: unsupported file type or cannot create reader\n";
-    }
-
-    if (!reader->open()) {
-        std::cerr << "Error: could not open pcap file \n";
-        delete reader;
-    }
-
-    TcpReporter tcpreporter(sharedrep,"127.0.0.1");
-    tcpreporter.setSaveContent(true);
+    SctpReporter sctpreporter(sharedrep,"155.230.24.155");
+    sctpreporter.addSctpClient("155.230.24.156");
+    sctpreporter.setSaveContent(true);
     pcpp::RawPacket rawPacket;
 
     while (reader->getNextPacket(rawPacket)) {
         pcpp::Packet parsed(&rawPacket);
         Binary bin = makeBinaryFromRaw(rawPacket);
-        tcpreporter.addTcpBinary(bin);
+        sctpreporter.addSctpBinary(bin);
         delete[] bin.data;
     }
 
     reader->close();
     delete reader;
-    EXPECT_EQ(sharedrep.totalTcpPackets.load(),13);
-    EXPECT_EQ(sharedrep.bytesUploaded.load(),120874);
-    EXPECT_EQ(sharedrep.totalConnections.load(),1);
-    EXPECT_EQ(sharedrep.normalClosed.load(), 1);
-    EXPECT_EQ(sharedrep.failedHandshakes.load(), 0);
+    EXPECT_EQ(sharedrep.totalSctpPackets.load(),84);
+    EXPECT_EQ(sharedrep.totalAssociations.load(),3); // 2 assoc with normal start and end; 3 attempts for creating 'one' assoc, we count that tried but not done communication as 1
+    EXPECT_EQ(sharedrep.openAssociations.load(),1);
+    EXPECT_EQ(sharedrep.normalClosed.load(),2);
 
-    FILE* pipe = popen("md5sum 127.0.0.1_56824_to_127.0.0.1_12345.txt", "r");
+    FILE* pipe = popen("md5sum 155.230.24.155_32836_to_203.255.252.194_80_stream_3.bin", "r"); // the image file
     if (!pipe) 
         EXPECT_FALSE(true);
     
@@ -118,14 +88,14 @@ TEST(TcpReporterTest, ReassembleTcpDataCommingInSortedOrder) {
     while (fgets(buffer, sizeof(buffer), pipe) != nullptr) 
         result += buffer;
     
-    EXPECT_EQ(result, "5f37be6997de29884d44af896fae7335  127.0.0.1_56824_to_127.0.0.1_12345.txt\n");
+    EXPECT_EQ(result, "d9aeaef2a3e33b942a39ea143b3b189f  155.230.24.155_32836_to_203.255.252.194_80_stream_3.bin\n");
     pclose(pipe);
-    return;
+    return; 
 }
 
 TEST(TcpReporterTest, ReassembleTcpDataCommingInShuffledOrder) {
-    TcpReport sharedrep;
-    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/tcp_frags.pcap");
+    SctpReport sharedrep;
+    pcpp::IFileReaderDevice* reader = pcpp::IFileReaderDevice::getReader("samples/sctp-www.cap");
     if (!reader) {
         std::cerr << "Error: unsupported file type or cannot create reader\n";
     }
@@ -135,8 +105,8 @@ TEST(TcpReporterTest, ReassembleTcpDataCommingInShuffledOrder) {
         delete reader;
     }
 
-    TcpReporter tcpreporter(sharedrep,"127.0.0.1");
-    tcpreporter.setSaveContent(true);
+    SctpReporter sctpreporter(sharedrep,"127.0.0.1");
+    sctpreporter.setSaveContent(true);
     pcpp::RawPacket rawPacket;
     vector<Binary> vc;
     while (reader->getNextPacket(rawPacket)) {
@@ -148,19 +118,18 @@ TEST(TcpReporterTest, ReassembleTcpDataCommingInShuffledOrder) {
     std::mt19937 gen(rd());
     
     // Shuffle the vector
-    std::shuffle(vc.begin() + 3, vc.end() -3, gen); //skip befor and after of stablished part
+    std::shuffle(vc.begin() + 4, vc.end() -4, gen); //skip befor and after of stablished part
 
-    for(Binary bin : vc) tcpreporter.addTcpBinary(bin),delete[] bin.data;
+    for(Binary bin : vc) sctpreporter.addSctpBinary(bin),delete[] bin.data;
 
     reader->close();
     delete reader;
-    EXPECT_EQ(sharedrep.totalTcpPackets.load(),13);
-    EXPECT_EQ(sharedrep.bytesUploaded.load(),120874);
-    EXPECT_EQ(sharedrep.totalConnections.load(),1);
-    EXPECT_EQ(sharedrep.normalClosed.load(), 1);
-    EXPECT_EQ(sharedrep.failedHandshakes.load(), 0);
+    EXPECT_EQ(sharedrep.totalSctpPackets.load(),84);
+    EXPECT_EQ(sharedrep.totalAssociations.load(),3); // 2 assoc with normal start and end; 3 attempts for creating 'one' assoc, we count that tried but not done communication as 1
+    EXPECT_EQ(sharedrep.openAssociations.load(),1);
+    EXPECT_EQ(sharedrep.normalClosed.load(),2);
 
-    FILE* pipe = popen("md5sum 127.0.0.1_56824_to_127.0.0.1_12345.txt", "r");
+    FILE* pipe = popen("md5sum 155.230.24.155_32836_to_203.255.252.194_80_stream_3.bin", "r"); // the image file
     if (!pipe) 
         EXPECT_FALSE(true);
     
@@ -169,8 +138,7 @@ TEST(TcpReporterTest, ReassembleTcpDataCommingInShuffledOrder) {
     while (fgets(buffer, sizeof(buffer), pipe) != nullptr) 
         result += buffer;
     
-    EXPECT_EQ(result, "5f37be6997de29884d44af896fae7335  127.0.0.1_56824_to_127.0.0.1_12345.txt\n");
+    EXPECT_EQ(result, "d9aeaef2a3e33b942a39ea143b3b189f  155.230.24.155_32836_to_203.255.252.194_80_stream_3.bin\n");
     pclose(pipe);
-    return;
+    return; 
 }
-*/

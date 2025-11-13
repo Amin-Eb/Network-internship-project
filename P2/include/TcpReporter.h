@@ -34,7 +34,10 @@ struct FlowKey {
     uint16_t dport;
 
     bool operator==(const FlowKey &o) const {// is bidirectional, from same (source, dest) no matters source port and dest port permutations
-        return src == o.src && dst == o.dst && ((sport == o.sport && dport == o.dport) || (sport == o.dport && dport == o.sport));
+        return (src == o.src && dst == o.dst &&
+            sport == o.sport && dport == o.dport) ||
+           (src == o.dst && dst == o.src &&
+            sport == o.dport && dport == o.sport);
     }
     bool operator<(const FlowKey &o) const {
         if (src != o.src) return src < o.src;
@@ -58,7 +61,7 @@ struct FlowKeyHash {
     size_t operator()(const FlowKey &k) const noexcept {
         uint16_t port1, port2;
         string src = min(k.src, k.dst);
-        string dst = min(k.src, k.dst);
+        string dst = max(k.src, k.dst);
         port1 = min(k.sport, k.dport);
         port2 = max(k.sport, k.dport);
         return hash<string>()(src) ^ (hash<string>()(dst) << 1)
@@ -90,5 +93,7 @@ private:
     
     void finalizeFlow(const FlowKey &key);
     bool extractTcpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &tcpPtr, size_t &tcpLen);
+    bool extractIPv4TcpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &tcpPtr, size_t &tcpLen);
+    bool extractIPv6TcpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &tcpPtr, size_t &tcpLen);
     void handleTcpFlags(const FlowKey &key, uint8_t flags, size_t payloadLen,const uint8_t* &tcpPtr);
 };

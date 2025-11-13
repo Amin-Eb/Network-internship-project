@@ -31,8 +31,10 @@ struct FlowKey {
     uint16_t dport;
 
     bool operator==(const FlowKey &o) const {// is bidirectional, from same (source, dest) no matters source port and dest port permutations
-        return src == o.src && dst == o.dst && 
-                ((sport == o.sport && dport == o.dport) || (sport == o.dport && dport == o.sport));
+         return (src == o.src && dst == o.dst &&
+            sport == o.sport && dport == o.dport) ||
+           (src == o.dst && dst == o.src &&
+            sport == o.dport && dport == o.sport);
                 
     }
     bool operator<(const FlowKey &o) const {
@@ -48,7 +50,7 @@ struct FlowKeyHash {
     size_t operator()(const FlowKey &k) const noexcept {
         uint16_t port1, port2;
         string src = min(k.src, k.dst);
-        string dst = min(k.src, k.dst);
+        string dst = max(k.src, k.dst);
         port1 = min(k.sport, k.dport);
         port2 = max(k.sport, k.dport);
         return hash<string>()(src) ^ (hash<string>()(dst) << 1)
@@ -68,8 +70,6 @@ struct SctpFlow {
     string second;
     uint16_t fport = 0;
     uint16_t sport = 0;
-    uint32_t srcVerif = 0;
-    uint32_t dstVerif = 0;
 };
 
 class SctpReporter
