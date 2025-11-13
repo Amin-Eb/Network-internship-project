@@ -97,6 +97,6 @@ private:
     
     void finalizeFlow(const FlowKey &key);
     bool extractSctpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &sctpPtr, size_t &sctpLen);
-    void handleSctpChunks(const FlowKey &key, uint8_t flags, size_t payloadLen,const uint8_t* &sctpPtr);
+    void handleSctpChunks(const FlowKey &key, size_t payloadLen,const uint8_t* &sctpPtr);
 };
 

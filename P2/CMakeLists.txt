@@ -49,6 +49,7 @@ add_library(PacketAnalyzerLib STATIC
     src/HttpReporter.cpp 
     src/SipReporter.cpp
     src/TcpReporter.cpp
+    src/SctpReporter.cpp
 )
 target_include_directories(PacketAnalyzerLib PUBLIC 
     ${PROJECT_SOURCE_DIR}/include
@@ -238,7 +239,7 @@ target_link_libraries(tcp-tests
 )
 add_test(NAME tcp-tests COMMAND tcp-tests)
 
-# ---- tcp ----
+# ---- sctp ----
 add_executable(sctp-tests tests/test_sctp.cpp)
 target_include_directories(sctp-tests PRIVATE 
     ${PROJECT_SOURCE_DIR}/include
