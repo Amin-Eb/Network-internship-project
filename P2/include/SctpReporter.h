@@ -1,6 +1,5 @@
 #pragma once
 #include "PacketBinary.h"
-#include "TcpNeeds.h"
 #include <unordered_map>
 #include <atomic>
 #include <mutex>
@@ -9,24 +8,22 @@
 #include <map>
 #include <cstring>
 #include <string>
+#include <set>
 #include "Constants.h"
-
+#include "SctpNeeds.h"
 
 using namespace std;
 
-struct TcpReport
-{
-    atomic<int> totalTcpPackets{0};
-    atomic<int> openConnections{0};
-    atomic<int> totalConnections{0};
-    atomic<int> failedHandshakes{0};
-    atomic<int> bytesUploaded{0};
-    atomic<int> bytesDownloaded{0};
+struct SctpReport {
+    atomic<int> totalSctpPackets{0};
+    atomic<int> openAssociations{0};
+    atomic<int> totalAssociations{0};
+    atomic<int> failedAssociations{0};
+    atomic<long long> bytesUploaded{0};
+    atomic<long long> bytesDownloaded{0};
     atomic<int> normalClosed{0};
-    atomic<int> timeouts{0};
 };
 
-// flow key
 struct FlowKey {
     string src;
     string dst;
@@ -34,7 +31,9 @@ struct FlowKey {
     uint16_t dport;
 
     bool operator==(const FlowKey &o) const {// is bidirectional, from same (source, dest) no matters source port and dest port permutations
-        return src == o.src && dst == o.dst && ((sport == o.sport && dport == o.dport) || (sport == o.dport && dport == o.sport));
+        return src == o.src && dst == o.dst && 
+                ((sport == o.sport && dport == o.dport) || (sport == o.dport && dport == o.sport));
+                
     }
     bool operator<(const FlowKey &o) const {
         if (src != o.src) return src < o.src;
@@ -42,15 +41,6 @@ struct FlowKey {
         if (sport != o.sport) return sport < o.sport;
         return dport < o.dport;
     }
-};
-
-struct TcpFlow {
-    map<int,vector<uint8_t>> mp;
-    string first;
-    string second;
-    uint16_t fport;
-    uint16_t sport;
-    uint32_t first_seq;
 };
 
 // hash for flowKey
@@ -66,29 +56,47 @@ struct FlowKeyHash {
     }
 };
 
-class TcpReporter
+struct SctpStream {
+    uint16_t SSN = -1;
+    map<uint32_t, vector<uint8_t>> dataMap;
+};
+
+//still using word flow instead of assosiation
+struct SctpFlow {
+    map<uint32_t, SctpStream> streams;
+    string first;   
+    string second;
+    uint16_t fport = 0;
+    uint16_t sport = 0;
+    uint32_t srcVerif = 0;
+    uint32_t dstVerif = 0;
+};
+
+class SctpReporter
 {
 public:
-    explicit TcpReporter(TcpReport& sharedReport, string client)
-        : tcprep(sharedReport) {this->client = client;}
+    explicit SctpReporter(SctpReport& sharedReport, string client)
+        : tcprep(sharedReport) {this->clients.insert(client);} // force to have at least one client
 
-    void addTcpBinary(const Binary &bin);
-    TcpReport& getTcpReport() { return tcprep; }
+    void addSctpBinary(const Binary &bin);
+    SctpReport& getSctpReport() { return tcprep; }
     void setSaveContent(bool saveContent){this->saveContent = saveContent;}
+    void addSctpClient(string client) { this->clients.insert(client); }
     
 private:
     bool saveContent = 0;
-    TcpReport& tcprep;
-    string client;
-
+    SctpReport& tcprep;
+    set<string> clients;
+    
     struct FlowMeta {
-        uint8_t stateMask = STATE_NONE;
+        uint8_t stateMask = STATE_NULL;
     }; // TODO : defined as struct not simple integer, meybe we added things about time further
 
     unordered_map<FlowKey, FlowMeta, FlowKeyHash> flows;
-    unordered_map<FlowKey, TcpFlow, FlowKeyHash> flow_data;
+    unordered_map<FlowKey, SctpFlow, FlowKeyHash> flow_data;
     
     void finalizeFlow(const FlowKey &key);
-    bool extractTcpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &tcpPtr, size_t &tcpLen);
-    void handleTcpFlags(const FlowKey &key, uint8_t flags, size_t payloadLen,const uint8_t* &tcpPtr);
+    bool extractSctpInfo(const uint8_t *data, size_t len, FlowKey &key, const uint8_t* &sctpPtr, size_t &sctpLen);
+    void handleSctpChunks(const FlowKey &key, uint8_t flags, size_t payloadLen,const uint8_t* &sctpPtr);
 };
+
