@@ -16,10 +16,10 @@ void SctpReporter::finalizeFlow(const FlowKey &key) {
         for (auto &streamPair : flow.streams) {
             uint32_t ssn = streamPair.first;
             auto &sctpStream = streamPair.second;
-            vector<uint32_t> tsns;
-            tsns.reserve(sctpStream.dataMap.size());
-            for (const auto &kv : sctpStream.dataMap) tsns.push_back(kv.first);
-            sort(tsns.begin(), tsns.end());
+            
+            int it = 0;
+            std::vector<uint32_t> tsns(sctpStream.dataMap.size());
+            for(const auto &kv : sctpStream.dataMap) tsns[it++] = kv.first;
 
             string filename = flow.first + "_" + to_string(flow.fport)
                             + "_and_" + flow.second + "_" + to_string(flow.sport)
