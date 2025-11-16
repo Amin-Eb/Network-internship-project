@@ -16,10 +16,6 @@ void SctpReporter::finalizeFlow(const FlowKey &key) {
         for (auto &streamPair : flow.streams) {
             uint32_t ssn = streamPair.first;
             auto &sctpStream = streamPair.second;
-            
-            int it = 0;
-            std::vector<uint32_t> tsns(sctpStream.dataMap.size());
-            for(const auto &kv : sctpStream.dataMap) tsns[it++] = kv.first;
 
             string filename = flow.first + "_" + to_string(flow.fport)
                             + "_and_" + flow.second + "_" + to_string(flow.sport)
@@ -30,9 +26,11 @@ void SctpReporter::finalizeFlow(const FlowKey &key) {
                 cerr << "SCTP: failed to open " << filename << " for writing\n";
                 continue;
             }
-            for (uint32_t tsn : tsns) {
+            for (const auto &kv : sctpStream.dataMap) {
+                uint32_t tsn = kv.first;
                 const auto &vec = sctpStream.dataMap[tsn];
-                if (!vec.empty()) out.write(reinterpret_cast<const char*>(vec.data()), vec.size());
+                if (!vec.empty()) 
+                    out.write(reinterpret_cast<const char*>(vec.data()), vec.size());
             }
             out.close();
         }
