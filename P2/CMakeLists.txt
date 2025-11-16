@@ -49,6 +49,7 @@ add_library(PacketAnalyzerLib STATIC
     src/HttpReporter.cpp 
     src/SipReporter.cpp
     src/TcpReporter.cpp
+    src/SctpReporter.cpp
 )
 target_include_directories(PacketAnalyzerLib PUBLIC 
     ${PROJECT_SOURCE_DIR}/include
@@ -237,3 +238,24 @@ target_link_libraries(tcp-tests
     libpcap::libpcap
 )
 add_test(NAME tcp-tests COMMAND tcp-tests)
+
+# ---- sctp ----
+add_executable(sctp-tests tests/test_sctp.cpp)
+target_include_directories(sctp-tests PRIVATE 
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/3rdparty
+    ${PcapPlusPlus_INCLUDE_DIRS}
+    ${libpcap_INCLUDE_DIRS}
+)
+target_link_libraries(sctp-tests
+    PacketAnalyzerLib
+    PacketUtilsLib
+    GTest::gtest
+    GTest::gtest_main
+    pcapplusplus::pcap
+    pcapplusplus::packet
+    pcapplusplus::common
+    libpcap::libpcap
+)
+add_test(NAME sctp-tests COMMAND sctp-tests)
+

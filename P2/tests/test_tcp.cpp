@@ -30,13 +30,11 @@ TEST(TcpReporterTest, SampleCreatedTcpStatistics) {
 
     TcpReporter tcpreporter(sharedrep,"127.0.0.1");
     pcpp::RawPacket rawPacket;
-    int dnsCount = 0;
 
     while (reader->getNextPacket(rawPacket)) {
         pcpp::Packet parsed(&rawPacket);
         Binary bin = makeBinaryFromRaw(rawPacket);
         tcpreporter.addTcpBinary(bin);
-        dnsCount++;
         delete[] bin.data;
     }
 

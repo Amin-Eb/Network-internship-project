@@ -1,0 +1,2730 @@
+No.     Time           Source                Destination           Protocol Length Info
+      1 0.000000       155.230.24.155        203.255.252.194       SCTP     106    INIT 
+
+Frame 1: 106 bytes on wire (848 bits), 106 bytes captured (848 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0x00000000
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x30baef54 [unverified]
+    [Checksum Status: Unverified]
+    INIT chunk (Outbound streams: 10, inbound streams: 65535)
+        Chunk type: INIT (1)
+        Chunk flags: 0x00
+        Chunk length: 60
+        Initiate tag: 0x3bb99c46
+        Advertised receiver window credit (a_rwnd): 106496
+        Number of outbound streams: 10
+        Number of inbound streams: 65535
+        Initial TSN: 724401842
+        IPv4 address parameter (Address: 155.230.24.155)
+        IPv4 address parameter (Address: 155.230.24.156)
+        Supported address types parameter (Supported types: IPv4)
+        ECN parameter
+        Forward TSN supported parameter
+        Adaptation Layer Indication parameter (Indication: 0)
+
+No.     Time           Source                Destination           Protocol Length Info
+      2 0.005392       203.255.252.194       155.230.24.155        SCTP     278    INIT_ACK 
+
+Frame 2: 278 bytes on wire (2224 bits), 278 bytes captured (2224 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xa3ba08e6 [unverified]
+    [Checksum Status: Unverified]
+    INIT_ACK chunk (Outbound streams: 10, inbound streams: 10)
+        Chunk type: INIT_ACK (2)
+        Chunk flags: 0x00
+        Chunk length: 232
+        Initiate tag: 0xd26ac1e5
+        Advertised receiver window credit (a_rwnd): 106496
+        Number of outbound streams: 10
+        Number of inbound streams: 10
+        Initial TSN: 1677732374
+        State cookie parameter (Cookie length: 192 bytes)
+        ECN parameter
+        Forward TSN supported parameter
+        Adaptation Layer Indication parameter (Indication: 0)
+
+No.     Time           Source                Destination           Protocol Length Info
+      3 0.005534       155.230.24.155        203.255.252.194       SCTP     242    COOKIE_ECHO 
+
+Frame 3: 242 bytes on wire (1936 bits), 242 bytes captured (1936 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x7514a49a [unverified]
+    [Checksum Status: Unverified]
+    COOKIE_ECHO chunk (Cookie length: 192 bytes)
+        Chunk type: COOKIE_ECHO (10)
+        Chunk flags: 0x00
+        Chunk length: 196
+        Cookie [truncated]: b3493015e1c27625f53ab8185555b8db7a0f43dd000000000000000000000000e5c16ad2469cb93b0000000000000000f4c5c543952b00000a000a00162a0064020044809be6189b00000000000000000000000000000000000000005000010000000000000000000100003c3bb
+
+No.     Time           Source                Destination           Protocol Length Info
+      4 0.006616       203.255.252.194       155.230.24.155        SCTP     60     COOKIE_ACK 
+
+Frame 4: 60 bytes on wire (480 bits), 60 bytes captured (480 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+    Padding: 00000000000000000000
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x81cede0b [unverified]
+    [Checksum Status: Unverified]
+    COOKIE_ACK chunk
+        Chunk type: COOKIE_ACK (11)
+        Chunk flags: 0x00
+        Chunk length: 4
+
+No.     Time           Source                Destination           Protocol Length Info
+      5 0.006817       155.230.24.155        203.255.252.194       HTTP     466    GET / HTTP/1.1 
+
+Frame 5: 466 bytes on wire (3728 bits), 466 bytes captured (3728 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x70e55b4c [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, complete segment, TSN: 0, SID: 0, SSN: 0, PPID: 0, payload length: 403 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x03
+        Chunk length: 419
+        Transmission sequence number (relative): 0
+        Transmission sequence number (absolute): 724401842
+        Stream identifier: 0x0000
+        Stream sequence number: 0
+        Payload protocol identifier: not specified (0)
+        Chunk padding: 00
+Hypertext Transfer Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+      6 0.007989       203.255.252.194       155.230.24.155        SCTP     62     SACK (Ack=0, Arwnd=106093) 
+
+Frame 6: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xdafdf97b [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 724401842, a_rwnd: 106093, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 0
+        Cumulative TSN ACK (absolute): 724401842
+        Advertised receiver window credit (a_rwnd): 106093
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+      7 0.008950       203.255.252.194       155.230.24.155        HTTP     366    HTTP/1.1 200 OK 
+
+Frame 7: 366 bytes on wire (2928 bits), 366 bytes captured (2928 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xbe86bcba [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, complete segment, TSN: 0, SID: 0, SSN: 0, PPID: 0, payload length: 304 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x03
+        Chunk length: 320
+        Transmission sequence number (relative): 0
+        Transmission sequence number (absolute): 1677732374
+        Stream identifier: 0x0000
+        Stream sequence number: 0
+        Payload protocol identifier: not specified (0)
+Hypertext Transfer Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+      8 0.009034       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=0, Arwnd=106192) 
+
+Frame 8: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x036af198 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732374, a_rwnd: 106192, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 0
+        Cumulative TSN ACK (absolute): 1677732374
+        Advertised receiver window credit (a_rwnd): 106192
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+      9 0.020739       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=1) (Message Fragment) 
+
+Frame 9: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x9b6df209 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, first segment, TSN: 1, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x02
+        Chunk length: 1448
+        Transmission sequence number (relative): 1
+        Transmission sequence number (absolute): 1677732375
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 16
+
+No.     Time           Source                Destination           Protocol Length Info
+     10 0.020962       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=2) (Message Fragment) 
+
+Frame 10: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x10746e29 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 2, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 2
+        Transmission sequence number (absolute): 1677732376
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 16
+
+No.     Time           Source                Destination           Protocol Length Info
+     11 0.021091       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=2, Arwnd=103632) 
+
+Frame 11: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x1a3856a8 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732376, a_rwnd: 103632, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 2
+        Cumulative TSN ACK (absolute): 1677732376
+        Advertised receiver window credit (a_rwnd): 103632
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     12 0.021130       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=3) (Message Fragment) 
+
+Frame 12: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xaab3c4bc [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 3, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 3
+        Transmission sequence number (absolute): 1677732377
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 16
+
+No.     Time           Source                Destination           Protocol Length Info
+     13 0.021269       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=4) (Message Fragment) 
+
+Frame 13: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x5ba54eaf [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 4, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 4
+        Transmission sequence number (absolute): 1677732378
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 16
+
+No.     Time           Source                Destination           Protocol Length Info
+     14 0.021335       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=4, Arwnd=100768) 
+
+Frame 14: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x1e28d31b [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732378, a_rwnd: 100768, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 4
+        Cumulative TSN ACK (absolute): 1677732378
+        Advertised receiver window credit (a_rwnd): 100768
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     15 0.022930       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=5) (Message Fragment) 
+
+Frame 15: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x646188cc [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 5, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 5
+        Transmission sequence number (absolute): 1677732379
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 16
+
+No.     Time           Source                Destination           Protocol Length Info
+     16 0.023000       203.255.252.194       155.230.24.155        HTTP     390    Continuation
+
+Frame 16: 390 bytes on wire (3120 bits), 390 bytes captured (3120 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xc6d57f0b [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, last segment, TSN: 6, SID: 0, SSN: 1, PPID: 0, payload length: 326 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x01
+        Chunk length: 342
+        Transmission sequence number (relative): 6
+        Transmission sequence number (absolute): 1677732380
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled SCTP Fragments (7486 bytes, 6 fragments): 
+        Chunk padding: 0000
+Hypertext Transfer Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     17 0.023073       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=6, Arwnd=99010) 
+
+Frame 17: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x28e3ec20 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732380, a_rwnd: 99010, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 6
+        Cumulative TSN ACK (absolute): 1677732380
+        Advertised receiver window credit (a_rwnd): 99010
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     18 0.023533       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=6, Arwnd=103106) 
+
+Frame 18: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x16d3e0e0 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732380, a_rwnd: 103106, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 6
+        Cumulative TSN ACK (absolute): 1677732380
+        Advertised receiver window credit (a_rwnd): 103106
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     19 0.023630       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=6, Arwnd=104738) 
+
+Frame 19: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x760a01f6 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732380, a_rwnd: 104738, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 6
+        Cumulative TSN ACK (absolute): 1677732380
+        Advertised receiver window credit (a_rwnd): 104738
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     20 0.023687       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=6, Arwnd=106496) 
+
+Frame 20: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xcc354557 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732380, a_rwnd: 106496, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 6
+        Cumulative TSN ACK (absolute): 1677732380
+        Advertised receiver window credit (a_rwnd): 106496
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     21 0.130800       155.230.24.155        203.255.252.194       HTTP     450    GET /images/CPL@KOREN_logo_menu.gif HTTP/1.1 
+
+Frame 21: 450 bytes on wire (3600 bits), 450 bytes captured (3600 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xf03c5b77 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, complete segment, TSN: 1, SID: 0, SSN: 1, PPID: 0, payload length: 387 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x03
+        Chunk length: 403
+        Transmission sequence number (relative): 1
+        Transmission sequence number (absolute): 724401843
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Chunk padding: 00
+Hypertext Transfer Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     22 0.132870       203.255.252.194       155.230.24.155        HTTP     366    HTTP/1.1 200 OK 
+
+Frame 22: 366 bytes on wire (2928 bits), 366 bytes captured (2928 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x8e81829a [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, complete segment, TSN: 7, SID: 0, SSN: 2, PPID: 0, payload length: 304 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x03
+        Chunk length: 320
+        Transmission sequence number (relative): 7
+        Transmission sequence number (absolute): 1677732381
+        Stream identifier: 0x0000
+        Stream sequence number: 2
+        Payload protocol identifier: not specified (0)
+Hypertext Transfer Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     23 0.135092       155.230.24.155        203.255.252.194       SCTP     106    INIT 
+
+Frame 23: 106 bytes on wire (848 bits), 106 bytes captured (848 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x00000000
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x6179f2ea [unverified]
+    [Checksum Status: Unverified]
+    INIT chunk (Outbound streams: 10, inbound streams: 65535)
+        Chunk type: INIT (1)
+        Chunk flags: 0x00
+        Chunk length: 60
+        Initiate tag: 0xe9b73bc3
+        Advertised receiver window credit (a_rwnd): 106496
+        Number of outbound streams: 10
+        Number of inbound streams: 65535
+        Initial TSN: 825374864
+        IPv4 address parameter (Address: 155.230.24.155)
+        IPv4 address parameter (Address: 155.230.24.156)
+        Supported address types parameter (Supported types: IPv4)
+        ECN parameter
+        Forward TSN supported parameter
+        Adaptation Layer Indication parameter (Indication: 0)
+
+No.     Time           Source                Destination           Protocol Length Info
+     24 0.136238       203.255.252.194       155.230.24.155        SCTP     278    INIT_ACK 
+
+Frame 24: 278 bytes on wire (2224 bits), 278 bytes captured (2224 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x211c6eb6 [unverified]
+    [Checksum Status: Unverified]
+    INIT_ACK chunk (Outbound streams: 10, inbound streams: 10)
+        Chunk type: INIT_ACK (2)
+        Chunk flags: 0x00
+        Chunk length: 232
+        Initiate tag: 0x13896007
+        Advertised receiver window credit (a_rwnd): 106496
+        Number of outbound streams: 10
+        Number of inbound streams: 10
+        Initial TSN: 2860946939
+        State cookie parameter (Cookie length: 192 bytes)
+        ECN parameter
+        Forward TSN supported parameter
+        Adaptation Layer Indication parameter (Indication: 0)
+
+No.     Time           Source                Destination           Protocol Length Info
+     25 0.136410       155.230.24.155        203.255.252.194       SCTP     242    COOKIE_ECHO 
+
+Frame 25: 242 bytes on wire (1936 bits), 242 bytes captured (1936 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x1a99ea1d [unverified]
+    [Checksum Status: Unverified]
+    COOKIE_ECHO chunk (Cookie length: 192 bytes)
+        Chunk type: COOKIE_ECHO (10)
+        Chunk flags: 0x00
+        Chunk length: 196
+        Cookie [truncated]: a9924f2108f4fcd9b62f8e40a45f86b2eef4ed1e00000000000000000000000007608913c33bb7e90000000000000000f4c5c5432a3b02000a000a00fb9586aa020045809be6189b00000000000000000000000000000000000000005000010000000000000000000100003ce9b
+
+No.     Time           Source                Destination           Protocol Length Info
+     26 0.137496       203.255.252.194       155.230.24.155        SCTP     60     COOKIE_ACK 
+
+Frame 26: 60 bytes on wire (480 bits), 60 bytes captured (480 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+    Padding: 00000000000000000000
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xfec77baf [unverified]
+    [Checksum Status: Unverified]
+    COOKIE_ACK chunk
+        Chunk type: COOKIE_ACK (11)
+        Chunk flags: 0x00
+        Chunk length: 4
+
+No.     Time           Source                Destination           Protocol Length Info
+     27 0.138220       155.230.24.155        203.255.252.194       HTTP     446    GET /images/protocols_small.gif HTTP/1.1 
+
+Frame 27: 446 bytes on wire (3568 bits), 446 bytes captured (3568 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xa6d61e34 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, complete segment, TSN: 0, SID: 0, SSN: 0, PPID: 0, payload length: 383 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x03
+        Chunk length: 399
+        Transmission sequence number (relative): 0
+        Transmission sequence number (absolute): 825374864
+        Stream identifier: 0x0000
+        Stream sequence number: 0
+        Payload protocol identifier: not specified (0)
+        Chunk padding: 00
+Hypertext Transfer Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     28 0.139391       203.255.252.194       155.230.24.155        SCTP     62     SACK (Ack=0, Arwnd=106113) 
+
+Frame 28: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xe0e3f50a [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 825374864, a_rwnd: 106113, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 0
+        Cumulative TSN ACK (absolute): 825374864
+        Advertised receiver window credit (a_rwnd): 106113
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     29 0.140016       203.255.252.194       155.230.24.155        HTTP     370    HTTP/1.1 200 OK 
+
+Frame 29: 370 bytes on wire (2960 bits), 370 bytes captured (2960 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x676688fc [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, complete segment, TSN: 0, SID: 0, SSN: 0, PPID: 0, payload length: 305 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x03
+        Chunk length: 321
+        Transmission sequence number (relative): 0
+        Transmission sequence number (absolute): 2860946939
+        Stream identifier: 0x0000
+        Stream sequence number: 0
+        Payload protocol identifier: not specified (0)
+        Chunk padding: 000000
+Hypertext Transfer Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     30 0.140086       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=0, Arwnd=106191) 
+
+Frame 30: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x1f9db742 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946939, a_rwnd: 106191, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 0
+        Cumulative TSN ACK (absolute): 2860946939
+        Advertised receiver window credit (a_rwnd): 106191
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     31 0.143573       155.230.24.155        222.96.156.151        SCTP     106    INIT 
+
+Frame 31: 106 bytes on wire (848 bits), 106 bytes captured (848 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 222.96.156.151
+Stream Control Transmission Protocol, Src Port: 32838 (32838), Dst Port: 80 (80)
+    Source port: 32838
+    Destination port: 80
+    Verification tag: 0x00000000
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x178ebd89 [unverified]
+    [Checksum Status: Unverified]
+    INIT chunk (Outbound streams: 10, inbound streams: 65535)
+        Chunk type: INIT (1)
+        Chunk flags: 0x00
+        Chunk length: 60
+        Initiate tag: 0xbf0db09b
+        Advertised receiver window credit (a_rwnd): 106496
+        Number of outbound streams: 10
+        Number of inbound streams: 65535
+        Initial TSN: 21506469
+        IPv4 address parameter (Address: 155.230.24.155)
+        IPv4 address parameter (Address: 155.230.24.156)
+        Supported address types parameter (Supported types: IPv4)
+        ECN parameter
+        Forward TSN supported parameter
+        Adaptation Layer Indication parameter (Indication: 0)
+
+No.     Time           Source                Destination           Protocol Length Info
+     32 0.147146       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=8) (Message Fragment) 
+
+Frame 32: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x6061537b [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, first segment, TSN: 8, SID: 0, SSN: 3, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x02
+        Chunk length: 1448
+        Transmission sequence number (relative): 8
+        Transmission sequence number (absolute): 1677732382
+        Stream identifier: 0x0000
+        Stream sequence number: 3
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 50
+
+No.     Time           Source                Destination           Protocol Length Info
+     33 0.147246       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=8, Arwnd=105064) 
+
+Frame 33: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xaaa538ad [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732382, a_rwnd: 105064, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 8
+        Cumulative TSN ACK (absolute): 1677732382
+        Advertised receiver window credit (a_rwnd): 105064
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     34 0.147307       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=9) (Message Fragment) 
+
+Frame 34: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x2cef510b [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 9, SID: 0, SSN: 3, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 9
+        Transmission sequence number (absolute): 1677732383
+        Stream identifier: 0x0000
+        Stream sequence number: 3
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 50
+
+No.     Time           Source                Destination           Protocol Length Info
+     35 0.147452       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=10) (Message Fragment) 
+
+Frame 35: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x03af702f [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 10, SID: 0, SSN: 3, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 10
+        Transmission sequence number (absolute): 1677732384
+        Stream identifier: 0x0000
+        Stream sequence number: 3
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 50
+
+No.     Time           Source                Destination           Protocol Length Info
+     36 0.147522       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=10, Arwnd=102200) 
+
+Frame 36: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x239cb39c [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732384, a_rwnd: 102200, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 10
+        Cumulative TSN ACK (absolute): 1677732384
+        Advertised receiver window credit (a_rwnd): 102200
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     37 0.147597       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=11) (Message Fragment) 
+
+Frame 37: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x71725df0 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 11, SID: 0, SSN: 3, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 11
+        Transmission sequence number (absolute): 1677732385
+        Stream identifier: 0x0000
+        Stream sequence number: 3
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 50
+
+No.     Time           Source                Destination           Protocol Length Info
+     38 0.148498       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=1) (Message Fragment) 
+
+Frame 38: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xb62568e3 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, first segment, TSN: 1, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x02
+        Chunk length: 1448
+        Transmission sequence number (relative): 1
+        Transmission sequence number (absolute): 2860946940
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 65
+
+No.     Time           Source                Destination           Protocol Length Info
+     39 0.148625       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=2) (Message Fragment) 
+
+Frame 39: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x8cdfe387 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 2, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 2
+        Transmission sequence number (absolute): 2860946941
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 65
+
+No.     Time           Source                Destination           Protocol Length Info
+     40 0.148695       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=2, Arwnd=103632) 
+
+Frame 40: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x97595028 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946941, a_rwnd: 103632, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 2
+        Cumulative TSN ACK (absolute): 2860946941
+        Advertised receiver window credit (a_rwnd): 103632
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     41 0.148746       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=3) (Message Fragment) 
+
+Frame 41: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xcff256e2 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 3, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 3
+        Transmission sequence number (absolute): 2860946942
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 65
+
+No.     Time           Source                Destination           Protocol Length Info
+     42 0.148867       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=4) (Message Fragment) 
+
+Frame 42: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xbc2ef122 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 4, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 4
+        Transmission sequence number (absolute): 2860946943
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 65
+
+No.     Time           Source                Destination           Protocol Length Info
+     43 0.148935       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=4, Arwnd=100768) 
+
+Frame 43: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x9349d59b [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946943, a_rwnd: 100768, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 4
+        Cumulative TSN ACK (absolute): 2860946943
+        Advertised receiver window credit (a_rwnd): 100768
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     44 0.149341       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=12) (Message Fragment) 
+
+Frame 44: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x67f32446 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 12, SID: 0, SSN: 3, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 12
+        Transmission sequence number (absolute): 1677732386
+        Stream identifier: 0x0000
+        Stream sequence number: 3
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 50
+
+No.     Time           Source                Destination           Protocol Length Info
+     45 0.149412       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=12, Arwnd=99336) 
+
+Frame 45: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x034112b1 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732386, a_rwnd: 99336, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 12
+        Cumulative TSN ACK (absolute): 1677732386
+        Advertised receiver window credit (a_rwnd): 99336
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     46 0.149482       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=13) (Message Fragment) 
+
+Frame 46: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x70d1d2bb [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 13, SID: 0, SSN: 3, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 13
+        Transmission sequence number (absolute): 1677732387
+        Stream identifier: 0x0000
+        Stream sequence number: 3
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 50
+
+No.     Time           Source                Destination           Protocol Length Info
+     47 0.149586       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=14) (Message Fragment) 
+
+Frame 47: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xce5707ef [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 14, SID: 0, SSN: 3, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 14
+        Transmission sequence number (absolute): 1677732388
+        Stream identifier: 0x0000
+        Stream sequence number: 3
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 50
+
+No.     Time           Source                Destination           Protocol Length Info
+     48 0.149652       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=14, Arwnd=96472) 
+
+Frame 48: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x96629ad1 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732388, a_rwnd: 96472, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 14
+        Cumulative TSN ACK (absolute): 1677732388
+        Advertised receiver window credit (a_rwnd): 96472
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     49 0.149710       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=15) (Message Fragment) 
+
+Frame 49: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xe65a954e [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 15, SID: 0, SSN: 3, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 15
+        Transmission sequence number (absolute): 1677732389
+        Stream identifier: 0x0000
+        Stream sequence number: 3
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 50
+
+No.     Time           Source                Destination           Protocol Length Info
+     50 0.149819       203.255.252.194       155.230.24.155        HTTP     1406   Continuation (GIF89a)
+
+Frame 50: 1406 bytes on wire (11248 bits), 1406 bytes captured (11248 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x908550c6 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, last segment, TSN: 16, SID: 0, SSN: 3, PPID: 0, payload length: 1344 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x01
+        Chunk length: 1360
+        Transmission sequence number (relative): 16
+        Transmission sequence number (absolute): 1677732390
+        Stream identifier: 0x0000
+        Stream sequence number: 3
+        Payload protocol identifier: not specified (0)
+        Reassembled SCTP Fragments (12800 bytes, 9 fragments): 
+Hypertext Transfer Protocol
+Compuserve GIF, Version: GIF89a
+
+No.     Time           Source                Destination           Protocol Length Info
+     51 0.149888       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=16, Arwnd=93696) 
+
+Frame 51: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xcdcac886 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732390, a_rwnd: 93696, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 16
+        Cumulative TSN ACK (absolute): 1677732390
+        Advertised receiver window credit (a_rwnd): 93696
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     52 0.150658       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=5) (Message Fragment) 
+
+Frame 52: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x515e0804 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 5, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 5
+        Transmission sequence number (absolute): 2860946944
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 65
+
+No.     Time           Source                Destination           Protocol Length Info
+     53 0.150778       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=6) (Message Fragment) 
+
+Frame 53: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x07c063d8 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 6, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 6
+        Transmission sequence number (absolute): 2860946945
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 65
+
+No.     Time           Source                Destination           Protocol Length Info
+     54 0.150845       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=6, Arwnd=97904) 
+
+Frame 54: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x4d3934a7 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946945, a_rwnd: 97904, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 6
+        Cumulative TSN ACK (absolute): 2860946945
+        Advertised receiver window credit (a_rwnd): 97904
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     55 0.150899       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=7) (Message Fragment) 
+
+Frame 55: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x860455cd [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 7, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 7
+        Transmission sequence number (absolute): 2860946946
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 65
+
+No.     Time           Source                Destination           Protocol Length Info
+     56 0.151020       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=8) (Message Fragment) 
+
+Frame 56: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x8c4fa724 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 8, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 8
+        Transmission sequence number (absolute): 2860946947
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 65
+
+No.     Time           Source                Destination           Protocol Length Info
+     57 0.151087       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=8, Arwnd=95040) 
+
+Frame 57: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xd973ece3 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946947, a_rwnd: 95040, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 8
+        Cumulative TSN ACK (absolute): 2860946947
+        Advertised receiver window credit (a_rwnd): 95040
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     58 0.151147       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=9) (Message Fragment) 
+
+Frame 58: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x8e177b41 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 9, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 9
+        Transmission sequence number (absolute): 2860946948
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 65
+
+No.     Time           Source                Destination           Protocol Length Info
+     59 0.151262       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=10) (Message Fragment) 
+
+Frame 59: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x0dce0fe8 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 10, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 10
+        Transmission sequence number (absolute): 2860946949
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 65
+
+No.     Time           Source                Destination           Protocol Length Info
+     60 0.151324       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=10, Arwnd=92176) 
+
+Frame 60: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x0d8377fc [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946949, a_rwnd: 92176, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 10
+        Cumulative TSN ACK (absolute): 2860946949
+        Advertised receiver window credit (a_rwnd): 92176
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     61 0.151373       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=16, Arwnd=97792) 
+
+Frame 61: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xf3fac446 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732390, a_rwnd: 97792, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 16
+        Cumulative TSN ACK (absolute): 1677732390
+        Advertised receiver window credit (a_rwnd): 97792
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     62 0.151457       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=16, Arwnd=101888) 
+
+Frame 62: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x7d303011 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732390, a_rwnd: 101888, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 16
+        Cumulative TSN ACK (absolute): 1677732390
+        Advertised receiver window credit (a_rwnd): 101888
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     63 0.151530       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=16, Arwnd=105984) 
+
+Frame 63: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x43003cd1 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 1677732390, a_rwnd: 105984, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 16
+        Cumulative TSN ACK (absolute): 1677732390
+        Advertised receiver window credit (a_rwnd): 105984
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     64 0.152686       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=11) (Message Fragment) 
+
+Frame 64: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x024c8097 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, middle segment, TSN: 11, SID: 0, SSN: 1, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x00
+        Chunk length: 1448
+        Transmission sequence number (relative): 11
+        Transmission sequence number (absolute): 2860946950
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 65
+
+No.     Time           Source                Destination           Protocol Length Info
+     65 0.152744       203.255.252.194       155.230.24.155        HTTP     694    Continuation (GIF89a)[BoundErrorUnreassembled Packet]
+
+Frame 65: 694 bytes on wire (5552 bits), 694 bytes captured (5552 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    Checksum: 0x98a95b73 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, last segment, TSN: 12, SID: 0, SSN: 1, PPID: 0, payload length: 632 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x01
+        Chunk length: 648
+        Transmission sequence number (relative): 12
+        Transmission sequence number (absolute): 2860946951
+        Stream identifier: 0x0000
+        Stream sequence number: 1
+        Payload protocol identifier: not specified (0)
+        Reassembled SCTP Fragments (16384 bytes, 12 fragments): 
+Hypertext Transfer Protocol
+Compuserve GIF, Version: GIF89a
+[BoundError Unreassembled Packet: GIF image]
+
+No.     Time           Source                Destination           Protocol Length Info
+     66 0.152812       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=12, Arwnd=90112) 
+
+Frame 66: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xa020c2fe [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946951, a_rwnd: 90112, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 12
+        Cumulative TSN ACK (absolute): 2860946951
+        Advertised receiver window credit (a_rwnd): 90112
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     67 0.152862       203.255.252.194       155.230.24.155        SCTP     1494   DATA (TSN=13) (Message Fragment) 
+
+Frame 67: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x208ff530 [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, first segment, TSN: 13, SID: 0, SSN: 2, PPID: 0, payload length: 1432 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x02
+        Chunk length: 1448
+        Transmission sequence number (relative): 13
+        Transmission sequence number (absolute): 2860946952
+        Stream identifier: 0x0000
+        Stream sequence number: 2
+        Payload protocol identifier: not specified (0)
+        Reassembled Message in frame: 68
+
+No.     Time           Source                Destination           Protocol Length Info
+     68 0.152968       203.255.252.194       155.230.24.155        HTTP     1318   Continuation
+
+Frame 68: 1318 bytes on wire (10544 bits), 1318 bytes captured (10544 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xde48dfeb [unverified]
+    [Checksum Status: Unverified]
+    DATA chunk (ordered, last segment, TSN: 14, SID: 0, SSN: 2, PPID: 0, payload length: 1255 bytes)
+        Chunk type: DATA (0)
+        Chunk flags: 0x01
+        Chunk length: 1271
+        Transmission sequence number (relative): 14
+        Transmission sequence number (absolute): 2860946953
+        Stream identifier: 0x0000
+        Stream sequence number: 2
+        Payload protocol identifier: not specified (0)
+        Reassembled SCTP Fragments (2687 bytes, 2 fragments): 
+        Chunk padding: 00
+Hypertext Transfer Protocol
+
+No.     Time           Source                Destination           Protocol Length Info
+     69 0.153033       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=14, Arwnd=87425) 
+
+Frame 69: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x480a613b [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946953, a_rwnd: 87425, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 14
+        Cumulative TSN ACK (absolute): 2860946953
+        Advertised receiver window credit (a_rwnd): 87425
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     70 0.162211       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=14, Arwnd=91521) 
+
+Frame 70: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xfb2c997e [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946953, a_rwnd: 91521, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 14
+        Cumulative TSN ACK (absolute): 2860946953
+        Advertised receiver window credit (a_rwnd): 91521
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     71 0.162298       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=14, Arwnd=95617) 
+
+Frame 71: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xc51c95be [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946953, a_rwnd: 95617, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 14
+        Cumulative TSN ACK (absolute): 2860946953
+        Advertised receiver window credit (a_rwnd): 95617
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     72 0.162370       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=14, Arwnd=99713) 
+
+Frame 72: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x4bd661e9 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946953, a_rwnd: 99713, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 14
+        Cumulative TSN ACK (absolute): 2860946953
+        Advertised receiver window credit (a_rwnd): 99713
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     73 0.162470       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=14, Arwnd=101745) 
+
+Frame 73: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x22a51e44 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946953, a_rwnd: 101745, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 14
+        Cumulative TSN ACK (absolute): 2860946953
+        Advertised receiver window credit (a_rwnd): 101745
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     74 0.162524       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=14, Arwnd=103809) 
+
+Frame 74: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x75e66d29 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946953, a_rwnd: 103809, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 14
+        Cumulative TSN ACK (absolute): 2860946953
+        Advertised receiver window credit (a_rwnd): 103809
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     75 0.162599       155.230.24.155        203.255.252.194       SCTP     62     SACK (Ack=14, Arwnd=106496) 
+
+Frame 75: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x5826e367 [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 2860946953, a_rwnd: 106496, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 14
+        Cumulative TSN ACK (absolute): 2860946953
+        Advertised receiver window credit (a_rwnd): 106496
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     76 0.330826       203.255.252.194       155.230.24.155        SCTP     62     SACK (Ack=1, Arwnd=106093) 
+
+Frame 76: 62 bytes on wire (496 bits), 62 bytes captured (496 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x922bc78f [unverified]
+    [Checksum Status: Unverified]
+    SACK chunk (Cumulative TSN: 724401843, a_rwnd: 106093, gaps: 0, duplicate TSNs: 0)
+        Chunk type: SACK (3)
+        Chunk flags: 0x00
+        Chunk length: 16
+        Cumulative TSN ACK (relative): 1
+        Cumulative TSN ACK (absolute): 724401843
+        Advertised receiver window credit (a_rwnd): 106093
+        Number of gap acknowledgement blocks: 0
+        Number of duplicated TSNs: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+     77 3.143158       155.230.24.155        222.96.156.151        SCTP     106    INIT 
+
+Frame 77: 106 bytes on wire (848 bits), 106 bytes captured (848 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 222.96.156.151
+Stream Control Transmission Protocol, Src Port: 32838 (32838), Dst Port: 80 (80)
+    Source port: 32838
+    Destination port: 80
+    Verification tag: 0x00000000
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x178ebd89 [unverified]
+    [Checksum Status: Unverified]
+    INIT chunk (Outbound streams: 10, inbound streams: 65535)
+        Chunk type: INIT (1)
+        Chunk flags: 0x00
+        Chunk length: 60
+        Initiate tag: 0xbf0db09b
+        Advertised receiver window credit (a_rwnd): 106496
+        Number of outbound streams: 10
+        Number of inbound streams: 65535
+        Initial TSN: 21506469
+        IPv4 address parameter (Address: 155.230.24.155)
+        IPv4 address parameter (Address: 155.230.24.156)
+        Supported address types parameter (Supported types: IPv4)
+        ECN parameter
+        Forward TSN supported parameter
+        Adaptation Layer Indication parameter (Indication: 0)
+
+No.     Time           Source                Destination           Protocol Length Info
+     78 9.143471       155.230.24.155        222.96.156.151        SCTP     106    INIT 
+
+Frame 78: 106 bytes on wire (848 bits), 106 bytes captured (848 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 222.96.156.151
+Stream Control Transmission Protocol, Src Port: 32838 (32838), Dst Port: 80 (80)
+    Source port: 32838
+    Destination port: 80
+    Verification tag: 0x00000000
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x178ebd89 [unverified]
+    [Checksum Status: Unverified]
+    INIT chunk (Outbound streams: 10, inbound streams: 65535)
+        Chunk type: INIT (1)
+        Chunk flags: 0x00
+        Chunk length: 60
+        Initiate tag: 0xbf0db09b
+        Advertised receiver window credit (a_rwnd): 106496
+        Number of outbound streams: 10
+        Number of inbound streams: 65535
+        Initial TSN: 21506469
+        IPv4 address parameter (Address: 155.230.24.155)
+        IPv4 address parameter (Address: 155.230.24.156)
+        Supported address types parameter (Supported types: IPv4)
+        ECN parameter
+        Forward TSN supported parameter
+        Adaptation Layer Indication parameter (Indication: 0)
+
+No.     Time           Source                Destination           Protocol Length Info
+     79 14.456014      155.230.24.155        203.255.252.194       SCTP     54     SHUTDOWN 
+
+Frame 79: 54 bytes on wire (432 bits), 54 bytes captured (432 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x7558d7db [unverified]
+    [Checksum Status: Unverified]
+    SHUTDOWN chunk (Cumulative TSN ack: 2860946953)
+        Chunk type: SHUTDOWN (7)
+        Chunk flags: 0x00
+        Chunk length: 8
+        Cumulative TSN Ack: 2860946953
+
+No.     Time           Source                Destination           Protocol Length Info
+     80 14.456170      155.230.24.155        203.255.252.194       SCTP     54     SHUTDOWN 
+
+Frame 80: 54 bytes on wire (432 bits), 54 bytes captured (432 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x8fbaa83b [unverified]
+    [Checksum Status: Unverified]
+    SHUTDOWN chunk (Cumulative TSN ack: 1677732390)
+        Chunk type: SHUTDOWN (7)
+        Chunk flags: 0x00
+        Chunk length: 8
+        Cumulative TSN Ack: 1677732390
+
+No.     Time           Source                Destination           Protocol Length Info
+     81 14.456942      203.255.252.194       155.230.24.155        SCTP     60     SHUTDOWN_ACK 
+
+Frame 81: 60 bytes on wire (480 bits), 60 bytes captured (480 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+    Padding: 00000000000000000000
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32837 (32837)
+    Source port: 80
+    Destination port: 32837
+    Verification tag: 0xe9b73bc3
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xc74e59cd [unverified]
+    [Checksum Status: Unverified]
+    SHUTDOWN_ACK chunk
+        Chunk type: SHUTDOWN_ACK (8)
+        Chunk flags: 0x00
+        Chunk length: 4
+
+No.     Time           Source                Destination           Protocol Length Info
+     82 14.457008      155.230.24.155        203.255.252.194       SCTP     50     SHUTDOWN_COMPLETE 
+
+Frame 82: 50 bytes on wire (400 bits), 50 bytes captured (400 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32837 (32837), Dst Port: 80 (80)
+    Source port: 32837
+    Destination port: 80
+    Verification tag: 0x13896007
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xae517e10 [unverified]
+    [Checksum Status: Unverified]
+    SHUTDOWN_COMPLETE chunk
+        Chunk type: SHUTDOWN_COMPLETE (14)
+        Chunk flags: 0x00
+        Chunk length: 4
+
+No.     Time           Source                Destination           Protocol Length Info
+     83 14.457159      203.255.252.194       155.230.24.155        SCTP     60     SHUTDOWN_ACK 
+
+Frame 83: 60 bytes on wire (480 bits), 60 bytes captured (480 bits)
+Ethernet II, Src: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40), Dst: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+    Destination: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+    Padding: 00000000000000000000
+Internet Protocol Version 4, Src: 203.255.252.194, Dst: 155.230.24.155
+Stream Control Transmission Protocol, Src Port: 80 (80), Dst Port: 32836 (32836)
+    Source port: 80
+    Destination port: 32836
+    Verification tag: 0x3bb99c46
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0xb847fc69 [unverified]
+    [Checksum Status: Unverified]
+    SHUTDOWN_ACK chunk
+        Chunk type: SHUTDOWN_ACK (8)
+        Chunk flags: 0x00
+        Chunk length: 4
+
+No.     Time           Source                Destination           Protocol Length Info
+     84 14.457219      155.230.24.155        203.255.252.194       SCTP     50     SHUTDOWN_COMPLETE 
+
+Frame 84: 50 bytes on wire (400 bits), 50 bytes captured (400 bits)
+Ethernet II, Src: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f), Dst: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+    Destination: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        Address: ExtremeNetwo_08:e0:40 (00:04:96:08:e0:40)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        Address: EdimaxTechno_24:37:5f (00:0e:2e:24:37:5f)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 155.230.24.155, Dst: 203.255.252.194
+Stream Control Transmission Protocol, Src Port: 32836 (32836), Dst Port: 80 (80)
+    Source port: 32836
+    Destination port: 80
+    Verification tag: 0xd26ac1e5
+    [Association index: disabled (enable in preferences)]
+    Checksum: 0x254226a7 [unverified]
+    [Checksum Status: Unverified]
+    SHUTDOWN_COMPLETE chunk
+        Chunk type: SHUTDOWN_COMPLETE (14)
+        Chunk flags: 0x00
+        Chunk length: 4

@@ -9,3 +9,4 @@ enum TcpStateMask : uint8_t {
     STATE_RST_SEEN   = 1 << 4,
     STATE_CLOSED     = 1 << 5
 };
+
