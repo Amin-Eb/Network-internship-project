@@ -92,13 +92,19 @@ void SctpReporter::handleSctpChunks(const FlowKey &key, size_t payloadLen, const
     const uint8_t* end = sctpPtr + payloadLen;
     if (cur >= end) return;
     while (cur + 4 <= end) {
-        uint8_t chunkType = cur[0];
-        uint8_t chunkFlags = cur[1];
-        uint16_t chunkLen = (cur[2] << 8) | cur[3];
-        if (chunkLen < 4) break; 
+
+        const SctpChunkHeader* hdr = reinterpret_cast<const SctpChunkHeader*>(cur);
+        uint8_t chunkType = hdr->type;
+        uint8_t chunkFlags = hdr->flags;
+        uint16_t chunkLen = ntohs(hdr->length);
+        if (hdr->length < 4) break; 
+
         const uint8_t* chunkData = cur + 4;
         const uint8_t* nextChunk = cur + ((chunkLen + 3) & ~3); // chunks are 4-byte aligned
-        if (nextChunk > end) nextChunk = end; 
+
+        if (nextChunk > end) 
+            nextChunk = end; 
+            
         FlowKeyHash hasher;
         switch (chunkType) {
             case 0: { // DATA
