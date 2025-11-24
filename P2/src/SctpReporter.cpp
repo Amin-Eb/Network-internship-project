@@ -16,10 +16,6 @@ void SctpReporter::finalizeFlow(const FlowKey &key) {
         for (auto &streamPair : flow.streams) {
             uint32_t ssn = streamPair.first;
             auto &sctpStream = streamPair.second;
-            vector<uint32_t> tsns;
-            tsns.reserve(sctpStream.dataMap.size());
-            for (const auto &kv : sctpStream.dataMap) tsns.push_back(kv.first);
-            sort(tsns.begin(), tsns.end());
 
             string filename = flow.first + "_" + to_string(flow.fport)
                             + "_and_" + flow.second + "_" + to_string(flow.sport)
@@ -30,9 +26,11 @@ void SctpReporter::finalizeFlow(const FlowKey &key) {
                 cerr << "SCTP: failed to open " << filename << " for writing\n";
                 continue;
             }
-            for (uint32_t tsn : tsns) {
+            for (const auto &kv : sctpStream.dataMap) {
+                uint32_t tsn = kv.first;
                 const auto &vec = sctpStream.dataMap[tsn];
-                if (!vec.empty()) out.write(reinterpret_cast<const char*>(vec.data()), vec.size());
+                if (!vec.empty()) 
+                    out.write(reinterpret_cast<const char*>(vec.data()), vec.size());
             }
             out.close();
         }
@@ -94,13 +92,19 @@ void SctpReporter::handleSctpChunks(const FlowKey &key, size_t payloadLen, const
     const uint8_t* end = sctpPtr + payloadLen;
     if (cur >= end) return;
     while (cur + 4 <= end) {
-        uint8_t chunkType = cur[0];
-        uint8_t chunkFlags = cur[1];
-        uint16_t chunkLen = (cur[2] << 8) | cur[3];
-        if (chunkLen < 4) break; 
+
+        const SctpChunkHeader* hdr = reinterpret_cast<const SctpChunkHeader*>(cur);
+        uint8_t chunkType = hdr->type;
+        uint8_t chunkFlags = hdr->flags;
+        uint16_t chunkLen = ntohs(hdr->length);
+        if (hdr->length < 4) break; 
+
         const uint8_t* chunkData = cur + 4;
         const uint8_t* nextChunk = cur + ((chunkLen + 3) & ~3); // chunks are 4-byte aligned
-        if (nextChunk > end) nextChunk = end; 
+
+        if (nextChunk > end) 
+            nextChunk = end; 
+            
         FlowKeyHash hasher;
         switch (chunkType) {
             case 0: { // DATA

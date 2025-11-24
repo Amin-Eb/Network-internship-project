@@ -1,4 +1,0 @@
-module(name = "prototest")
-
-bazel_dep(name = "protobuf", version = "29.0")
-
