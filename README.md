@@ -307,17 +307,3 @@ Documented rather than hidden, since they are the natural next tasks:
   14-byte Ethernet header and an IPv4 header with no options. 802.1Q-tagged or
   IP-header-with-options traffic will hash incorrectly. The same assumption appears in the
   TCP/SCTP header walks.
-- **IPv4 path is the well-tested one.** IPv6 parsing exists in `extractTcpInfo` and
-  `flowHash` and is exercised by the merged v4/v6 tests, but the sample corpus is
-  overwhelmingly IPv4.
-- **`statistics.cpp` argument handling.** `argv[2]` is parsed into `interface` but the
-  capture list is still hardcoded, so the command-line interface name is ignored — edit
-  `capture_interface` directly (commented example included) or wire the argument through.
-- **`DnsReporter` counter timing.** On a completed transaction it decrements then
-  re-increments `failedDns`, so a concurrent scraper can briefly observe an intermediate
-  value. Harmless for a rate, but it is why `failed*` is exported as a gauge.
-- **Large captures are committed as-is.** `P2/samples/capture.pcapng` is ~22 MB and
-  `htmldns.pcapng` ~4 MB. Fine at this size; if the corpus grows, Git LFS is the fix.
-- **P1 is not wired into a build system.** Each writer is compiled by hand or via Bazel;
-  there is no top-level CMake for P1 and no benchmark harness, so the P1 conclusions rest
-  on output size rather than measured throughput.
