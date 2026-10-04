@@ -1,0 +1,31 @@
+# Build output
+build/
+build-*/
+cmake-build-*/
+bazel-*/
+CMakeUserPresets.json
+CMakePresets.json
+
+# Compiled objects and binaries
+*.o
+*.obj
+*.exe
+*.a
+*.so
+*.dylib
+*.out
+
+# Reassembled payloads written by TcpReporter / SctpReporter during tests
+# (see P2/tests/test_tcp.cpp, P2/tests/test_sctp.cpp)
+*.txt.bin
+*_to_*.txt
+*_and_*_stream_*.bin
+
+# nDPI built from source
+nDPI/
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
